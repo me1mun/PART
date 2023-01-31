@@ -16,6 +16,8 @@ public class ButtonController : MonoBehaviour
 
     void Start()
     {
+        if (isFillEffect == true) { }; //test. has to be deleted
+
         if (isSoundClick)
         {
             button.onClick.AddListener(() => { soundClick.Play(); });
