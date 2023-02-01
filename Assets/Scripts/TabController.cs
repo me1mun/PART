@@ -14,7 +14,6 @@ public class TabController : MonoBehaviour
     public void TabOpen()
     {
         gameObject.SetActive(true);
-        Debug.Log("clicked");
     }
 
     public void TabCloseAnimation()

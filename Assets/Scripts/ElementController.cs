@@ -33,7 +33,7 @@ public class ElementController : MonoBehaviour, IPointerDownHandler
 
     public void Init(Part part, Level level)
     {
-        isFixed = part.isFixed;
+        //isFixed = part.isFixed;
 
         if (part.element.icon != null) 
         { 
@@ -45,13 +45,13 @@ public class ElementController : MonoBehaviour, IPointerDownHandler
             image.enabled = false;
         }
 
-        connections = new Element.ConnectionTypes[4];
-        part.element.connections.CopyTo(connections, 0);
+        //connections = new Element.ConnectionTypes[4];
+        //part.element.connections.CopyTo(connections, 0);
         //connections = element.connections;
         
         if(isFixed)
         {
-            ElementTurn(part.fixTurns, true);
+            //ElementTurn(part.fixTurns, true);
         }
     }
 

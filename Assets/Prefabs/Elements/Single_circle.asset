@@ -10,8 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39a711dd80675c04cb7692f5d603765f, type: 3}
-  m_Name: Xero_circle
+  m_Name: Single_circle
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: c393c6d75295cff4bb22109cb8360259, type: 3}
-  connections: 02000000020000000200000002000000
+  icon: {fileID: 21300000, guid: cb185f9d38c30b4469ddc8b68ca08e00, type: 3}
   isFixed: 0
+  connectionLeft: 1
+  connectionUp: 0
+  connectionRight: 0
+  connectionDown: 0

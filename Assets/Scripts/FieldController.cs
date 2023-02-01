@@ -16,7 +16,7 @@ public class FieldController : MonoBehaviour
     void Start()
     {
         
-        FieldCreate();
+        //FieldCreate();
     }
 
     private void FieldClear()

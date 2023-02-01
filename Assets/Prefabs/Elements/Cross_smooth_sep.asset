@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a711dd80675c04cb7692f5d603765f, type: 3}
   m_Name: Cross_smooth_sep
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 8865f6a56d127d24baf1d64e1da181a2, type: 3}
-  connections: 01000000010000000100000001000000
-  isFixed: 0
+  icon: {fileID: 21300000, guid: 2089935ba3ecfcb49b01656973f043a2, type: 3}
+  isFixed: 1
+  connectionLeft: 1
+  connectionUp: 1
+  connectionRight: 1
+  connectionDown: 1

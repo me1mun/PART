@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Tripple_circle
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 137ead3b0f3bbc449877f4e84dbc3eaa, type: 3}
-  connections: 01000000010000000100000000000000
   isFixed: 0
+  connectionLeft: 1
+  connectionUp: 1
+  connectionRight: 1
+  connectionDown: 0

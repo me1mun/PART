@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 708a17fdf5ad43547b380f6124f4782e, type: 3}
-  m_Name: Level_4
+  m_Script: {fileID: 11500000, guid: 39a711dd80675c04cb7692f5d603765f, type: 3}
+  m_Name: Cross_oblique_sep
   m_EditorClassIdentifier: 
-  nameId: 
-  premium: 0
-  width: 0
-  color: 0
-  parts: []
+  icon: {fileID: 21300000, guid: 0f8333a58a0194b47a76a3504e6ca0a7, type: 3}
+  isFixed: 1
+  connectionLeft: 1
+  connectionUp: 1
+  connectionRight: 1
+  connectionDown: 1

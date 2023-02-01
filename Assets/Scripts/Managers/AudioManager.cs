@@ -3,32 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class Options : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    [Header ("Sound")]
+    public static AudioManager Instance { get; private set; }
+
+    [Header("Audio")]
     [SerializeField] private AudioMixer audioMixer;
 
     private float[] volumeGrades = new float[4] { -80, -15, -5, 0 };
-    public static int volume_effects = 2;
-    public static int volume_music = 3;
+    public int volume_sounds = 2;
+    public int volume_music = 3;
 
-    private void Start()
+    private void Awake()
     {
-        VolumeInit();
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
     }
 
-    public void ChangeVolumeEffects()
+    public void ChangeVolumeSounds()
     {
-        volume_effects = ClampVolume(volume_effects + 1, volumeGrades.Length);
+        volume_sounds = ClampVolume(volume_sounds + 1, volumeGrades.Length);
 
-        VolumeInit();
+        ApplyVolume();
+        Debug.Log("Effects: " + volume_sounds);
     }
 
     public void ChangeVolumeMusic()
     {
         volume_music = ClampVolume(volume_music + 1, volumeGrades.Length);
 
-        VolumeInit();
+        ApplyVolume();
+        Debug.Log("Music: " + volume_music);
     }
 
     private int ClampVolume(int volumeIndex, int volumeCount)
@@ -45,9 +54,9 @@ public class Options : MonoBehaviour
         return (volumeIndex);
     }
 
-    public void VolumeInit()
+    private void ApplyVolume()
     {
         audioMixer.SetFloat("Volume_music", volumeGrades[volume_music]);
-        audioMixer.SetFloat("Volume_effects", volumeGrades[volume_effects]);
+        audioMixer.SetFloat("Volume_sounds", volumeGrades[volume_sounds]);
     }
 }

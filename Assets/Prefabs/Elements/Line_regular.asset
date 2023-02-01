@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Line_regular
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: a59c5462ed9a5bc4386d904e95a517a6, type: 3}
-  connections: 01000000000000000100000000000000
   isFixed: 0
+  connectionLeft: 1
+  connectionUp: 0
+  connectionRight: 1
+  connectionDown: 0

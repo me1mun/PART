@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Turn_smooth
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: bef32bdfb229bd04e8d5d5d79494b0e6, type: 3}
-  connections: 01000000010000000000000000000000
   isFixed: 0
+  connectionLeft: 1
+  connectionUp: 1
+  connectionRight: 2
+  connectionDown: 2

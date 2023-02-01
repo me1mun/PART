@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: Cross_sharp
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: adedadb34f0a65347aed03ff4a58ad25, type: 3}
-  connections: 01000000010000000100000001000000
   isFixed: 0
+  connectionLeft: 1
+  connectionUp: 1
+  connectionRight: 1
+  connectionDown: 1

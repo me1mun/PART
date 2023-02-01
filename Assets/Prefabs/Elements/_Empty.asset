@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: _Empty
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  connections: 00000000000000000000000000000000
   isFixed: 0
+  connectionLeft: 0
+  connectionUp: 0
+  connectionRight: 0
+  connectionDown: 0

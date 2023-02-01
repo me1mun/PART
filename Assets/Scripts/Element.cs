@@ -9,6 +9,11 @@ public class Element : ScriptableObject
 {
     public Sprite icon;
 
+    public bool isFixed = false;
+
     public enum ConnectionTypes {none, regular, universal};
-    public ConnectionTypes[] connections = new ConnectionTypes[4];
+    public ConnectionTypes connectionLeft= ConnectionTypes.none;
+    public ConnectionTypes connectionUp = ConnectionTypes.none;
+    public ConnectionTypes connectionRight = ConnectionTypes.none;
+    public ConnectionTypes connectionDown = ConnectionTypes.none;
 }

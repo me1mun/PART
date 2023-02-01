@@ -5,34 +5,36 @@ using UnityEngine.Audio;
 
 public class UI_sound : MonoBehaviour
 {
-    private enum Types { effects, music };
+
+
+    private enum Types { sounds, music };
     [SerializeField] Types type;
 
-    [SerializeField] private Options options;
+    //[SerializeField] private Options options;
     [SerializeField] private GradesController gradeController;
 
     private void OnEnable()
     {
-        if(type == Types.effects)
+        if(type == Types.sounds)
         {
-            gradeController.SetGrade(Options.volume_effects);
+            gradeController.SetGrade(AudioManager.Instance.volume_sounds);
         }
         else if (type == Types.music)
         {
-            gradeController.SetGrade(Options.volume_music);
+            gradeController.SetGrade(AudioManager.Instance.volume_music);
         }
     }
 
     public void ChangeEffects()
     {
-        options.ChangeVolumeEffects();
-        SetGrade(Options.volume_effects);
+        AudioManager.Instance.ChangeVolumeSounds();
+        SetGrade(AudioManager.Instance.volume_sounds);
     }
 
     public void ChangeMusic()
     {
-        options.ChangeVolumeMusic();
-        SetGrade(Options.volume_music);
+        AudioManager.Instance.ChangeVolumeMusic();
+        SetGrade(AudioManager.Instance.volume_music);
     }
 
     private void SetGrade(int grade)

@@ -11,8 +11,8 @@ public class LevelData : MonoBehaviour
 
     private void Awake()
     {
-        levels = levelsTemp;
-        Debug.Log(levels[0]);
-        levelsCount = levels.Length;
+        //levels = levelsTemp;
+        //Debug.Log(levels[0]);
+        //levelsCount = levels.Length;
     }
 }

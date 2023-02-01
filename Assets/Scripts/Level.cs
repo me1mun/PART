@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Level", menuName = "Levels", order = 0)]
-public class Level : ScriptableObject
+public class Level
 {
     public string nameId;
     public int width;
@@ -16,11 +15,10 @@ public class Level : ScriptableObject
     public Part[] parts;
 }
 
-[Serializable]
+//[Serializable]
 public class Part
 {
     public Element element;
 
-    public bool isFixed = false;
-    public int fixTurns;
+    public int startTurns;
 }
