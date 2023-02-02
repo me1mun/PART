@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class ElementData : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static ElementData Instance { get; private set; }
+
+    public Element[] elements;
+    public Dictionary<string, Element> elementList = new Dictionary<string, Element>();
+
+    private void Awake()
     {
-        
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
+        foreach(Element el in elements)
+        {
+            elementList.Add(el.name, el);
+        }
+
     }
 }

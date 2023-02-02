@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class UI_sound : MonoBehaviour
+public class OptionsAudio : MonoBehaviour
 {
-
 
     private enum Types { sounds, music };
     [SerializeField] Types type;
