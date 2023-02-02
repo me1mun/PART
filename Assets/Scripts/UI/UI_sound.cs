@@ -25,7 +25,7 @@ public class UI_sound : MonoBehaviour
         }
     }
 
-    public void ChangeEffects()
+    public void ChangeSounds()
     {
         AudioManager.Instance.ChangeVolumeSounds();
         SetGrade(AudioManager.Instance.volume_sounds);

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
         Application.targetFrameRate = 60;
+        //ChangeScene("Main");
     }
 
 
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
         Debug.Log(level);
     }
 
-    public static void SceneChange(string newScene)
+    public static void ChangeScene(string newScene)
     {
         SceneManager.LoadScene(newScene);
     }

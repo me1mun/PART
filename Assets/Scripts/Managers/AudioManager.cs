@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
         volume_sounds = ClampVolume(volume_sounds + 1, volumeGrades.Length);
 
         ApplyVolume();
-        Debug.Log("Effects: " + volume_sounds);
+        //Debug.Log("Effects: " + volume_sounds);
     }
 
     public void ChangeVolumeMusic()
@@ -37,7 +37,7 @@ public class AudioManager : MonoBehaviour
         volume_music = ClampVolume(volume_music + 1, volumeGrades.Length);
 
         ApplyVolume();
-        Debug.Log("Music: " + volume_music);
+        //Debug.Log("Music: " + volume_music);
     }
 
     private int ClampVolume(int volumeIndex, int volumeCount)
