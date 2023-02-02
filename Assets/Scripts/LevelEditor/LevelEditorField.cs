@@ -17,7 +17,6 @@ public class LevelEditorField : MonoBehaviour
         CellsGenerate();
     }
 
-
     private void CellsGenerate()
     {
         //GameObject cellPrefab = cellsParent.transform.GetChild(0).gameObject;
@@ -34,5 +33,10 @@ public class LevelEditorField : MonoBehaviour
         }
 
         Destroy(cellPrefab);
+    }
+
+    public void SetActiveElement(Element el)
+    {
+        activeElement = el;
     }
 }

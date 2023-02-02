@@ -386,7 +386,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: LeveEditor
+          m_StringArgument: LevelEditor
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &227784489
@@ -791,6 +791,7 @@ GameObject:
   - component: {fileID: 1648203041}
   - component: {fileID: 1648203040}
   - component: {fileID: 1648203042}
+  - component: {fileID: 1648203043}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -840,6 +841,37 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: 2815b080360f8b34bb0e7a513fdd52ae, type: 2}
   volume_sounds: 2
   volume_music: 3
+--- !u!114 &1648203043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1648203039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe20a082d914ad340986861796e10d1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements:
+  - {fileID: 11400000, guid: 1fd093e5e15ecef48be2001755f23567, type: 2}
+  - {fileID: 11400000, guid: 9167ada7ba7c2d9449b1769a84e5ed46, type: 2}
+  - {fileID: 11400000, guid: 00f8979f286eb9347be4e9bb797c10ce, type: 2}
+  - {fileID: 11400000, guid: 60079daf84dc34045bb8059a7d23084d, type: 2}
+  - {fileID: 11400000, guid: 5c3afb8790f66254ab637781422535a3, type: 2}
+  - {fileID: 11400000, guid: 6f5692b9b8e47df449aeafec66430cb9, type: 2}
+  - {fileID: 11400000, guid: 50049816f4da4e840b17217f3e34cb17, type: 2}
+  - {fileID: 11400000, guid: ef6af734a79e52f4da4e01e70d1922b7, type: 2}
+  - {fileID: 11400000, guid: a2ba7b826a657374dbd0206af869e37b, type: 2}
+  - {fileID: 11400000, guid: 2d20779e09eb1b84c8fed57292d8618d, type: 2}
+  - {fileID: 11400000, guid: a32ed5a9225893449afe9bdd9890732a, type: 2}
+  - {fileID: 11400000, guid: 08532d770ed41d542bee527175e28570, type: 2}
+  - {fileID: 11400000, guid: f8c3ff19d5104fb4dab1ffed5cb6d585, type: 2}
+  - {fileID: 11400000, guid: 35edf7136a1bcdf44b553caeeb1d261b, type: 2}
+  - {fileID: 11400000, guid: b636fbd95a7fe4046a3cb96a3d8bece3, type: 2}
+  - {fileID: 11400000, guid: 39896be7be95a8f4db5d9af5bd2d814b, type: 2}
+  - {fileID: 11400000, guid: f56e47b3fde449e49a8365838600473c, type: 2}
+  - {fileID: 11400000, guid: 3dbc582c0724424409b6287b676469f2, type: 2}
 --- !u!1 &2101852239
 GameObject:
   m_ObjectHideFlags: 0

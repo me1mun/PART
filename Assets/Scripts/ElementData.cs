@@ -21,10 +21,14 @@ public class ElementData : MonoBehaviour
 
     private void Start()
     {
-        foreach(Element el in elements)
+        FillElementList();
+    }
+
+    private void FillElementList()
+    {
+        foreach (Element el in elements)
         {
             elementList.Add(el.name, el);
         }
-
     }
 }
