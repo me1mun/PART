@@ -5,10 +5,9 @@ using UnityEngine.UI;
 
 public class LevelEditorField : MonoBehaviour
 {
-    [SerializeField] private GameObject cellsParent;
+    [SerializeField] private Transform cellsParent;
     [SerializeField] private GameObject cellPrefab;
     public LevelEditorCell[,] cellsList;
-    public Element activeElement;
 
     private Vector2Int fieldSize = new Vector2Int(8, 10);
 
@@ -26,17 +25,20 @@ public class LevelEditorField : MonoBehaviour
         {
             for (int x = 0; x < fieldSize.x; x++)
             {
-                cellsList[x, y] = Instantiate(cellPrefab, cellsParent.transform).GetComponent<LevelEditorCell>();
-                cellsList[x, y].position = new Vector2Int(x, y);
-                //cellsList[x, y].field = this;
+                cellsList[x, y] = Instantiate(cellPrefab, cellsParent).GetComponent<LevelEditorCell>();
             }
         }
 
         Destroy(cellPrefab);
     }
-
-    public void SetActiveElement(Element el)
+    
+    public void PaintField(LevelDatabase.Colors colorName)
     {
-        activeElement = el;
+        Color32 newColor = LevelDatabase.Instance.GetColor(colorName);
+
+        foreach (LevelEditorCell ec in cellsList)
+        {
+            ec.PaintSelf(newColor);
+        }
     }
 }

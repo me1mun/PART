@@ -5,30 +5,89 @@ using UnityEngine.UI;
 
 public class LevelEditorCell : MonoBehaviour
 {
-    public Vector2Int position;
-    public Element element;
+        [Header("Initialization")]
+    [SerializeField] private GameObject content;
     [SerializeField] private Image elementIcon;
-    public LevelEditorField field;
+
+        [Header("Properties")]
+    public Element element;
+    private Color32 color;
+    public int elementFlip = 0;
+    private Coroutine coroutineFlip;
 
     private void Start()
     {
-        elementIcon.gameObject.SetActive(false);
+        SetupDisplay();
     }
 
-    public void SetElement()
-    {
-        element = field.activeElement;
 
-        if (element.icon != null)
+    public void SetupDisplay()
+    {
+
+        if (element != null)
         {
-            elementIcon.gameObject.SetActive(true);
+            content.SetActive(true);
+
             elementIcon.sprite = element.icon;
+
         }
         else
         {
-            elementIcon.gameObject.SetActive(false);
+            content.SetActive(false);
         }
-
     }
 
+    public void PaintSelf(Color32 newColor)
+    {
+        color = newColor;
+
+        elementIcon.color = color;
+    }
+
+    public void Interact()
+    {
+        if (element == null || LevelEditor.Instance.elementPool.GetActiveElement() == null)
+        {
+            InteractSetElement();
+        }
+        else
+        {
+            InteractFlipElement();
+        }
+    }
+
+    private void InteractFlipElement()
+    {
+        elementFlip = elementFlip == 3 ? 0 : elementFlip + 1;
+        //elementIcon.gameObject.transform.localRotation = Quaternion.Euler(0, 0, elementFlip * -90);
+
+        AnimationFlip();
+    }
+
+    private void InteractSetElement()
+    {
+        element = LevelEditor.Instance.elementPool.GetActiveElement();
+        SetupDisplay();
+    }
+
+    private void AnimationFlip()
+    {
+        if (coroutineFlip != null)
+            StopCoroutine(coroutineFlip);
+
+        coroutineFlip = StartCoroutine(CoroutineFlip());
+    }
+
+    private IEnumerator CoroutineFlip()
+    {
+        Quaternion rotationTarget = Quaternion.Euler(0, 0, elementFlip * -90);
+
+        while (Mathf.Round(content.transform.localRotation.eulerAngles.z) != (rotationTarget.eulerAngles.z))
+        {
+            content.transform.localRotation = Quaternion.Lerp(content.transform.localRotation, rotationTarget, 14f * Time.deltaTime);
+            yield return null;
+        }
+
+        content.transform.localRotation = rotationTarget;
+    }
 }

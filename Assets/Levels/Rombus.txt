@@ -1,0 +1,1 @@
+{"nameId":"Rombus","width":2,"height":2,"colorName":"green","elements":["Turn_oblique","Turn_oblique","Turn_oblique","Turn_oblique"],"elementFlip":[2,3,1,0]}

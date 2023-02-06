@@ -5,15 +5,8 @@ using UnityEngine.UI;
 
 public class LevelEditorElementCase : MonoBehaviour
 {
-    [SerializeField] LevelEditorField field;
-
     public Element element;
     [SerializeField] private Image icon;
-
-    void Start()
-    {
-        
-    }
 
     public void Init(Element el)
     {
@@ -22,8 +15,20 @@ public class LevelEditorElementCase : MonoBehaviour
         icon.sprite = element.icon;
     }
 
-    public void SetActiveElement()
+    public void SetupDisplay(Element el)
     {
-        field.SetActiveElement(element);
+        if (element == el)
+        {
+            icon.GetComponent<CanvasGroup>().alpha = 1;
+        }
+        else
+        {
+            icon.GetComponent<CanvasGroup>().alpha = 0.2f;
+        }
+    }
+
+    public void SetPoolActiveElement()
+    {
+        LevelEditor.Instance.elementPool.SetActiveElement(element);
     }
 }

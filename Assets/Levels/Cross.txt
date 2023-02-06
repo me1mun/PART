@@ -1,0 +1,1 @@
+{"nameId":"Cross","width":2,"height":3,"colorName":"white","elements":["null","Single_circle","Single_circle","Cross_circle","null","Single_circle"],"elementFlip":[0,3,2,0,0,1]}

@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Element", menuName = "Elements", order = 1)]
 public class Element : ScriptableObject
 {
+    public bool isEmpty = false;
+
     public Sprite icon;
 
     public bool isFixed = false;

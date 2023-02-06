@@ -15,20 +15,28 @@ public class GameManager : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(this);
-            return;
         }
-        Instance = this;
+        else
+        {
+            Instance = this;
+        }
 
         DontDestroyOnLoad(this.gameObject);
         Application.targetFrameRate = 60;
-        //ChangeScene("Main");
+
     }
 
+    private void Start()
+    {
+
+
+        //ChangeScene("Main"); // at the end
+    }
 
     public static void ChangeLevel(int count)
     {
         level += count;
-        level = Mathf.Clamp(level, 0, LevelData.levelsCount - 1);
+        level = Mathf.Clamp(level, 0, 1000);
 
         Debug.Log(level);
     }

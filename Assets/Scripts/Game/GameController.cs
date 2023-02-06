@@ -6,7 +6,7 @@ using TMPro;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private FieldController fieldController;
+    [SerializeField] private GameField field;
     [SerializeField] private TextMeshProUGUI levelCounter;
 
     //private float initProgress;
