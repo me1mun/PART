@@ -84,7 +84,7 @@ public class GameElement : MonoBehaviour
 
     private IEnumerator CoroutineShake()
     {
-        //transform.localRotation = Quaternion.Euler(0, 0, targetAngle);
+        transform.localRotation = Quaternion.Euler(0, 0, targetAngle);
         float startAngle = targetAngle;
 
         for (int i = 0; i <= 5; i++)

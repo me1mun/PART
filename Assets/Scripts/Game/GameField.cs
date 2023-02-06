@@ -43,7 +43,7 @@ public class GameField : MonoBehaviour
         {
             for (int x = 0; x < fieldWidth; x++)
             {
-                int elementIndex = x + y * fieldHeight;
+                int elementIndex = y * fieldWidth + x;
                 //Debug.Log("Index: " + elementIndex);
                 field[x, y] = Instantiate(casePrefab, casePrefab.transform.parent).GetComponent<GameElement>();
 

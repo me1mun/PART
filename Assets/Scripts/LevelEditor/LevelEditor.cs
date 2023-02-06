@@ -45,10 +45,10 @@ public class LevelEditor : MonoBehaviour
                 if (field.cellsList[x, y].element != null)
                 {
                     start.x = Mathf.Min(start.x, x);
-                    end.x = Mathf.Max(start.x, x);
+                    end.x = Mathf.Max(end.x, x);
 
                     start.y = Mathf.Min(start.y, y);
-                    end.y = Mathf.Max(start.y, y);
+                    end.y = Mathf.Max(end.y, y);
                 }
             }
         }
