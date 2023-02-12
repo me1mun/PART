@@ -7,7 +7,7 @@ public class LevelEditorElementPool : MonoBehaviour
     [SerializeField] private GameObject casePrefab;
     [SerializeField] private GameObject container;
 
-    [SerializeField] private Element activeElement;
+    private Element activeElement = LevelDatabase.Instance.emptyElemet;
 
     private List<LevelEditorElementCase> elementCases = new List<LevelEditorElementCase>();
     //private Dictionary<Element, LevelEditorElementCase> elementPool = new Dictionary<Element, LevelEditorElementCase>();
@@ -20,7 +20,6 @@ public class LevelEditorElementPool : MonoBehaviour
     private void GeneratePool()
     {
         int elementCount = LevelDatabase.Instance.elements.Length;
-        //caseElements = new LevelEditorElementCase[elementCount];
 
         int caseSize = 120 + 30;
         RectTransform containerRect = container.GetComponent<RectTransform>();

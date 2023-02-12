@@ -18,10 +18,12 @@ public class LevelList : MonoBehaviour
         {
             Instance = this;
         }
+
+        //GameManager.levelCount = levelJson.Count;
     }
 
-    void Start()
+    public Level GetLevel()
     {
-        
+        return JsonUtility.FromJson<Level>(levelJson[GameManager.level].text);
     }
 }

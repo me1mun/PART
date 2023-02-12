@@ -7,6 +7,12 @@ public class LevelEditorElementCase : MonoBehaviour
 {
     public Element element;
     [SerializeField] private Image icon;
+    //private Image iconImage;
+
+    private void Awake()
+    {
+        //iconImage = icon.GetComponent<Image>();
+    }
 
     public void Init(Element el)
     {

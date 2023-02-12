@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a711dd80675c04cb7692f5d603765f, type: 3}
   m_Name: Line_arrow
   m_EditorClassIdentifier: 
+  isEmpty: 0
   icon: {fileID: 21300000, guid: f03a883adf737ac429f8ffda3c05e9e8, type: 3}
   isFixed: 1
   connectionLeft: 1
-  connectionUp: 2
+  connectionUp: 1
   connectionRight: 1
-  connectionDown: 2
+  connectionDown: 0

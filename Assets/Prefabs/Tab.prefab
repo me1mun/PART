@@ -230,7 +230,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 960, y: 1920}
+  m_ReferenceResolution: {x: 900, y: 1920}
   m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 1
   m_PhysicalUnit: 3
@@ -706,6 +706,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 954441984275576065, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7173790052038648258}
+    - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: TabCloseAnimation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TabController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
+      propertyPath: onClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2079412112579789406, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}

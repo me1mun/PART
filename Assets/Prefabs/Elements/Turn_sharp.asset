@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a711dd80675c04cb7692f5d603765f, type: 3}
   m_Name: Turn_sharp
   m_EditorClassIdentifier: 
+  isEmpty: 0
   icon: {fileID: 21300000, guid: 05cb95ec5f8dbef4c9aa0c520ffe7152, type: 3}
   isFixed: 0
   connectionLeft: 1
   connectionUp: 1
-  connectionRight: 2
-  connectionDown: 2
+  connectionRight: 0
+  connectionDown: 0

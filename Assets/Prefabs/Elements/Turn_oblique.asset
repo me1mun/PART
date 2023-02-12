@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a711dd80675c04cb7692f5d603765f, type: 3}
   m_Name: Turn_oblique
   m_EditorClassIdentifier: 
+  isEmpty: 0
   icon: {fileID: 21300000, guid: d1f836bc5684b3b4eacaa33a734258a3, type: 3}
   isFixed: 0
   connectionLeft: 1
   connectionUp: 1
-  connectionRight: 2
-  connectionDown: 2
+  connectionRight: 0
+  connectionDown: 0

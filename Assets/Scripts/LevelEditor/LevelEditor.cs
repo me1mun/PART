@@ -13,7 +13,7 @@ public class LevelEditor : MonoBehaviour
 
     public TMP_InputField levelNameField;
     public LevelEditorElementPool elementPool;
-    public LevelEditorField field;
+    public FieldController field;
     public LevelEditorColorPool colorPool;
 
     [SerializeField] private TextMeshProUGUI subTitle;
@@ -30,10 +30,15 @@ public class LevelEditor : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        field.FieldCreate(null);
+    }
+
     public Level ConstructLevel()
     {
-        int fieldWidth = field.cellsList.GetLength(0);
-        int fieldHeight = field.cellsList.GetLength(1);
+        int fieldWidth = field.field.GetLength(0);
+        int fieldHeight = field.field.GetLength(1);
 
         Vector2Int start = new Vector2Int(fieldWidth, fieldHeight);
         Vector2Int end = new Vector2Int(0, 0);
@@ -42,7 +47,7 @@ public class LevelEditor : MonoBehaviour
         {
             for (int x = 0; x < fieldWidth; x++)
             {
-                if (field.cellsList[x, y].element != null)
+                if (field.field[x, y].element != null)
                 {
                     start.x = Mathf.Min(start.x, x);
                     end.x = Mathf.Max(end.x, x);
@@ -66,19 +71,12 @@ public class LevelEditor : MonoBehaviour
             for (int x = 0; x < width; x++)
             {
                 //Debug.Log(x + " , " + y);
-                LevelEditorCell currentCell = field.cellsList[start.x + x, start.y + y];
+                PartController currentCell = field.field[start.x + x, start.y + y];
                 int index = y * width + x;
 
-                if (currentCell.element != null)
-                {
-                    elementNames[index] = currentCell.element.name;
-                }
-                else
-                {
-                    elementNames[index] = "null";
-                }
+                elementNames[index] = currentCell.element.name;
                 
-                elementFlip[index] = currentCell.elementFlip;
+                elementFlip[index] = currentCell.flip;
             }
         }
 

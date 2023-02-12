@@ -7,11 +7,11 @@ public class LevelDatabase : MonoBehaviour
     public static LevelDatabase Instance { get; private set; }
 
     public Element[] elements;
-    [SerializeField] private Element emptyElemet;
+    public Element emptyElemet;
 
     public enum Colors { white, blue, purple, red, green };
     public Dictionary<Colors, Color32> colorsList = new Dictionary<Colors, Color32>();
-    private Color32 defaultColor = new Color32(255, 255, 255, 255);
+    public Color32 defaultColor = new Color32(255, 255, 255, 255);
 
     private void Awake()
     {

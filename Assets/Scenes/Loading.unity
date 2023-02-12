@@ -855,6 +855,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elements:
+  - {fileID: 11400000, guid: 1fd093e5e15ecef48be2001755f23567, type: 2}
   - {fileID: 11400000, guid: 9167ada7ba7c2d9449b1769a84e5ed46, type: 2}
   - {fileID: 11400000, guid: 00f8979f286eb9347be4e9bb797c10ce, type: 2}
   - {fileID: 11400000, guid: 60079daf84dc34045bb8059a7d23084d, type: 2}
@@ -873,6 +874,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f56e47b3fde449e49a8365838600473c, type: 2}
   - {fileID: 11400000, guid: 3dbc582c0724424409b6287b676469f2, type: 2}
   emptyElemet: {fileID: 11400000, guid: 1fd093e5e15ecef48be2001755f23567, type: 2}
+  defaultColor:
+    serializedVersion: 2
+    rgba: 4294967295
 --- !u!114 &1648203044
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39a711dd80675c04cb7692f5d603765f, type: 3}
   m_Name: _Empty
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  isEmpty: 1
+  icon: {fileID: 21300000, guid: 37717f3ca315a97499fe02f22ebdd5ea, type: 3}
   isFixed: 0
   connectionLeft: 0
   connectionUp: 0

@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public static int level = 0;
-    public static int levelLast = 1; // levelLast + 1 = real last
+    public static int levelsUnlocked = 21;
+    public static int levelCount = 83;
 
     private void Awake()
     {

@@ -38,7 +38,7 @@ public class LevelEditorColorPool : MonoBehaviour
 
         SetupCasesDisplay();
 
-        Destroy(casePrefab);
+        //Destroy(casePrefab);
     }
 
     public void SetActiveColor(LevelDatabase.Colors colorName)
