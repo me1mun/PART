@@ -7,14 +7,14 @@ public class LevelTab : MonoBehaviour
 {
     [SerializeField] private ScrollRect scrollRect;
 
-    [SerializeField] private GameObject rowPrefab;
+    [SerializeField] private GameObject casePrefab;
     [SerializeField] private GameObject container;
 
     //private List<GameObject> rows = new List<GameObject>();
-    private Dictionary<GameObject, LevelCaseRow> rows = new Dictionary<GameObject, LevelCaseRow>();
-    private int casesInRow = 5;
-    private int rowsCount, rowsClamp;
-    private float replaceRowGap;
+    private Dictionary<GameObject, LevelCase> casesList = new Dictionary<GameObject, LevelCase>();
+    private const int casesInRow = 5, casesGap = 170;
+    private int casesCount, casesClamp;
+    private float replaceCaseGap;
     [SerializeField] private RectTransform canvasRect;
     [SerializeField] private Transform borderUp, borderDown;
 
@@ -27,38 +27,39 @@ public class LevelTab : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            ReplaceRow();
+            ReplaceCase();
         }
 
-        ReplaceRow();
+        ReplaceCase();
     }
 
     public void Init()
     {
-        foreach (KeyValuePair<GameObject, LevelCaseRow> lcr in rows)
+        foreach (KeyValuePair<GameObject, LevelCase> lcr in casesList)
         {
-            Destroy(rows[lcr.Key]);
+            Destroy(casesList[lcr.Key]);
         }
-        rows.Clear();
+        casesList.Clear();
         //rowsClass.Clear();
 
-        rowsCount = (int)Mathf.Ceil((float)GameManager.levelCount / casesInRow);
-        rowsClamp = Mathf.Clamp(rowsCount, 1, 10);
+        casesCount = GameManager.levelCount;
+        casesClamp = Mathf.Clamp(casesCount, 1, 45);
+        Debug.Log(casesCount / casesInRow);
 
         RectTransform containerRect = container.GetComponent<RectTransform>();
-        containerRect.sizeDelta = new Vector2(containerRect.sizeDelta.x, rowsCount * (140 + 30));
+        containerRect.sizeDelta = new Vector2(containerRect.sizeDelta.x, Mathf.Ceil((float)casesCount / casesInRow) * (casesGap));
 
-        for(int i = 0; i < rowsClamp; i++)
+        for(int i = 0; i < casesClamp; i++)
         {
-            GameObject newRow = Instantiate(rowPrefab, container.transform);
+            GameObject newCase = Instantiate(casePrefab, container.transform);
 
-            RectTransform rowRect = newRow.GetComponent<RectTransform>();
-            rowRect.localPosition = new Vector3(rowRect.localPosition.x, (i + 0.5f) * -170, rowRect.localPosition.z);
+            RectTransform caseRect = newCase.GetComponent<RectTransform>();
+            caseRect.localPosition = GetCasePosition(i);
 
-            newRow.GetComponent<LevelCaseRow>().Init(i);
+            newCase.GetComponent<LevelCase>().Init(i);
 
             //rows.Add(newRow);
-            rows.Add(newRow, newRow.GetComponent<LevelCaseRow>());
+            casesList.Add(newCase, newCase.GetComponent<LevelCase>());
         }
     }
 
@@ -67,38 +68,50 @@ public class LevelTab : MonoBehaviour
         //Init();
     }
 
-    private void ReplaceRow()
+    private void ReplaceCase()
     {
-        replaceRowGap = 200 / canvasRect.sizeDelta.y * Camera.main.orthographicSize;
+        replaceCaseGap = 200 / canvasRect.sizeDelta.y * Camera.main.orthographicSize;
         //Debug.Log(rows[lastRow].GetComponent<LevelCaseRow>().GetStartLevel());
         Transform containerTransform = container.transform;
 
-        GameObject firstRow = containerTransform.GetChild(0).gameObject;
-        GameObject lastRow = containerTransform.GetChild(rowsClamp - 1).gameObject;
+        GameObject firstCase = containerTransform.GetChild(0).gameObject;
+        GameObject lastCase = containerTransform.GetChild(casesClamp - 1).gameObject;
 
-        if (rows[firstRow].GetRowNum() > 0)
+        if (casesList[firstCase].GetLevelIndex() > 0)
         {
-            if (firstRow.transform.position.y < borderUp.position.y + replaceRowGap)
+            if (firstCase.transform.position.y < borderUp.position.y + replaceCaseGap)
             {
-                lastRow.transform.localPosition = firstRow.transform.localPosition + new Vector3(0, 170, 0);
+                //Debug.Log("last to start");
+                int newCaseIndex = casesList[firstCase].GetLevelIndex() - 1;
+                lastCase.transform.localPosition = GetCasePosition(newCaseIndex);
 
-                rows[lastRow].Init(rows[firstRow].GetRowNum() - 1);
-                rows[lastRow].transform.SetAsFirstSibling();
+                casesList[lastCase].Init(newCaseIndex);
+                casesList[lastCase].transform.SetAsFirstSibling();
 
-                firstRow = containerTransform.GetChild(0).gameObject;
-                lastRow = containerTransform.GetChild(rowsClamp - 1).gameObject;
+                firstCase = containerTransform.GetChild(0).gameObject;
+                lastCase = containerTransform.GetChild(casesClamp - 1).gameObject;
             }
         }
 
-        if (rows[lastRow].GetRowNum() < rowsCount - 1)
+        if (casesList[lastCase].GetLevelIndex() < casesCount - 1)
         {
-            if (lastRow.transform.position.y > borderDown.position.y - replaceRowGap)
+            if (lastCase.transform.position.y > borderDown.position.y - replaceCaseGap)
             {
-                firstRow.transform.localPosition = lastRow.transform.localPosition - new Vector3(0, 170, 0);
+                //Debug.Log("firs to end");
+                int newCaseIndex = casesList[lastCase].GetLevelIndex() + 1;
+                firstCase.transform.localPosition = GetCasePosition(newCaseIndex);
 
-                rows[firstRow].Init(rows[lastRow].GetRowNum() + 1);
-                rows[firstRow].transform.SetAsLastSibling();
+                casesList[firstCase].Init(casesList[lastCase].GetLevelIndex() + 1);
+                casesList[firstCase].transform.SetAsLastSibling();
             }
         }
+    }
+
+    private Vector3 GetCasePosition(int caseIndex)
+    {
+        int rowIndex = caseIndex / casesInRow;
+        int indexInRow = caseIndex % casesInRow;
+
+        return new Vector3(((casesInRow - 1) * -0.5f * casesGap) + indexInRow * casesGap, (rowIndex + 0.5f) * -casesGap, 0);
     }
 }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class LevelCase : MonoBehaviour
 {
-    public int levelNum;
+    public int levelIndex;
 
     [SerializeField] private Image border;
     [SerializeField] private Color32 borderActiveColor, borderInactiveColor;
@@ -16,15 +16,20 @@ public class LevelCase : MonoBehaviour
 
     public void Init(int lvlNum)
     {
-        levelNum = lvlNum;
+        levelIndex = lvlNum;
 
-        levelText.text = (levelNum + 1).ToString();
+        levelText.text = (levelIndex + 1).ToString();
 
-        bool isUnlocked = levelNum < GameManager.levelsUnlocked;
+        bool isUnlocked = levelIndex < GameManager.levelsUnlocked;
 
         border.color = isUnlocked ? borderActiveColor: borderInactiveColor;
         levelTextCanvas.alpha = isUnlocked ? 1 : 0.5f;
 
         GetComponent<ButtonController>().SetInteractable(isUnlocked);
+    }
+
+    public int GetLevelIndex()
+    {
+        return levelIndex;
     }
 }

@@ -130,7 +130,7 @@ public class PartController : MonoBehaviour
 
     private IEnumerator CoroutineFlip()
     {
-        Debug.Log("Flip coroutine");
+        //Debug.Log("Flip coroutine");
         Quaternion rotationTarget = Quaternion.Euler(0, 0, flip * -90);
 
         while (Mathf.Round(content.transform.localRotation.eulerAngles.z) != (rotationTarget.eulerAngles.z))

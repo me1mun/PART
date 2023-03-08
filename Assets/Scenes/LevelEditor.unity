@@ -393,7 +393,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   casePrefab: {fileID: 6521205695124962962, guid: a9a7336c7a0f1b04ea3979f1c21efa01, type: 3}
   container: {fileID: 1481511023}
-  activeElement: {fileID: 0}
 --- !u!1 &199226393
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,7 +429,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.18039216, g: 0.18039216, b: 0.27058825, a: 1}
+  m_BackGroundColor: {r: 0.13725491, g: 0.13725491, b: 0.20392157, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     {
 
 
-        //ChangeScene("Main"); // at the end
+        ChangeScene("Main"); // at the end
     }
 
     public static void ChangeLevel(int count)
