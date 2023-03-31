@@ -6,6 +6,8 @@ public class LevelList : MonoBehaviour
 {
     public static LevelList Instance { get; private set; }
 
+    public string saveLevelPath;
+
     public List<TextAsset> levelJson = new List<TextAsset>();
 
     private void Awake()
@@ -19,11 +21,13 @@ public class LevelList : MonoBehaviour
             Instance = this;
         }
 
-        //GameManager.levelCount = levelJson.Count;
+        GameManager.levelCount = levelJson.Count;
+
+        saveLevelPath = Application.persistentDataPath + "/UserLevels/";
     }
 
-    public Level GetLevel()
+    public Level GetLevel(int lvl)
     {
-        return JsonUtility.FromJson<Level>(levelJson[GameManager.level].text);
+        return JsonUtility.FromJson<Level>(levelJson[lvl].text);
     }
 }

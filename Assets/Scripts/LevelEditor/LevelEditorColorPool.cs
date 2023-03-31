@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class LevelEditorColorPool : MonoBehaviour
 {
+    [SerializeField] private LevelEditor editor;
     [SerializeField] private GameObject casePrefab;
     [SerializeField] private GameObject container;
 
-    [SerializeField] private LevelDatabase.Colors activeColor = LevelDatabase.Colors.white;
+    private LevelDatabase.Colors activeColor = LevelDatabase.Colors.blue;
 
     private List<LevelEditorColorCase> colorCases = new List<LevelEditorColorCase>();
     //private Dictionary<Element, LevelEditorElementCase> elementPool = new Dictionary<Element, LevelEditorElementCase>();
@@ -36,7 +37,7 @@ public class LevelEditorColorPool : MonoBehaviour
             colorCases.Add(newCase);
         }
 
-        SetupCasesDisplay();
+        SetActiveColor(activeColor);
 
         //Destroy(casePrefab);
     }
@@ -46,7 +47,7 @@ public class LevelEditorColorPool : MonoBehaviour
         activeColor = colorName;
 
         SetupCasesDisplay();
-        LevelEditor.Instance.field.PaintField(activeColor);
+        editor.field.PaintField(activeColor);
     }
 
     private void SetupCasesDisplay()

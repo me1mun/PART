@@ -7,6 +7,7 @@ using System;
 public class FieldController : MonoBehaviour
 {
     private Level currentLevel;
+    [SerializeField] Transform fieldContainer;
     [SerializeField] GameObject casePrefab;
 
     public PartController[,] field = new PartController[0, 0];
@@ -44,7 +45,7 @@ public class FieldController : MonoBehaviour
             {
                 int elementIndex = y * fieldSize.x + x;
                 //Debug.Log("Index: " + elementIndex);
-                field[x, y] = Instantiate(casePrefab, casePrefab.transform.parent).GetComponent<PartController>();
+                field[x, y] = Instantiate(casePrefab, fieldContainer).GetComponent<PartController>();
 
 
                 Element newPart = LevelDatabase.Instance.emptyElemet;
@@ -68,7 +69,7 @@ public class FieldController : MonoBehaviour
             }
         }
 
-        Destroy(casePrefab);
+        //Destroy(casePrefab);
     }
 
     private void FieldClear()

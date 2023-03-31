@@ -6,7 +6,7 @@ public class GamePart : MonoBehaviour
 {
     private PartController part;
 
-    void Start()
+    void Awake()
     {
         part = GetComponent<PartController>();
     }

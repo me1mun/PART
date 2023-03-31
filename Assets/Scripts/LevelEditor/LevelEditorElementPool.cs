@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelEditorElementPool : MonoBehaviour
 {
+    [SerializeField] private LevelEditor editor;
     [SerializeField] private GameObject casePrefab;
     [SerializeField] private GameObject container;
 

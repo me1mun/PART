@@ -9,7 +9,7 @@ public class LevelDatabase : MonoBehaviour
     public Element[] elements;
     public Element emptyElemet;
 
-    public enum Colors { white, blue, purple, red, green };
+    public enum Colors { blue, purple, red, green };
     public Dictionary<Colors, Color32> colorsList = new Dictionary<Colors, Color32>();
     public Color32 defaultColor = new Color32(255, 255, 255, 255);
 
@@ -43,7 +43,6 @@ public class LevelDatabase : MonoBehaviour
 
     private void SetupColors()
     {
-        colorsList.Add(Colors.white, new Color32(255, 255, 255, 255));
         colorsList.Add(Colors.blue, new Color32(80, 140, 255, 255));
         colorsList.Add(Colors.purple, new Color32(160, 100, 250, 255));
         colorsList.Add(Colors.red, new Color32(255, 120, 130, 255));

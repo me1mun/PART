@@ -5,14 +5,11 @@ using UnityEngine;
 public class MenuController : MonoBehaviour
 {
     public bool isOpen;
-    [SerializeField] Animation anim;
+    [SerializeField] private Animator animator;
 
     void Start()
     {
         isOpen = false;
-        anim["Menu"].speed = -1;
-        anim["Menu"].time = 0;
-        anim.Play();
     }
 
     private void Update()
@@ -26,14 +23,11 @@ public class MenuController : MonoBehaviour
 
         if (isOpen)
         {
-            anim["Menu"].speed = 1;
+            animator.SetTrigger("Open");
         }
         else
         {
-            anim["Menu"].speed = -1;
-            anim["Menu"].time = anim["Menu"].length;
+            animator.SetTrigger("Close");
         }
-
-        anim.Play();
     }
 }

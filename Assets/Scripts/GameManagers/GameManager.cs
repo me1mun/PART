@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public static int level = 0;
-    public static int levelsUnlocked = 21;
-    public static int levelCount = 83;
+    public static int levelsUnlocked = 2;
+    public static int levelCount = 3;
 
     private void Awake()
     {
@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this.gameObject);
         Application.targetFrameRate = 60;
-
     }
 
     private void Start()

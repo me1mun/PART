@@ -6,25 +6,32 @@ using TMPro;
 
 public class LevelCase : MonoBehaviour
 {
+    
+    public GameController.LevelType listType = GameController.LevelType.challange;
     public int levelIndex;
 
-    [SerializeField] private Image border;
-    [SerializeField] private Color32 borderActiveColor, borderInactiveColor;
-
+    private InfiniteScrollCase scrollCase;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private CanvasGroup levelTextCanvas;
 
-    public void Init(int lvlNum)
+    private void Awake()
     {
-        levelIndex = lvlNum;
+        scrollCase = GetComponent<InfiniteScrollCase>();
+        scrollCase.OnInit.AddListener(Init);
+    }
+
+    public void Init()
+    {
+        levelIndex = scrollCase.GetIndex();
+        Level level = LevelList.Instance.GetLevel(levelIndex);
+        //field.FieldCreate(level);
 
         levelText.text = (levelIndex + 1).ToString();
 
         bool isUnlocked = levelIndex < GameManager.levelsUnlocked;
 
-        border.color = isUnlocked ? borderActiveColor: borderInactiveColor;
-        levelTextCanvas.alpha = isUnlocked ? 1 : 0.5f;
-
+        float disableAlpha = 0.33f;
+        levelTextCanvas.alpha = isUnlocked ? 1 : disableAlpha;
         GetComponent<ButtonController>().SetInteractable(isUnlocked);
     }
 

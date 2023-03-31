@@ -39,6 +39,7 @@ public class PartController : MonoBehaviour
         else
         {
             icon.enabled = false;
+            //GetComponent<ButtonController>().SetInteractable(false);
         }
 
         connectionLeft = el.connectionLeft;

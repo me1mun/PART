@@ -15,6 +15,7 @@ public class LevelEditor : MonoBehaviour
     public LevelEditorElementPool elementPool;
     public FieldController field;
     public LevelEditorColorPool colorPool;
+    //public
 
     [SerializeField] private TextMeshProUGUI subTitle;
 
@@ -28,11 +29,13 @@ public class LevelEditor : MonoBehaviour
         {
             Instance = this;
         }
+
+        field.FieldCreate(null);
     }
 
     private void Start()
     {
-        field.FieldCreate(null);
+        
     }
 
     public Level ConstructLevel()
@@ -107,7 +110,7 @@ public class LevelEditor : MonoBehaviour
         }
         else
         {
-            string savePath = Application.persistentDataPath + "/Levels/";
+            string savePath = LevelList.Instance.saveLevelPath;
             if (!Directory.Exists(savePath))
             {
                 Directory.CreateDirectory(savePath);
@@ -118,5 +121,8 @@ public class LevelEditor : MonoBehaviour
             File.WriteAllText(savePath + levelNameField.text + ".txt", jsonLevel);
             Debug.Log("saved to: " + savePath);
         }
+
+        field.FieldCreate(null);
+        levelNameField.text = "";
     }
 }
