@@ -155,6 +155,6 @@ public class FieldController : MonoBehaviour
             p.SetInteractable(interactable);
 
         float newScale = interactable ? 1f : 0.75f;
-        GetComponent<AnimationScale>().AnimationResizeStart(0.2f, newScale);
+        GetComponent<AnimationScale>().StartAnimationResize(newScale, 0.2f);
     }
 }

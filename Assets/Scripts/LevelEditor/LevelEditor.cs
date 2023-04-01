@@ -4,20 +4,19 @@ using UnityEngine;
 using System.IO;
 using System;
 using TMPro;
+using UnityEngine.Localization;
 
 public class LevelEditor : MonoBehaviour
 {
-    //public Level level;
-
     public static LevelEditor Instance { get; private set; }
 
     public TMP_InputField levelNameField;
     public LevelEditorElementPool elementPool;
     public FieldController field;
     public LevelEditorColorPool colorPool;
-    //public
 
-    [SerializeField] private TextMeshProUGUI subTitle;
+    [SerializeField] private TextTransition subtitle;
+    [SerializeField] private LocalizedString string_noAlias, string_noParts;
 
     private void Awake()
     {
@@ -100,13 +99,13 @@ public class LevelEditor : MonoBehaviour
     {
         Level FinalLevel = ConstructLevel();
 
-        if (FinalLevel.nameId == "")
+        if (FinalLevel.width <= 0)
         {
-            subTitle.text = "Enter the level name";
+            subtitle.StartTransition(string_noParts);
         }
-        else if (FinalLevel.width <= 0)
+        else if (FinalLevel.nameId == "")
         {
-            subTitle.text = "No level here";
+            subtitle.StartTransition(string_noAlias);
         }
         else
         {

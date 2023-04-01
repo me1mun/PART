@@ -6,11 +6,11 @@ public class AnimationScale : MonoBehaviour
 {
     private Coroutine coroutineResize;
 
-    public AnimationCurve animCurve;
+    [SerializeField] private AnimationCurve animCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
     private float animTime = 0.2f;
     private float targetScale = 1;
 
-    public void AnimationResizeStart(float newTime, float newScale)
+    public void StartAnimationResize(float newScale, float newTime)
     {
         animTime = newTime;
         targetScale = newScale;
@@ -19,7 +19,6 @@ public class AnimationScale : MonoBehaviour
         {
             StopCoroutine(coroutineResize);
         }
-
         coroutineResize = StartCoroutine(CoroutineResize());
     }
 
