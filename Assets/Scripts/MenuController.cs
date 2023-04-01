@@ -6,6 +6,7 @@ public class MenuController : MonoBehaviour
 {
     public bool isOpen;
     [SerializeField] private Animator animator;
+    [SerializeField] private FieldController gameField;
 
     void Start()
     {
@@ -24,10 +25,12 @@ public class MenuController : MonoBehaviour
         if (isOpen)
         {
             animator.SetTrigger("Open");
+            gameField.SetInteractable(false);
         }
         else
         {
             animator.SetTrigger("Close");
+            gameField.SetInteractable(true);
         }
     }
 }

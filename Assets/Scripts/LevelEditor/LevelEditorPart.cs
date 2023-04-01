@@ -19,7 +19,7 @@ public class LevelEditorPart : MonoBehaviour
 
         if (activeEl.isEmpty || part.element.isEmpty)
         {
-            part.Init(activeEl, 0);
+            part.Init(activeEl, 0, part.GetPosition());
         }
         else
         {

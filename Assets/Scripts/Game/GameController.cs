@@ -32,6 +32,6 @@ public class GameController : MonoBehaviour
         level = newLevel;
         levelType = newLevelType;
 
-        field.FieldCreate(level);
+        field.CreateField(level);
     }
 }

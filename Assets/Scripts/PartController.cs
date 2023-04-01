@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PartController : MonoBehaviour
 {
+    private ButtonController buttonController;
     [SerializeField] private Image icon;
     [SerializeField] private GameObject content;
 
@@ -13,6 +14,7 @@ public class PartController : MonoBehaviour
     public Element.ConnectionTypes connectionRight = Element.ConnectionTypes.none;
     public Element.ConnectionTypes connectionDown = Element.ConnectionTypes.none;
 
+    private Vector2Int position;
     public bool isFixed = false;
     public Element element;
     private Color32 color;
@@ -23,13 +25,15 @@ public class PartController : MonoBehaviour
 
     private void Awake()
     {
+        buttonController = GetComponent<ButtonController>();
         //Init(LevelDatabase.Instance.emptyElemet, LevelDatabase.Instance.defaultColor, 0);
     }
 
-    public void Init(Element el, int flipCount)
+    public void Init(Element el, int flipCount, Vector2Int pos)
     {
         element = el;
         isFixed = el.isFixed;
+        position = pos;
 
         if (el.isEmpty == false) 
         {
@@ -104,6 +108,11 @@ public class PartController : MonoBehaviour
         connectionUp = tempConnection;
     }
 
+    public Vector2Int GetPosition()
+    {
+        return position;
+    }
+
     private void AnimationStart(string coroutine)
     {
         if (coroutineAnimation != null)
@@ -143,5 +152,8 @@ public class PartController : MonoBehaviour
         content.transform.localRotation = rotationTarget;
     }
 
-
+    public void SetInteractable(bool interactable)
+    {
+        buttonController.SetInteractable(interactable);
+    }
 }

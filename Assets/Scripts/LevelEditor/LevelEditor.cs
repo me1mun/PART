@@ -30,7 +30,7 @@ public class LevelEditor : MonoBehaviour
             Instance = this;
         }
 
-        field.FieldCreate(null);
+        field.CreateField(null);
     }
 
     private void Start()
@@ -122,7 +122,7 @@ public class LevelEditor : MonoBehaviour
             Debug.Log("saved to: " + savePath);
         }
 
-        field.FieldCreate(null);
+        field.CreateField(null);
         levelNameField.text = "";
     }
 }

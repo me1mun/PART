@@ -10,8 +10,10 @@ public class FieldController : MonoBehaviour
     [SerializeField] Transform fieldContainer;
     [SerializeField] GameObject casePrefab;
 
+    private bool isInteractable = true;
     public PartController[,] field = new PartController[0, 0];
     private Vector2Int fieldSize;
+    public bool isLooped = false;
 
     void Start()
     {
@@ -20,9 +22,15 @@ public class FieldController : MonoBehaviour
         //FieldCreate(currentLevel);
     }
 
-    public void FieldCreate(Level level)
+    private void Update()
     {
-        FieldClear();
+        if (Input.GetKeyDown(KeyCode.C))
+            CheckLoop();
+    }
+
+    public void CreateField(Level level)
+    {
+        ClearField();
         
         if(level != null)
         {
@@ -47,7 +55,6 @@ public class FieldController : MonoBehaviour
                 //Debug.Log("Index: " + elementIndex);
                 field[x, y] = Instantiate(casePrefab, fieldContainer).GetComponent<PartController>();
 
-
                 Element newPart = LevelDatabase.Instance.emptyElemet;
                 int newPartFlip = 0;
                 Color32 levelColor = LevelDatabase.Instance.defaultColor;
@@ -64,7 +71,7 @@ public class FieldController : MonoBehaviour
                 }
 
                 
-                field[x, y].Init(newPart, newPartFlip);
+                field[x, y].Init(newPart, newPartFlip, new Vector2Int(x, y));
                 field[x, y].PaintSelf(levelColor);
             }
         }
@@ -72,7 +79,46 @@ public class FieldController : MonoBehaviour
         //Destroy(casePrefab);
     }
 
-    private void FieldClear()
+    private void CheckLoop()
+    {
+        foreach(PartController pc in field)
+        {
+            if (!CheckElementLoop(pc))
+            {
+                isLooped = false;
+                return;
+            }
+        }
+
+        isLooped = true;
+    }
+
+    public bool CheckElementLoop(PartController part)
+    {
+        Vector2Int partPos = part.GetPosition();
+
+        bool conLeft = true, conUp = true, conRight = true, conDown = true;
+
+        if (part.connectionLeft == Element.ConnectionTypes.regular)
+            if (partPos.x == 0 || field[partPos.x - 1, partPos.y].connectionRight == Element.ConnectionTypes.none)
+                conLeft = false;
+
+        if (part.connectionUp == Element.ConnectionTypes.regular)
+            if (partPos.y == 0 || field[partPos.x, partPos.y - 1].connectionDown == Element.ConnectionTypes.none)
+                conUp = false;
+
+        if (part.connectionRight == Element.ConnectionTypes.regular)
+            if (partPos.x == fieldSize.x - 1 || field[partPos.x + 1, partPos.y].connectionLeft == Element.ConnectionTypes.none)
+                conRight = false;
+
+        if (part.connectionDown == Element.ConnectionTypes.regular)
+            if (partPos.y == fieldSize.y - 1 || field[partPos.x, partPos.y + 1].connectionUp == Element.ConnectionTypes.none)
+                conDown = false;
+
+        return conLeft && conUp && conRight && conDown;
+    }
+
+    private void ClearField()
     {
         foreach (PartController el in field)
         {
@@ -80,7 +126,7 @@ public class FieldController : MonoBehaviour
         }
     }
 
-    public void fieldShuffle(bool flashShuffle)
+    public void Shufflefield(bool flashShuffle)
     {
         foreach (PartController el in field)
         {
@@ -99,5 +145,16 @@ public class FieldController : MonoBehaviour
         {
             ec.PaintSelf(newColor);
         }
+    }
+
+    public void SetInteractable(bool interactable)
+    {
+        isInteractable = interactable;
+
+        foreach (PartController p in field)
+            p.SetInteractable(interactable);
+
+        float newScale = interactable ? 1f : 0.75f;
+        GetComponent<AnimationScale>().AnimationResizeStart(0.2f, newScale);
     }
 }

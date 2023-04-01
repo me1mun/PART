@@ -12,7 +12,7 @@ public class InfiniteScroll : MonoBehaviour
 
     //private List<GameObject> rows = new List<GameObject>();
     private Dictionary<GameObject, InfiniteScrollCase> casesList = new Dictionary<GameObject, InfiniteScrollCase>();
-    private const int caseSize = 160, caseGap = 20;
+    private const int caseSize = 150, caseGap = 20;
     private const int casesInRow = 5;
     private int casesCount, casesClamp;
     private float replaceCaseGap;
