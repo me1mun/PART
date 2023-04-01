@@ -24,12 +24,12 @@ public class MenuController : MonoBehaviour
 
         if (isOpen)
         {
-            animator.SetTrigger("Open");
+            animator.SetBool("Activate", true);
             gameField.SetInteractable(false);
         }
         else
         {
-            animator.SetTrigger("Close");
+            animator.SetBool("Activate", false);
             gameField.SetInteractable(true);
         }
     }

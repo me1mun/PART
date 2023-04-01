@@ -17,7 +17,7 @@ public class AnimationScale : MonoBehaviour
 
         if (coroutineResize != null)
         {
-            StopCoroutine(CoroutineResize());
+            StopCoroutine(coroutineResize);
         }
 
         coroutineResize = StartCoroutine(CoroutineResize());
