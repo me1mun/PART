@@ -13,6 +13,7 @@ public class InfiniteScroll : MonoBehaviour
     //private List<GameObject> rows = new List<GameObject>();
     private Dictionary<GameObject, InfiniteScrollCase> casesList = new Dictionary<GameObject, InfiniteScrollCase>();
     private const int caseSize = 150, caseGap = 20;
+    private const int casesMax = 45;
     private const int casesInRow = 5;
     private int casesCount, casesClamp;
     private float replaceCaseGap;
@@ -26,24 +27,15 @@ public class InfiniteScroll : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            ReplaceCase();
-        }
-
         ReplaceCase();
     }
 
     public void Init()
     {
-        foreach (KeyValuePair<GameObject, InfiniteScrollCase> cs in casesList)
-        {
-            Destroy(casesList[cs.Key]);
-        }
-        casesList.Clear();
+        Debug.Log(casesList.Count + " | " + container.transform.childCount);
 
         casesCount = GameManager.levelCount;
-        casesClamp = Mathf.Clamp(casesCount, 0, 45);
+        casesClamp = Mathf.Min(casesCount, casesMax);
 
         RectTransform containerRect = container.GetComponent<RectTransform>();
         containerRect.sizeDelta = new Vector2(containerRect.sizeDelta.x, Mathf.Ceil((float)casesCount / casesInRow) * (caseSize + caseGap));
@@ -60,11 +52,21 @@ public class InfiniteScroll : MonoBehaviour
 
             casesList.Add(newCase, newCase.GetComponent<InfiniteScrollCase>());
         }
+
+
+    }
+
+    private void InitCases()
+    {
+        foreach (KeyValuePair<GameObject, InfiniteScrollCase> cs in casesList)
+        {
+            cs.Value.Init(cs.Value.GetIndex());
+        }
     }
 
     private void OnEnable()
     {
-        //Init();
+        InitCases();
     }
 
     private void ReplaceCase()

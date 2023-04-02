@@ -42,4 +42,12 @@ public class AnimationScale : MonoBehaviour
         // Set final size to target size to avoid precision errors
         transform.localScale = new Vector3(targetScale, targetScale, 1);
     }
+
+    private void OnDestroy()
+    {
+        if (coroutineResize != null)
+        {
+            StopCoroutine(coroutineResize);
+        }
+    }
 }

@@ -24,7 +24,7 @@ MonoBehaviour:
     - Locale-uk
     - Preload
   - m_GUID: 13d06f7e51ed82248a9cbd830e217f9f
-    m_Address: Subtitles_uk
+    m_Address: GameSubtitles_uk
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-uk

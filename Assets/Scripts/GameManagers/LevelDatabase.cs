@@ -11,7 +11,7 @@ public class LevelDatabase : MonoBehaviour
 
     public enum Colors { blue, purple, red, green };
     public Dictionary<Colors, Color32> colorsList = new Dictionary<Colors, Color32>();
-    public Color32 defaultColor = new Color32(255, 255, 255, 255);
+    public Colors defaultColor = Colors.blue;
 
     private void Awake()
     {
@@ -56,6 +56,6 @@ public class LevelDatabase : MonoBehaviour
             return colorsList[color];
         }
 
-        return defaultColor;
+        return colorsList[defaultColor];
     }
 }

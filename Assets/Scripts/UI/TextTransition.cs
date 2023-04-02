@@ -15,8 +15,8 @@ public class TextTransition : MonoBehaviour
 
     private AnimationAlpha animationAlpha;
     private LocalizedString stringReference;
-    private float animTime = 0.33f;
-    private const float defaultTextShowTime = 6f;
+    private float animTime = 0.5f;
+    private const float defaultTextShowTime = 4.5f;
     private float textShowTime = 0;
 
     private void Awake()
@@ -43,6 +43,11 @@ public class TextTransition : MonoBehaviour
             StopCoroutine(coroutineTransition);
         }
         coroutineTransition = StartCoroutine(CoroutineTransition());
+    }
+
+    public void HideText()
+    {
+        gameObject.SetActive(false);
     }
 
     private IEnumerator CoroutineTransition()

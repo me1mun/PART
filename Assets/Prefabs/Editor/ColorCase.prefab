@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7716823087968061471}
   - component: {fileID: 1570525729211438253}
   - component: {fileID: 7327918124589066620}
+  - component: {fileID: 3136156017250706442}
   m_Layer: 0
   m_Name: Fill
   m_TagString: Untagged
@@ -76,6 +77,42 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3136156017250706442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5053040563671352701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b32e73c6318c364a84744fbd9bb3edb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &6661540842226557916
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +124,6 @@ GameObject:
   - component: {fileID: 6213643281854694060}
   - component: {fileID: 3230417578089085374}
   - component: {fileID: 3294540954928622050}
-  - component: {fileID: 5682194329877849609}
   m_Layer: 0
   m_Name: Border
   m_TagString: Untagged
@@ -154,26 +190,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!95 &5682194329877849609
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6661540842226557916}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 460cb821fb61b7842a3f99bd007c6b71, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &635833464538890320
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -359,4 +375,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   border: {fileID: 3294540954928622050}
   fill: {fileID: 7327918124589066620}
-  animator: {fileID: 5682194329877849609}
+  animator: {fileID: 3136156017250706442}

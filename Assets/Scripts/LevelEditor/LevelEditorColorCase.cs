@@ -8,7 +8,7 @@ public class LevelEditorColorCase : MonoBehaviour
     private LevelDatabase.Colors color;
     [SerializeField] private Image border, fill;
 
-    [SerializeField] private Animator animator;
+    [SerializeField] private AnimationScale animator;
 
     public void Init(LevelDatabase.Colors col, Color32 col32)
     {
@@ -21,16 +21,9 @@ public class LevelEditorColorCase : MonoBehaviour
 
     public void SetupDisplay(LevelDatabase.Colors activeColor)
     {
-        bool isActive = activeColor == color;
+        float targetScale = activeColor == color ? 1f : 0f;
 
-        if(isActive)
-        {
-            animator.SetTrigger("Activate");
-        }
-        else
-        {
-            animator.SetTrigger("Deactivate");
-        }
+        animator.StartAnimationResize(targetScale, 0.25f);
     }
 
     public void SetPoolActiveColor()

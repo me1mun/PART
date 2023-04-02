@@ -45,6 +45,7 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerClic
     {
         if (interactable)
         {
+            //Debug.Log("Button is clicked");
             onClick.Invoke();
         }
     }

@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public static int level = 0;
-    public static int levelsUnlocked = 2;
-    public static int levelCount = 3;
+    public static int levelsUnlocked = 1;
+    public static int levelCount;
 
     private void Awake()
     {
@@ -28,17 +28,28 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
+        levelCount = 20;// LevelList.Instance.levelJson.Count;
 
         ChangeScene("Main"); // at the end
     }
 
-    public static void ChangeLevel(int count)
+    public static void SetLevel(int newLevel)
     {
-        level += count;
-        level = Mathf.Clamp(level, 0, 1000);
+        //Debug.Log("before " + level);
+        if (newLevel > 0 && newLevel < levelsUnlocked)
+        {
+            level = Mathf.Clamp(newLevel, 0, levelCount);
+        }
+        //Debug.Log("after " + level);
+    }
 
-        Debug.Log(level);
+    public static void UnlockLevel()
+    {
+        
+        if (level >= levelsUnlocked -1 && levelsUnlocked < levelCount)
+        {
+            levelsUnlocked += 1;
+        }
     }
 
     public static void ChangeScene(string newScene)

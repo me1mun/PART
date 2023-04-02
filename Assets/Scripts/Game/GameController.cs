@@ -2,36 +2,91 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Localization;
 
 public class GameController : MonoBehaviour
 {
     public enum LevelType { challange, custom };
 
     [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private FieldController field;
     [SerializeField] private TextMeshProUGUI levelCounter;
+    [SerializeField] private TextTransition subtitle;
+    [SerializeField] private LocalizedString subtitle_complete, subtitle_newLevels;
+    [SerializeField] private FieldController field;
+    [SerializeField] private GameButtonComplete buttonNext;
+    [SerializeField] private MenuController menu;
+
+    private AnimationAlpha animationAlpha;
 
     private Level level;
-    private LevelType levelType;
 
     //private float initProgress;
-    private Coroutine levelInitCoroutine;
+    private Coroutine coroutineLevelTransition;
+
+    private void Awake()
+    {
+        animationAlpha = GetComponent<AnimationAlpha>();
+        canvasGroup.alpha = 0;
+    }
 
     void Start()
     {
-        StartLevel(LevelList.Instance.GetLevel(GameManager.level), LevelType.challange);
+        StartLevel();
     }
 
-    public void ChangeLevel(int count)
+    private void Update()
     {
-        GameManager.ChangeLevel(count);
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            CompleteLevel();
+        }
     }
 
-    public void StartLevel(Level newLevel, LevelType newLevelType)
+    public void CompleteLevel()
     {
-        level = newLevel;
-        levelType = newLevelType;
+        GameManager.UnlockLevel();
+        GameManager.SetLevel(GameManager.level + 1);
 
+        subtitle.StartTransition(subtitle_complete, -1f);
+        field.SetInteractable(false);
+        buttonNext.ShowButton();
+        menu.SetInteractable(false);
+        
+    }
+
+    public void StartLevel()
+    {
+        level = LevelList.Instance.GetLevel(GameManager.level);
+
+        if (coroutineLevelTransition != null)
+        {
+            StopCoroutine(coroutineLevelTransition);
+        }
+        coroutineLevelTransition = StartCoroutine(CoroutineLevelTransition());
+    }
+
+    public void StartNextLevel()
+    {
+        StartLevel();
+    }
+
+    private IEnumerator CoroutineLevelTransition()
+    {
+        float animTime = 0.2f;
+
+        animationAlpha.StartAnimationAlpha(0, animTime);
+
+        while(canvasGroup.alpha > 0)
+            yield return null;
+
+        levelCounter.text = "#" + (GameManager.level + 1);
+        subtitle.HideText();
         field.CreateField(level);
+        field.SetInteractable(true);
+        buttonNext.gameObject.SetActive(false);
+        menu.SetInteractable(true);
+        
+
+        animationAlpha.StartAnimationAlpha(1, animTime);
     }
 }

@@ -19,9 +19,7 @@ public class LevelList : MonoBehaviour
         else
         {
             Instance = this;
-        }
-
-        GameManager.levelCount = levelJson.Count;
+        }GameManager.levelCount = levelJson.Count;
 
         saveLevelPath = Application.persistentDataPath + "/UserLevels/";
     }

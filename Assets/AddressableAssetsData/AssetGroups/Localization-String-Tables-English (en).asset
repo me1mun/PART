@@ -24,7 +24,7 @@ MonoBehaviour:
     - Locale-en
     - Preload
   - m_GUID: 44f640bcc23156e4f8fc9a6294ffe941
-    m_Address: Subtitles_en
+    m_Address: GameSubtitles_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

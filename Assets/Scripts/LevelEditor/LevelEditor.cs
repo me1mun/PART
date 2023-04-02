@@ -30,6 +30,7 @@ public class LevelEditor : MonoBehaviour
         }
 
         field.CreateField(null);
+        field.PaintField(colorPool.GetActiveColor());
     }
 
     private void Start()
@@ -49,7 +50,7 @@ public class LevelEditor : MonoBehaviour
         {
             for (int x = 0; x < fieldWidth; x++)
             {
-                if (field.field[x, y].element != null)
+                if (field.field[x, y].element.isEmpty == false)
                 {
                     start.x = Mathf.Min(start.x, x);
                     end.x = Mathf.Max(end.x, x);

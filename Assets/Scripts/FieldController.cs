@@ -13,6 +13,7 @@ public class FieldController : MonoBehaviour
     private bool isInteractable = true;
     public PartController[,] field = new PartController[0, 0];
     private Vector2Int fieldSize;
+    private LevelDatabase.Colors levelColor;
     public bool isLooped = false;
 
     void Start()
@@ -31,18 +32,25 @@ public class FieldController : MonoBehaviour
     public void CreateField(Level level)
     {
         ClearField();
+
+        currentLevel = level;
+        levelColor = LevelDatabase.Instance.defaultColor;
         
         if(level != null)
         {
             fieldSize.x = level.width;
             fieldSize.y = level.height;
+
+            if (Enum.IsDefined(typeof(LevelDatabase.Colors), level.colorName))
+                levelColor = Enum.Parse<LevelDatabase.Colors>(level.colorName);
         }
         else
         {
             fieldSize.x = 8;
             fieldSize.y = 10;
         }
-        
+
+        Color32 levelColor32 = LevelDatabase.Instance.GetColor(levelColor);
 
         GetComponent<GridLayoutGroup>().constraintCount = fieldSize.x;
         field = new PartController[fieldSize.x, fieldSize.y];
@@ -57,22 +65,21 @@ public class FieldController : MonoBehaviour
 
                 Element newPart = LevelDatabase.Instance.emptyElemet;
                 int newPartFlip = 0;
-                Color32 levelColor = LevelDatabase.Instance.defaultColor;
+                //levelColor = LevelDatabase.Instance.defaultColor;
+
 
                 if (level != null)
                 {
                     newPart = LevelDatabase.Instance.GetElement(level.elements[elementIndex]);
-                    levelColor = LevelDatabase.Instance.GetColor(Enum.Parse<LevelDatabase.Colors>(level.colorName));
 
                     if (newPart.isFixed)
                         newPartFlip = level.elementFlip[elementIndex];
                     else
                         newPartFlip = UnityEngine.Random.Range(0, 4);
                 }
-
                 
                 field[x, y].Init(newPart, newPartFlip, new Vector2Int(x, y));
-                field[x, y].PaintSelf(levelColor);
+                field[x, y].PaintSelf(levelColor32);
             }
         }
 
