@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class InfiniteScrollCase : MonoBehaviour
 {
-    public int index;
+    private int index;
 
     public UnityEvent OnInit;
 

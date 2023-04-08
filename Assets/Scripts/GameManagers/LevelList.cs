@@ -9,6 +9,7 @@ public class LevelList : MonoBehaviour
     public string saveLevelPath;
 
     public List<TextAsset> levelJson = new List<TextAsset>();
+    [SerializeField] private TextAsset randomLevel;
 
     private void Awake()
     {
@@ -19,13 +20,20 @@ public class LevelList : MonoBehaviour
         else
         {
             Instance = this;
-        }GameManager.levelCount = levelJson.Count;
+        }
 
-        saveLevelPath = Application.persistentDataPath + "/UserLevels/";
+        saveLevelPath = Application.persistentDataPath + "/CreatedLevels/";
+
+        levelJson.Add(randomLevel);
     }
 
     public Level GetLevel(int lvl)
     {
         return JsonUtility.FromJson<Level>(levelJson[lvl].text);
+    }
+
+    public int GetLevelCount()
+    {
+        return levelJson.Count;
     }
 }

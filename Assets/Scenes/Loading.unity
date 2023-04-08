@@ -875,9 +875,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f56e47b3fde449e49a8365838600473c, type: 2}
   - {fileID: 11400000, guid: 3dbc582c0724424409b6287b676469f2, type: 2}
   emptyElemet: {fileID: 11400000, guid: 1fd093e5e15ecef48be2001755f23567, type: 2}
-  defaultColor:
-    serializedVersion: 2
-    rgba: 4294967295
+  defaultColor: 0
 --- !u!114 &1648203044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -895,54 +893,27 @@ MonoBehaviour:
   - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
   - {fileID: 4900000, guid: c2474c54b32150f49bdafef064191e03, type: 3}
   - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
-  - {fileID: 4900000, guid: c2474c54b32150f49bdafef064191e03, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
+  randomLevel: {fileID: 4900000, guid: 937a21a6f6c01cb448f2364037927393, type: 3}
 --- !u!114 &1648203045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -958,18 +929,33 @@ MonoBehaviour:
   onColorThemeChange:
     m_PersistentCalls:
       m_Calls: []
-  colorBg:
-    serializedVersion: 2
-    rgba: 0
-  colorOverlay:
-    serializedVersion: 2
-    rgba: 0
-  colorContent:
-    serializedVersion: 2
-    rgba: 0
-  colorAccent:
-    serializedVersion: 2
-    rgba: 0
+  colorThemeArary:
+  - themeName: 0
+    colorBg:
+      serializedVersion: 2
+      rgba: 4281606947
+    colorOverlay:
+      serializedVersion: 2
+      rgba: 4282723886
+    colorContent:
+      serializedVersion: 2
+      rgba: 4294967295
+    colorAccent:
+      serializedVersion: 2
+      rgba: 4294937680
+  - themeName: 1
+    colorBg:
+      serializedVersion: 2
+      rgba: 4293980400
+    colorOverlay:
+      serializedVersion: 2
+      rgba: 4294967295
+    colorContent:
+      serializedVersion: 2
+      rgba: 4282723886
+    colorAccent:
+      serializedVersion: 2
+      rgba: 4294937680
 --- !u!1 &2101852239
 GameObject:
   m_ObjectHideFlags: 0

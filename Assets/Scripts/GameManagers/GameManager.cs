@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        levelCount = 20;// LevelList.Instance.levelJson.Count;
+        levelCount = LevelList.Instance.GetLevelCount();
 
         ChangeScene("Main"); // at the end
     }
@@ -36,11 +36,11 @@ public class GameManager : MonoBehaviour
     public static void SetLevel(int newLevel)
     {
         //Debug.Log("before " + level);
-        if (newLevel > 0 && newLevel < levelsUnlocked)
+        if (newLevel >= 0 && newLevel < levelsUnlocked)
         {
             level = Mathf.Clamp(newLevel, 0, levelCount);
         }
-        //Debug.Log("after " + level);
+        //Debug.Log("Level set: " + level);
     }
 
     public static void UnlockLevel()

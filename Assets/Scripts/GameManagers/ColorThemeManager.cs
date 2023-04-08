@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 public class ColorThemeManager : MonoBehaviour
 {
@@ -9,11 +10,13 @@ public class ColorThemeManager : MonoBehaviour
 
     public UnityEvent onColorThemeChange;
 
-    public enum Theme { darkDefault, white };
-    private Dictionary<Theme, ColorTheme> colorThemeDict = new Dictionary<Theme, ColorTheme>();
+    public enum ThemeType { darkDefault, white };
+    public enum ColorType { bg, overlay, content, accent };
+    [SerializeField] private ColorTheme[] colorThemeArary;
+    private Dictionary<ThemeType, ColorTheme> colorThemeDict = new Dictionary<ThemeType, ColorTheme>();
 
-    private Theme currentTheme = Theme.darkDefault;
-    public Color32 colorBg, colorOverlay, colorContent, colorAccent;
+    private ThemeType currentTheme = ThemeType.darkDefault;
+    public Dictionary<ColorType, Color32> Colors = new Dictionary<ColorType, Color32>();
 
     private void Awake()
     {
@@ -43,24 +46,32 @@ public class ColorThemeManager : MonoBehaviour
 
     private void InitThemes()
     {
-        colorThemeDict.Add(Theme.darkDefault, new ColorTheme(new Color32(35, 35, 52, 255), new Color32(46, 46, 69, 255), new Color32(255, 255, 255, 255), new Color32(80, 140, 255, 255))); // default
-        colorThemeDict.Add(Theme.white, new ColorTheme(new Color32(242, 242, 242, 255), new Color32(255, 255, 255, 255), new Color32(46, 46, 69, 255), new Color32(80, 140, 255, 255)));
+        foreach(ColorType colType in Enum.GetValues(typeof(ColorType)))
+        {
+            Colors.Add(colType, new Color32(255, 0, 0, 255));
+        }
+
+        foreach (ColorTheme ct in colorThemeArary)
+        {
+            colorThemeDict.Add(ct.themeName, ct);
+        }
+
     }
 
-    public void SetColorTheme(Theme newTheme) 
+    public void SetColorTheme(ThemeType newTheme) 
     {
         currentTheme = newTheme;
 
         if(colorThemeDict.ContainsKey(newTheme))
         {
-            colorBg = colorThemeDict[newTheme].colorBg;
-            colorOverlay = colorThemeDict[newTheme].colorOverlay;
-            colorContent = colorThemeDict[newTheme].colorContent;
-            colorAccent = colorThemeDict[newTheme].colorAccent;
+            Colors[ColorType.bg] = colorThemeDict[newTheme].colorBg;
+            Colors[ColorType.overlay] = colorThemeDict[newTheme].colorOverlay;
+            Colors[ColorType.content] = colorThemeDict[newTheme].colorContent;
+            Colors[ColorType.accent] = colorThemeDict[newTheme].colorAccent;
         }
-        else if (colorThemeDict.ContainsKey(Theme.darkDefault))
+        else if (colorThemeDict.ContainsKey(ThemeType.darkDefault))
         {
-            SetColorTheme(Theme.darkDefault);
+            SetColorTheme(ThemeType.darkDefault);
         }
 
         onColorThemeChange.Invoke();
@@ -68,21 +79,21 @@ public class ColorThemeManager : MonoBehaviour
 
     public void ChangeColorTheme()
     {
-        SetColorTheme(Theme.white);
-        Debug.Log("Change Theme to white");
+        SetColorTheme(currentTheme == ThemeType.white ? ThemeType.darkDefault : ThemeType.white);
+        Debug.Log("Change color theme");
+    }
+
+    public Color32 GetColor(ColorType colType)
+    {
+        return Colors[colType];
     }
 }
 
+
+[System.Serializable]
 public class ColorTheme
 {
+    public ColorThemeManager.ThemeType themeName;
+
     public Color32 colorBg, colorOverlay, colorContent, colorAccent;
-
-    public ColorTheme(Color32 colBg, Color32 colOverlay, Color32 colContent, Color32 colAccent)
-    {
-        colorBg = colBg;
-        colorOverlay = colOverlay;
-        colorContent = colContent;
-        colorAccent = colAccent;
-    }
-
 }

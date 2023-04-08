@@ -1,0 +1,1 @@
+{"isRandom":true,"levelName":"Random","width":1,"height":1,"colorName":"blue","elements":["Zero_circleBig"],"elementFlip":[0]}

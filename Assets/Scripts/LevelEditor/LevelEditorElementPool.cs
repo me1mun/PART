@@ -24,7 +24,7 @@ public class LevelEditorElementPool : MonoBehaviour
 
         int caseSize = 120 + 30;
         RectTransform containerRect = container.GetComponent<RectTransform>();
-        containerRect.sizeDelta = new Vector2(caseSize * (elementCount + 1) + 60, containerRect.sizeDelta.y);
+        containerRect.sizeDelta = new Vector2(caseSize * elementCount + 60, containerRect.sizeDelta.y);
 
         elementCases.Add(casePrefab.GetComponent<LevelEditorElementCase>());
 

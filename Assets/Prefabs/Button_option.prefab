@@ -431,6 +431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button_option
       objectReference: {fileID: 0}
+    - target: {fileID: 4140293764740573476, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
+      propertyPath: m_AdditionalShaderChannelsFlag
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 4251097578951017435, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -494,22 +498,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4251097578951017435, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
   m_PrefabInstance: {fileID: 3574976523922191731}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3238809170863783825 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2120722578390829794, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
-  m_PrefabInstance: {fileID: 3574976523922191731}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &7663007741340224433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3238809170863783825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b60c3e10c2be42f4e8303058780108d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  gradeController: {fileID: 0}

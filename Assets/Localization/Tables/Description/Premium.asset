@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
-  m_Name: Description
+  m_Name: Premium
   m_EditorClassIdentifier: 
   m_SharedTableData: {fileID: 11400000, guid: 84b8a9d9eca56514d80471f9aa2f81fa, type: 2}
   m_Tables:

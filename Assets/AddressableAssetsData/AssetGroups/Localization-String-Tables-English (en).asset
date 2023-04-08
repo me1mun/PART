@@ -30,7 +30,7 @@ MonoBehaviour:
     - Locale-en
     - Preload
   - m_GUID: e507bb03de687a247afa1a8c437d5769
-    m_Address: Description_en
+    m_Address: Premium_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

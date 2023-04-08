@@ -6,7 +6,7 @@ using UnityEngine.Localization;
 
 public class GameController : MonoBehaviour
 {
-    public enum LevelType { challange, custom };
+    private bool isPause = false;
 
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TextMeshProUGUI levelCounter;
@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private LocalizedString subtitle_complete, subtitle_newLevels;
     [SerializeField] private FieldController field;
     [SerializeField] private GameButtonComplete buttonNext;
-    [SerializeField] private MenuController menu;
+    [SerializeField] private MenuBar menu;
 
     private AnimationAlpha animationAlpha;
 

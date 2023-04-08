@@ -17,9 +17,14 @@ public class AnimationAlpha : MonoBehaviour
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
+    public float GetAlpha()
+    {
+        return canvasGroup.alpha;
+    }
+
     public void StartAnimationAlpha(float newScale, float newTime)
     {
-        animTime = newTime;
+        animTime = newTime <= 0 ? 0.01f : newTime;
         targetAlpha = newScale;
 
         if (coroutineAlpha != null)

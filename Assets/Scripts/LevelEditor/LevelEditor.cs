@@ -10,9 +10,10 @@ public class LevelEditor : MonoBehaviour
 {
     public static LevelEditor Instance { get; private set; }
 
-    public TMP_InputField levelNameField;
-    public LevelEditorElementPool elementPool;
+    //public TMP_InputField levelNameField;
+    [SerializeField] private string levelName;
     public FieldController field;
+    public LevelEditorElementPool elementPool;
     public LevelEditorColorPool colorPool;
 
     [SerializeField] private TextTransition subtitle;
@@ -66,8 +67,8 @@ public class LevelEditor : MonoBehaviour
 
         Debug.Log(start + " | " + end);
 
-        string[] elementNames = new string[width * height];
-        int[] elementFlip = new int[width * height];
+        string[] elementNameArray = new string[width * height];
+        int[] elementFlipArray = new int[width * height];
 
         for (int y = 0; y < height; y++)
         {
@@ -77,20 +78,20 @@ public class LevelEditor : MonoBehaviour
                 PartController currentCell = field.field[start.x + x, start.y + y];
                 int index = y * width + x;
 
-                elementNames[index] = currentCell.element.name;
-                
-                elementFlip[index] = currentCell.flip;
+                elementNameArray[index] = currentCell.element.name;
+
+                elementFlipArray[index] = currentCell.flip;
             }
         }
 
         Level NewLevel = new Level
         {
-            nameId = levelNameField.text,
+            levelName = levelName,
             width = width,
             height = height,
             colorName = colorPool.GetActiveColor().ToString(),
-            elements = elementNames,
-            elementFlip = elementFlip,
+            elements = elementNameArray,
+            elementFlip = elementFlipArray,
         };
 
         return NewLevel;
@@ -104,7 +105,7 @@ public class LevelEditor : MonoBehaviour
         {
             subtitle.StartTransition(string_noParts);
         }
-        else if (FinalLevel.nameId == "")
+        else if (FinalLevel.levelName == "")
         {
             subtitle.StartTransition(string_noAlias);
         }
@@ -118,11 +119,11 @@ public class LevelEditor : MonoBehaviour
 
             string jsonLevel = JsonUtility.ToJson(FinalLevel);
 
-            File.WriteAllText(savePath + levelNameField.text + ".txt", jsonLevel);
+            File.WriteAllText(savePath + levelName + ".txt", jsonLevel);
             Debug.Log("saved to: " + savePath);
         }
 
         field.CreateField(null);
-        levelNameField.text = "";
+        levelName = "";
     }
 }

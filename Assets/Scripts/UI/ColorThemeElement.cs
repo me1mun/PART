@@ -6,8 +6,8 @@ using TMPro;
 
 public class ColorThemeElement : MonoBehaviour
 {
-    public enum ColorType { bg, overlay, content, accent };
-    public ColorType colorType;
+    
+    public ColorThemeManager.ColorType colorType;
 
     private Image image;
     private TextMeshProUGUI text;
@@ -30,23 +30,7 @@ public class ColorThemeElement : MonoBehaviour
 
     public void UpdateColor()
     {
-        Color32 myColor = ColorThemeManager.Instance.colorOverlay;
-
-        switch(colorType)
-        {
-            case ColorType.bg:
-                myColor = ColorThemeManager.Instance.colorBg;
-                break;
-            case ColorType.overlay:
-                myColor = ColorThemeManager.Instance.colorOverlay;
-                break;
-            case ColorType.content:
-                myColor = ColorThemeManager.Instance.colorContent;
-                break;
-            case ColorType.accent:
-                myColor = ColorThemeManager.Instance.colorAccent;
-                break;
-        }
+        Color32 myColor = ColorThemeManager.Instance.GetColor(colorType);
 
         if (image != null)
             image.color = myColor;

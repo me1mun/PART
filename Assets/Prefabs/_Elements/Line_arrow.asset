@@ -16,6 +16,6 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: f03a883adf737ac429f8ffda3c05e9e8, type: 3}
   isFixed: 1
   connectionLeft: 1
-  connectionUp: 1
+  connectionUp: 2
   connectionRight: 1
   connectionDown: 0

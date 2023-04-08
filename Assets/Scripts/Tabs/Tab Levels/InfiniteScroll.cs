@@ -12,7 +12,7 @@ public class InfiniteScroll : MonoBehaviour
 
     //private List<GameObject> rows = new List<GameObject>();
     private Dictionary<GameObject, InfiniteScrollCase> casesList = new Dictionary<GameObject, InfiniteScrollCase>();
-    private const int caseSize = 150, caseGap = 20;
+    private const int caseSize = 140, caseGap = 15, containerGap = 30;
     private const int casesMax = 45;
     private const int casesInRow = 5;
     private int casesCount, casesClamp;
@@ -22,7 +22,7 @@ public class InfiniteScroll : MonoBehaviour
 
     private void Start()
     {
-        Init();
+        CreateCases();
     }
 
     private void Update()
@@ -30,33 +30,35 @@ public class InfiniteScroll : MonoBehaviour
         ReplaceCase();
     }
 
-    public void Init()
+    public void CreateCases()
     {
-        Debug.Log(casesList.Count + " | " + container.transform.childCount);
+        //Debug.Log(casesList.Count + " | " + container.transform.childCount);
 
         casesCount = GameManager.levelCount;
         casesClamp = Mathf.Min(casesCount, casesMax);
 
         RectTransform containerRect = container.GetComponent<RectTransform>();
-        containerRect.sizeDelta = new Vector2(containerRect.sizeDelta.x, Mathf.Ceil((float)casesCount / casesInRow) * (caseSize + caseGap));
+        containerRect.sizeDelta = new Vector2(containerRect.sizeDelta.x, Mathf.Ceil((float)casesCount / casesInRow) * (caseSize + caseGap) + containerGap * 2);
 
         for (int i = 0; i < casesClamp; i++)
         {
             //Debug.Log(casesCount);
-            GameObject newCase = Instantiate(casePrefab, container.transform);
+            GameObject newCaseObject = Instantiate(casePrefab, container.transform);
 
-            RectTransform caseRect = newCase.GetComponent<RectTransform>();
+            RectTransform caseRect = newCaseObject.GetComponent<RectTransform>();
             caseRect.localPosition = GetCasePosition(i);
 
-            newCase.GetComponent<InfiniteScrollCase>().Init(i);
+            InfiniteScrollCase newCase = newCaseObject.GetComponent<InfiniteScrollCase>();
+            //newCase.SetTabLevels(tabLevels);
+            newCase.Init(i);
 
-            casesList.Add(newCase, newCase.GetComponent<InfiniteScrollCase>());
+            casesList.Add(newCaseObject, newCase);
         }
 
 
     }
 
-    private void InitCases()
+    public void InitCases()
     {
         foreach (KeyValuePair<GameObject, InfiniteScrollCase> cs in casesList)
         {
@@ -108,6 +110,6 @@ public class InfiniteScroll : MonoBehaviour
         int indexInRow = caseIndex % casesInRow;
         int spacing = caseGap + caseSize;
 
-        return new Vector3(((casesInRow - 1) * -0.5f * spacing) + indexInRow * spacing, (rowIndex + 0.5f) * -spacing, 0);
+        return new Vector3(((casesInRow - 1) * -0.5f * spacing) + indexInRow * spacing, (rowIndex + 0.5f) * -spacing - containerGap, 0);
     }
 }

@@ -1,1 +1,1 @@
-{"nameId":"test","width":3,"height":3,"colorName":"white","elements":["null","Single_circle","null","Single_circle","Zero_circleBig","Single_circle","null","Single_circle","null"],"elementFlip":[0,3,0,2,0,0,0,1,0]}
+{"levelName":"test","width":3,"height":3,"colorName":"white","elements":["null","Single_circle","null","Single_circle","Zero_circleBig","Single_circle","null","Single_circle","null"],"elementFlip":[0,3,0,2,0,0,0,1,0]}

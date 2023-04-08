@@ -123,19 +123,23 @@ public class PartController : MonoBehaviour
 
     private IEnumerator CoroutineShake()
     {
-        float[] gaps = new float[5] { -14, 9, -5, 2, 0 };
+        float[] gaps = new float[5] { -18, 12, -7, 4, 0 };
 
         for (int i = 0; i < gaps.Length; i++)
         {
             Quaternion rotationTarget = Quaternion.Euler(0, 0, flip * -90 + gaps[i]);
             //float shakeTarget = targetAngle + gaps[i];
 
-            while (Mathf.Round(content.transform.localRotation.eulerAngles.z) != (rotationTarget.eulerAngles.z))
+            while (Quaternion.Angle(rotationTarget, content.transform.localRotation) > 1f)
             {
                 content.transform.localRotation = Quaternion.Lerp(content.transform.localRotation, rotationTarget, 20f * Time.deltaTime);
+                //Debug.Log(Quaternion.Angle(rotationTarget, content.transform.localRotation));
                 yield return null;
             }
+            content.transform.localRotation = rotationTarget;
         }
+
+        //content.transform.localRotation = Quaternion.Euler(0, 0, flip * -90);
     }
 
     private IEnumerator CoroutineFlip()
@@ -143,7 +147,7 @@ public class PartController : MonoBehaviour
         //Debug.Log("Flip coroutine");
         Quaternion rotationTarget = Quaternion.Euler(0, 0, flip * -90);
 
-        while (Mathf.Round(content.transform.localRotation.eulerAngles.z) != (rotationTarget.eulerAngles.z))
+        while (Quaternion.Angle(rotationTarget, content.transform.localRotation) > 1f)
         {
             content.transform.localRotation = Quaternion.Lerp(content.transform.localRotation, rotationTarget, 14f * Time.deltaTime);
             yield return null;

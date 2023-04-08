@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class Level
 {
-    public string nameId;
+    public bool isRandom = false;
+
+    public string levelName;
     public int width, height;
 
     public string colorName;

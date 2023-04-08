@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Description Shared Data
+  m_Name: Premium Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: Description
+  m_TableCollectionName: Premium
   m_TableCollectionNameGuidString: 84b8a9d9eca56514d80471f9aa2f81fa
   m_Entries:
   - m_Id: 25805950976
-    m_Key: Premium_noAd
+    m_Key: noAd
     m_Metadata:
       m_Items: []
   m_Metadata:

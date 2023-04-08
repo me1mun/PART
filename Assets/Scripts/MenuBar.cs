@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MenuController : MonoBehaviour
+public class MenuBar : MonoBehaviour
 {
     public bool isOpen = false;
     public bool isInteractable = true;
+
+    [SerializeField] private TabManager tabManager;
     [SerializeField] private Animator animator;
+    [SerializeField] private GameObject panel;
     [SerializeField] private FieldController gameField;
     [SerializeField] private ButtonController[] buttons;
 
@@ -31,15 +34,13 @@ public class MenuController : MonoBehaviour
     {
         isOpen = activate;
 
-        if (isOpen)
+        animator.SetBool("Activate", isOpen);
+        gameField.SetInteractable(!isOpen);
+        panel.gameObject.SetActive(isOpen);
+
+        if (isOpen == false)
         {
-            animator.SetBool("Activate", true);
-            gameField.SetInteractable(false);
-        }
-        else
-        {
-            animator.SetBool("Activate", false);
-            gameField.SetInteractable(true);
+            tabManager.CloseTabAll();
         }
     }
 
