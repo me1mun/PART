@@ -34,7 +34,7 @@ public class InfiniteScroll : MonoBehaviour
     {
         //Debug.Log(casesList.Count + " | " + container.transform.childCount);
 
-        casesCount = GameManager.levelCount;
+        casesCount = LevelManager.Instance.levelCount;
         casesClamp = Mathf.Min(casesCount, casesMax);
 
         RectTransform containerRect = container.GetComponent<RectTransform>();

@@ -13,8 +13,8 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerClic
     private float animationProgress = 1;
     private Coroutine coroutinePressed;
 
-    [SerializeField] private bool isSoundClick = true;
     [SerializeField] private bool isFillEffect = true;
+    [SerializeField] private bool isSoundClick = true, isSoundDown = false;
 
     [SerializeField] private GameObject content;
 
@@ -45,8 +45,12 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerClic
     {
         if (interactable)
         {
-            //Debug.Log("Button is clicked");
             onClick.Invoke();
+
+            if (isSoundDown)
+            {
+                soundClick.Play();
+            }
         }
     }
 

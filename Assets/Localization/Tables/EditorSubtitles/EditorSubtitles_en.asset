@@ -10,22 +10,32 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: EditorWarnings_uk
+  m_Name: EditorSubtitles_en
   m_EditorClassIdentifier: 
   m_LocaleId:
-    m_Code: uk
+    m_Code: en
   m_SharedData: {fileID: 11400000, guid: a0d6a5337fe34f34f82701cb6bad97d4, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
   - m_Id: 8340869120
-    m_Localized: "\u0412\u0432\u0435\u0434\u0456\u0442\u044C \u0441\u0432\u0456\u0439
-      \u043F\u0441\u0435\u0432\u0434\u043E\u043D\u0456\u043C"
+    m_Localized: Check your internet connection
     m_Metadata:
       m_Items: []
   - m_Id: 40410517504
-    m_Localized: "\u041D\u0435\u043C\u0430\u0454 \u0436\u043E\u0434\u043D\u043E\u0433\u043E
-      \u0435\u043B\u0435\u043C\u0435\u043D\u0442\u0430"
+    m_Localized: There are no elements
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2524746695020544
+    m_Localized: Close the loop before sending
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2536486392532992
+    m_Localized: Create levels for updates
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2537623397044224
+    m_Localized: Level sent for moderation
     m_Metadata:
       m_Items: []
   references:

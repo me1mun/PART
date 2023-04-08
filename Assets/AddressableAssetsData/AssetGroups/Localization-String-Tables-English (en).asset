@@ -42,7 +42,7 @@ MonoBehaviour:
     - Locale-en
     - Preload
   - m_GUID: 173bf67a63c726043b66024302b3c226
-    m_Address: EditorWarnings_en
+    m_Address: EditorSubtitles_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en

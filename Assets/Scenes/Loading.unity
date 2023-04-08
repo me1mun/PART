@@ -888,11 +888,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008411f625d5a8841aeed13eaffef18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
+  levelsUnlocked: 1
+  levelCount: 0
   saveLevelPath: 
   levelsJson:
-  - {fileID: 4900000, guid: 6d54ada11d70f554da804c24542d99d0, type: 3}
-  - {fileID: 4900000, guid: d4e01047fb697554d9430fa2ff5751a5, type: 3}
-  - {fileID: 4900000, guid: c2474c54b32150f49bdafef064191e03, type: 3}
+  - {fileID: 4900000, guid: a36642ac4e9df804ea1b0207373f6105, type: 3}
 --- !u!114 &1648203045
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,25 +5,28 @@ using UnityEngine;
 [RequireComponent(typeof(PartController))]
 public class LevelEditorPart : MonoBehaviour
 {
-    private PartController part;
+    private LevelEditor levelEditor;
+    private PartController partController;
 
     void Awake()
     {
-        part = GetComponent<PartController>();
+        levelEditor = GetComponentInParent<LevelEditor>();
+
+        partController = GetComponent<PartController>();
     }
 
     public void Interact()
     {
-        Element activeEl = LevelEditor.Instance.elementPool.GetActiveElement();
+        Element activeEl = levelEditor.elementPool.GetActiveElement();
 
 
-        if (activeEl.isEmpty || part.element.isEmpty)
+        if (activeEl.isEmpty || partController.element.isEmpty)
         {
-            part.Init(activeEl, 0, part.GetPosition());
+            partController.Init(activeEl, 0, partController.GetPosition());
         }
         else
         {
-            part.FlipElement();
+            partController.FlipElement();
         }
     }
 }

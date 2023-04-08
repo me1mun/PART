@@ -42,7 +42,7 @@ MonoBehaviour:
     - Locale-uk
     - Preload
   - m_GUID: f7d2fa257b3234f40a41430c41bc2f5f
-    m_Address: EditorWarnings_uk
+    m_Address: EditorSubtitles_uk
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-uk

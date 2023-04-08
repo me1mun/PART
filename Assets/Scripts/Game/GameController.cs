@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour
 
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TextMeshProUGUI levelCounter;
+    [SerializeField] private GameObject infiniteIcon;
     [SerializeField] private TextTransition subtitle;
     [SerializeField] private LocalizedString subtitle_complete, subtitle_newLevels;
     [SerializeField] private FieldController field;
@@ -50,46 +51,56 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void SetGameState(GameStates newState)
+    public void SetGameStateGame()
     {
-        if (newState == GameStates.game)
-        {
-            menu.Activator(false);
-            buttonNext.gameObject.SetActive(false);
-            field.SetInteractable(true);
-        }
-        else if (newState == GameStates.menu)
-        {
-            menu.Activator(true);
-            buttonNext.gameObject.SetActive(false);
-            field.SetInteractable(false);
-        }
-        else if (newState == GameStates.victory)
-        {
-            menu.Activator(false);
-            buttonNext.gameObject.SetActive(true);
-            field.SetInteractable(false);
-        }
+        gameState = GameStates.game;
+
+        menu.Activator(false);
+        menu.SetInteractable(true);
+        buttonNext.gameObject.SetActive(false);
+        field.SetInteractable(true);
+    }
+
+    public void SetGameStateMenu()
+    {
+        gameState = GameStates.menu;
+
+        menu.Activator(true);
+        menu.SetInteractable(true);
+        buttonNext.gameObject.SetActive(false);
+        field.SetInteractable(false);
+    }
+
+    public void SetGameStateVictory()
+    {
+        gameState = GameStates.victory;
+
+        menu.Activator(false);
+        menu.SetInteractable(false);
+        buttonNext.gameObject.SetActive(true);
+        buttonNext.ShowButton();
+        field.SetInteractable(false);
+
+        subtitle.StartTextTransition(subtitle_complete, -1f);
     }
 
     public void CompleteLevel()
     {
-        GameManager.UnlockLevel();
-        GameManager.SetLevel(GameManager.level + 1);
+        LevelManager.Instance.UnlockLevel();
+        LevelManager.Instance.SetLevel(LevelManager.Instance.level + 1);
 
-        subtitle.StartTransition(subtitle_complete, -1f);
-        field.SetInteractable(false);
-        buttonNext.ShowButton();
-        menu.SetInteractable(false);
-        
+        SetGameStateVictory();
     }
 
-    public void StartLevel()
+    public void StartLevel(bool fadeOut = true)
     {
-        level = LevelList.Instance.GetLevel(GameManager.level);
+        level = LevelManager.Instance.GetLevel(LevelManager.Instance.level);
 
         if (level.levelType == LevelDatabase.LevelTypes.random)
             level = randomLevelGenerator.GenerateLevel(level);
+
+        if (fadeOut == false)
+            canvasGroup.alpha = 0;
 
         if (coroutineLevelTransition != null)
         {
@@ -98,30 +109,36 @@ public class GameController : MonoBehaviour
         coroutineLevelTransition = StartCoroutine(CoroutineLevelTransition());
     }
 
-    public void StartNextLevel()
-    {
-        StartLevel();
-    }
-
     private IEnumerator CoroutineLevelTransition()
     {
         float animTime = 0.2f;
 
-        animationAlpha.StartAnimationAlpha(0, animTime);
+        if (canvasGroup.alpha > 0)
+            animationAlpha.StartAnimationAlpha(0, animTime);
 
-        while(canvasGroup.alpha > 0)
+        while (canvasGroup.alpha > 0)
             yield return null;
 
-        levelCounter.text = "#" + (GameManager.level + 1);
-        subtitle.HideText();
+        if (level.levelType == LevelDatabase.LevelTypes.challange)
+        {
+            levelCounter.gameObject.SetActive(true);
+            infiniteIcon.SetActive(false);
+            levelCounter.text = "#" + (LevelManager.Instance.level + 1);
+            subtitle.HideText();
+        }
+        else if (level.levelType == LevelDatabase.LevelTypes.random)
+        {
+            levelCounter.gameObject.SetActive(false);
+            infiniteIcon.SetActive(true);
+            subtitle.SetText(subtitle_newLevels);
+        }
 
         field.CreateField(level);
 
-        field.SetInteractable(true);
+        if (LevelManager.Instance.level == 0)
+            field.field[0, 0].FlipElement(4 - field.field[0, 0].flip, true);
 
-        buttonNext.gameObject.SetActive(false);
-        menu.SetInteractable(true);
-        
+        SetGameStateGame();
 
         animationAlpha.StartAnimationAlpha(1, animTime);
     }

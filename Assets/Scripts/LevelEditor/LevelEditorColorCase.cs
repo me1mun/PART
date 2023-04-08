@@ -5,13 +5,16 @@ using UnityEngine.UI;
 
 public class LevelEditorColorCase : MonoBehaviour
 {
+    [SerializeField] LevelEditor levelEditor;
     private LevelDatabase.Colors color;
     [SerializeField] private Image border, fill;
 
     [SerializeField] private AnimationScale animator;
 
-    public void Init(LevelDatabase.Colors col, Color32 col32)
+    public void Init(LevelEditor editor, LevelDatabase.Colors col, Color32 col32)
     {
+        levelEditor = editor;
+
         color = col;
         //Color32 col32 = LevelDatabase.Instance.colorsList[color];
 
@@ -28,6 +31,6 @@ public class LevelEditorColorCase : MonoBehaviour
 
     public void SetPoolActiveColor()
     {
-        LevelEditor.Instance.colorPool.SetActiveColor(color);
+        levelEditor.colorPool.SetActiveColor(color);
     }
 }

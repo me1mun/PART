@@ -8,7 +8,6 @@ using UnityEngine.Localization;
 
 public class LevelEditor : MonoBehaviour
 {
-    public static LevelEditor Instance { get; private set; }
 
     //public TMP_InputField levelNameField;
     [SerializeField] private string levelName;
@@ -17,26 +16,17 @@ public class LevelEditor : MonoBehaviour
     public LevelEditorColorPool colorPool;
 
     [SerializeField] private TextTransition subtitle;
-    [SerializeField] private LocalizedString string_noAlias, string_noParts;
+    [SerializeField] private LocalizedString string_intro, string_noInternet, string_emptyField, string_noLoop, string_submited;
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-        }
-
         field.CreateField(LevelDatabase.emptyLevel);
         field.PaintField(colorPool.GetActiveColor());
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        
+        subtitle.SetText(string_intro);
     }
 
     public Level ConstructLevel()
@@ -101,29 +91,40 @@ public class LevelEditor : MonoBehaviour
     {
         Level FinalLevel = ConstructLevel();
 
-        if (FinalLevel.width <= 0)
+        if (GameManager.CheckInternet() == false)
         {
-            subtitle.StartTransition(string_noParts);
+            subtitle.StartTextTransition(string_noInternet);
         }
-        else if (FinalLevel.levelName == "")
+        else if (FinalLevel.width <= 0)
         {
-            subtitle.StartTransition(string_noAlias);
+            subtitle.StartTextTransition(string_emptyField);
+        }
+        else if (field.CheckLoopComplete() == false)
+        {
+            subtitle.StartTextTransition(string_noLoop);
         }
         else
         {
-            string savePath = LevelList.Instance.saveLevelPath;
-            if (!Directory.Exists(savePath))
+            subtitle.StartTextTransition(string_submited);
+            field.CreateField(LevelDatabase.emptyLevel);
+
+            if (Application.isEditor)
             {
-                Directory.CreateDirectory(savePath);
+                string savePath = LevelManager.Instance.saveLevelPath;
+                if (!Directory.Exists(savePath))
+                {
+                    Directory.CreateDirectory(savePath);
+                }
+
+                string jsonLevel = JsonUtility.ToJson(FinalLevel);
+
+                File.WriteAllText(savePath + levelName + ".txt", jsonLevel);
+                Debug.Log("Level has been saved to: " + savePath);
             }
-
-            string jsonLevel = JsonUtility.ToJson(FinalLevel);
-
-            File.WriteAllText(savePath + levelName + ".txt", jsonLevel);
-            Debug.Log("saved to: " + savePath);
+            else
+            {
+                //submit to database
+            }
         }
-
-        field.CreateField(null);
-        levelName = "";
     }
 }

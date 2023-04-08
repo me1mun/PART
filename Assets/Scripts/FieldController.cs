@@ -130,6 +130,7 @@ public class FieldController : MonoBehaviour
         {
             Destroy(el.gameObject);
         }
+        Array.Clear(field, 0, field.Length);
     }
 
     public void Shufflefield(bool flashShuffle)

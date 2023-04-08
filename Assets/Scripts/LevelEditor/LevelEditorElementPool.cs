@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelEditorElementPool : MonoBehaviour
 {
-    [SerializeField] private LevelEditor editor;
+    [SerializeField] private LevelEditor levelEditor;
     [SerializeField] private GameObject casePrefab;
     [SerializeField] private GameObject container;
 
@@ -31,7 +31,7 @@ public class LevelEditorElementPool : MonoBehaviour
         for (int i = 0; i < elementCount; i++)
         {
             LevelEditorElementCase newCase = Instantiate(casePrefab, container.transform).GetComponent<LevelEditorElementCase>();
-            newCase.Init(LevelDatabase.Instance.elements[i]);
+            newCase.Init(levelEditor, LevelDatabase.Instance.elements[i]);
 
             elementCases.Add(newCase);
         }

@@ -36,12 +36,16 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
+      propertyPath: isSoundDown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
       propertyPath: isFillEffect
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
       propertyPath: isSoundClick
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1342690268089326426, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
       propertyPath: onClick.m_PersistentCalls.m_Calls.Array.size

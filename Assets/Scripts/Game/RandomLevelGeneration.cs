@@ -56,7 +56,7 @@ public class RandomLevelGeneration : MonoBehaviour
 
                 //Debug.Log(oneDemIndex + " | " + randomLevel.elements[oneDemIndex] + " | " + part.element.name);
                 randomLevel.elements[oneDemIndex] = part.element.name;
-                randomLevel.elementFlip[oneDemIndex] = 0;
+                randomLevel.elementFlip[oneDemIndex] = Random.Range(0, 4);
             }
         }
 
@@ -70,7 +70,7 @@ public class RandomLevelGeneration : MonoBehaviour
         connnectionsCount += part.up ? 1 : 0;
         connnectionsCount += part.right ? 1 : 0;
         connnectionsCount += part.down ? 1 : 0;
-        Debug.Log(connnectionsCount);
+        //Debug.Log(connnectionsCount);
 
         switch (connnectionsCount)
         {

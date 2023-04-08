@@ -7,11 +7,11 @@ public class TabLevels : MonoBehaviour
     [SerializeField] private GameController game;
     [SerializeField] private InfiniteScroll scroll;
 
-    public void StartLevel(int levelIndex)
+    public void StartLevelFlash(int levelIndex)
     {
-        GameManager.SetLevel(levelIndex);
-        game.StartLevel();
+        LevelManager.Instance.SetLevel(levelIndex);
+        game.StartLevel(false);
         //Debug.Log("New level: " + GameManager.level);
-        scroll.InitCases();
+        //scroll.InitCases();
     }
 }

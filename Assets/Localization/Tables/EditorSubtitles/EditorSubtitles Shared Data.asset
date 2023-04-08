@@ -10,17 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: EditorWarnings Shared Data
+  m_Name: EditorSubtitles Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: EditorWarnings
+  m_TableCollectionName: EditorSubtitles
   m_TableCollectionNameGuidString: a0d6a5337fe34f34f82701cb6bad97d4
   m_Entries:
   - m_Id: 8340869120
-    m_Key: NoAlias
+    m_Key: NoInternet
     m_Metadata:
       m_Items: []
   - m_Id: 40410517504
-    m_Key: NoParts
+    m_Key: EmptyField
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2524746695020544
+    m_Key: NoLoop
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2536486392532992
+    m_Key: Intro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2537623397044224
+    m_Key: Submited
     m_Metadata:
       m_Items: []
   m_Metadata:

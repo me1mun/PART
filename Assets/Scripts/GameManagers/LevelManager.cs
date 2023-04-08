@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LevelList : MonoBehaviour
+public class LevelManager : MonoBehaviour
 {
-    public static LevelList Instance { get; private set; }
+    public static LevelManager Instance { get; private set; }
+
+    public int level = 0;
+    public int levelsUnlocked = 1;
+    public int levelCount;
 
     public string saveLevelPath;
 
@@ -28,6 +32,8 @@ public class LevelList : MonoBehaviour
         foreach (TextAsset tl in levelsJson)
             levels.Add(JsonUtility.FromJson<Level>(tl.text));
         levels.Add(LevelDatabase.randomLevel);
+
+        levelCount = levels.Count;
     }
 
     public Level GetLevel(int levelInex)
@@ -38,5 +44,22 @@ public class LevelList : MonoBehaviour
     public int GetLevelCount()
     {
         return levels.Count;
+    }
+
+    public void SetLevel(int newLevel)
+    {
+        if (newLevel >= 0 && newLevel < levelsUnlocked)
+        {
+            level = Mathf.Clamp(newLevel, 0, levelCount);
+        }
+    }
+
+    public void UnlockLevel()
+    {
+
+        if (level >= levelsUnlocked - 1 && levelsUnlocked < levelCount)
+        {
+            levelsUnlocked += 1;
+        }
     }
 }

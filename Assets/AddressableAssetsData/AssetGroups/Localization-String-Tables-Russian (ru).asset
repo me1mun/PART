@@ -42,7 +42,7 @@ MonoBehaviour:
     - Locale-ru
     - Preload
   - m_GUID: bf48b4fb9844db641b4aa7c77e9b51ee
-    m_Address: EditorWarnings_ru
+    m_Address: EditorSubtitles_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru

@@ -11,38 +11,22 @@ public class TextTransition : MonoBehaviour
     private LocalizeStringEvent localizedStrinEvent;
     private CanvasGroup canvasGroup;
 
-    private Coroutine coroutineTransition;
+    private Coroutine coroutineTextTransition;
 
     private AnimationAlpha animationAlpha;
     private LocalizedString stringReference;
-    private float animTime = 0.5f;
+    private float animTime = 0.2f;
     private const float defaultTextShowTime = 4.5f;
     private float textShowTime = 0;
 
     private void Awake()
     {
         localizedStrinEvent = GetComponent<LocalizeStringEvent>();
-        canvasGroup = GetComponent<CanvasGroup>();
+        canvasGroup = gameObject.GetComponent<CanvasGroup>();
+        if (canvasGroup != null)
+            Debug.Log("canvas init");
 
         animationAlpha = GetComponent<AnimationAlpha>();
-    }
-
-    public void StartTransition(LocalizedString newStrnig, float newTextShowTime = defaultTextShowTime)
-    {
-        stringReference = newStrnig;
-        textShowTime = newTextShowTime;
-
-        if (!gameObject.activeSelf)
-        {
-            gameObject.SetActive(true);
-            canvasGroup.alpha = 0;
-        }
-
-        if (coroutineTransition != null)
-        {
-            StopCoroutine(coroutineTransition);
-        }
-        coroutineTransition = StartCoroutine(CoroutineTransition());
     }
 
     public void HideText()
@@ -50,7 +34,35 @@ public class TextTransition : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    private IEnumerator CoroutineTransition()
+    public void SetText(LocalizedString newText)
+    {
+        stringReference = newText;
+
+        this.gameObject.SetActive(true);
+        if (canvasGroup != null)
+            canvasGroup.alpha = 1;
+        localizedStrinEvent.StringReference = stringReference;
+    }
+
+    public void StartTextTransition(LocalizedString newText, float newTextShowTime = defaultTextShowTime)
+    {
+        stringReference = newText;
+        textShowTime = newTextShowTime;
+
+        if (gameObject.activeSelf == false)
+        {
+            gameObject.SetActive(true);
+            canvasGroup.alpha = 0;
+        }
+
+        if (coroutineTextTransition != null)
+        {
+            StopCoroutine(coroutineTextTransition);
+        }
+        coroutineTextTransition = StartCoroutine(CoroutineTextTransition());
+    }
+
+    private IEnumerator CoroutineTextTransition()
     {
         animationAlpha.StartAnimationAlpha(0, animTime); // alpha to 0
 
@@ -67,9 +79,14 @@ public class TextTransition : MonoBehaviour
         }
         else
         {
-            yield break;
+            yield break; //if show time <= 0 then end coroutine
         }
 
         animationAlpha.StartAnimationAlpha(0, animTime);
+
+        while (canvasGroup.alpha > 0)
+            yield return null;
+
+        gameObject.SetActive(false);
     }
 }

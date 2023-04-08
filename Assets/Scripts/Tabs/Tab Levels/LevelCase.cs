@@ -28,18 +28,18 @@ public class LevelCase : MonoBehaviour
     public void Init()
     {
         levelIndex = scrollCase.GetIndex();
-        Level level = LevelList.Instance.GetLevel(levelIndex);
+        Level level = LevelManager.Instance.GetLevel(levelIndex);
         //field.FieldCreate(level);
 
         levelText.text = (levelIndex + 1).ToString();
 
-        bool isUnlocked = levelIndex < GameManager.levelsUnlocked;
+        bool isUnlocked = levelIndex < LevelManager.Instance.levelsUnlocked;
 
         float disableAlpha = 0.33f;
         contentCanvasGroup.alpha = isUnlocked ? 1 : disableAlpha;
         GetComponent<ButtonController>().SetInteractable(isUnlocked);
 
-        outline.gameObject.SetActive(GameManager.level == levelIndex);
+        outline.gameObject.SetActive(LevelManager.Instance.level == levelIndex);
 
         bool isRandom = level.levelType == LevelDatabase.LevelTypes.random;
         containerInfo.gameObject.SetActive(!isRandom);
@@ -49,10 +49,10 @@ public class LevelCase : MonoBehaviour
 
     public void Interact()
     {
-        if(GameManager.level != levelIndex)
+        if(LevelManager.Instance.level != levelIndex)
         {
             tabLevels = GetComponentInParent<TabLevels>();
-            tabLevels.StartLevel(levelIndex);
+            tabLevels.StartLevelFlash(levelIndex);
 
 
         }

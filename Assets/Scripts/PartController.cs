@@ -76,7 +76,7 @@ public class PartController : MonoBehaviour
         //Debug.Log("Flip method");
         for (int i = 0; i < turnCount; i++)
         {
-            flip += 1;
+            flip = (flip + 1) % 4;
             targetAngle = flip * -90;
 
             ConnectionsShift();
