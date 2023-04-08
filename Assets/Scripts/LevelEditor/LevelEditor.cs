@@ -30,7 +30,7 @@ public class LevelEditor : MonoBehaviour
             Instance = this;
         }
 
-        field.CreateField(null);
+        field.CreateField(LevelDatabase.emptyLevel);
         field.PaintField(colorPool.GetActiveColor());
     }
 

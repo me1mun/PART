@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 public class FieldController : MonoBehaviour
 {
-    public UnityEvent OnLoopComplete;
+    public UnityEvent OnLevelComplete;
 
     private Level currentLevel;
     [SerializeField] Transform fieldContainer;
@@ -15,6 +15,7 @@ public class FieldController : MonoBehaviour
 
     private bool isInteractable = true;
     public PartController[,] field = new PartController[0, 0];
+    private Vector2Int fieldMaxSize = new Vector2Int(8, 10);
     private Vector2Int fieldSize;
     private LevelDatabase.Colors levelColor;
     public bool isLooped = false;
@@ -37,21 +38,10 @@ public class FieldController : MonoBehaviour
         ClearField();
 
         currentLevel = level;
-        levelColor = LevelDatabase.Instance.defaultColor;
-        
-        if(level != null)
-        {
-            fieldSize.x = level.width;
-            fieldSize.y = level.height;
+        levelColor = LevelDatabase.Instance.GetColorEnum(level.colorName);
 
-            if (Enum.IsDefined(typeof(LevelDatabase.Colors), level.colorName))
-                levelColor = Enum.Parse<LevelDatabase.Colors>(level.colorName);
-        }
-        else
-        {
-            fieldSize.x = 8;
-            fieldSize.y = 10;
-        }
+        fieldSize.x = level.width;
+        fieldSize.y = level.height;
 
         Color32 levelColor32 = LevelDatabase.Instance.GetColor(levelColor);
 
@@ -70,8 +60,7 @@ public class FieldController : MonoBehaviour
                 int newPartFlip = 0;
                 //levelColor = LevelDatabase.Instance.defaultColor;
 
-
-                if (level != null)
+                if (level.elements != null)
                 {
                     newPart = LevelDatabase.Instance.GetElement(level.elements[elementIndex]);
 
@@ -89,21 +78,26 @@ public class FieldController : MonoBehaviour
         //Destroy(casePrefab);
     }
 
-    public void CheckLoopComplete()
+    public bool CheckLoopComplete()
     {
         foreach(PartController pc in field)
         {
             if (!CheckElementLoop(pc))
             {
                 isLooped = false;
-                return;
+                return isLooped;
             }
         }
 
         isLooped = true;
-        OnLoopComplete.Invoke();
+        return isLooped;
     }
 
+    public void CheckLevelComplete()
+    {
+        if (CheckLoopComplete())
+            OnLevelComplete.Invoke();
+    }
 
     private bool CheckElementLoop(PartController part)
     {

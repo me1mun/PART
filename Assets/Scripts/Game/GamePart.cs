@@ -22,7 +22,7 @@ public class GamePart : MonoBehaviour
         else
         {
             part.FlipElement();
-            field.CheckLoopComplete();
+            field.CheckLevelComplete();
         }
     }
 

@@ -6,7 +6,12 @@ using UnityEngine.Localization;
 
 public class GameController : MonoBehaviour
 {
+    public enum GameStates { game, menu, victory }
+    public GameStates gameState = GameStates.game;
     private bool isPause = false;
+
+
+    private RandomLevelGeneration randomLevelGenerator;
 
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private TextMeshProUGUI levelCounter;
@@ -25,13 +30,15 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        randomLevelGenerator = GetComponent<RandomLevelGeneration>();
+
         animationAlpha = GetComponent<AnimationAlpha>();
         canvasGroup.alpha = 0;
     }
 
     void Start()
     {
-        field.OnLoopComplete.AddListener(CompleteLevel);
+        field.OnLevelComplete.AddListener(CompleteLevel);
         StartLevel();
     }
 
@@ -40,6 +47,28 @@ public class GameController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.I))
         {
             CompleteLevel();
+        }
+    }
+
+    public void SetGameState(GameStates newState)
+    {
+        if (newState == GameStates.game)
+        {
+            menu.Activator(false);
+            buttonNext.gameObject.SetActive(false);
+            field.SetInteractable(true);
+        }
+        else if (newState == GameStates.menu)
+        {
+            menu.Activator(true);
+            buttonNext.gameObject.SetActive(false);
+            field.SetInteractable(false);
+        }
+        else if (newState == GameStates.victory)
+        {
+            menu.Activator(false);
+            buttonNext.gameObject.SetActive(true);
+            field.SetInteractable(false);
         }
     }
 
@@ -58,6 +87,9 @@ public class GameController : MonoBehaviour
     public void StartLevel()
     {
         level = LevelList.Instance.GetLevel(GameManager.level);
+
+        if (level.levelType == LevelDatabase.LevelTypes.random)
+            level = randomLevelGenerator.GenerateLevel(level);
 
         if (coroutineLevelTransition != null)
         {
@@ -82,8 +114,11 @@ public class GameController : MonoBehaviour
 
         levelCounter.text = "#" + (GameManager.level + 1);
         subtitle.HideText();
+
         field.CreateField(level);
+
         field.SetInteractable(true);
+
         buttonNext.gameObject.SetActive(false);
         menu.SetInteractable(true);
         

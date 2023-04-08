@@ -41,8 +41,9 @@ public class LevelCase : MonoBehaviour
 
         outline.gameObject.SetActive(GameManager.level == levelIndex);
 
-        containerInfo.gameObject.SetActive(!level.isRandom);
-        containerInfinite.gameObject.SetActive(level.isRandom);
+        bool isRandom = level.levelType == LevelDatabase.LevelTypes.random;
+        containerInfo.gameObject.SetActive(!isRandom);
+        containerInfinite.gameObject.SetActive(isRandom);
 
     }
 
@@ -52,6 +53,7 @@ public class LevelCase : MonoBehaviour
         {
             tabLevels = GetComponentInParent<TabLevels>();
             tabLevels.StartLevel(levelIndex);
+
 
         }
 
