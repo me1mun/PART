@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        field.OnLoopComplete.AddListener(CompleteLevel);
         StartLevel();
     }
 

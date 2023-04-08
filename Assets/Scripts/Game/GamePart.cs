@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class GamePart : MonoBehaviour
 {
+    private FieldController field;
     private PartController part;
 
     void Awake()
     {
+        field = transform.parent.GetComponent<FieldController>();
         part = GetComponent<PartController>();
     }
 
@@ -20,6 +22,8 @@ public class GamePart : MonoBehaviour
         else
         {
             part.FlipElement();
+            field.CheckLoopComplete();
         }
     }
+
 }

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Events;
 
 public class FieldController : MonoBehaviour
 {
+    public UnityEvent OnLoopComplete;
+
     private Level currentLevel;
     [SerializeField] Transform fieldContainer;
     [SerializeField] GameObject casePrefab;
@@ -26,7 +29,7 @@ public class FieldController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
-            CheckLoop();
+            CheckLoopComplete();
     }
 
     public void CreateField(Level level)
@@ -86,7 +89,7 @@ public class FieldController : MonoBehaviour
         //Destroy(casePrefab);
     }
 
-    private void CheckLoop()
+    public void CheckLoopComplete()
     {
         foreach(PartController pc in field)
         {
@@ -98,9 +101,11 @@ public class FieldController : MonoBehaviour
         }
 
         isLooped = true;
+        OnLoopComplete.Invoke();
     }
 
-    public bool CheckElementLoop(PartController part)
+
+    private bool CheckElementLoop(PartController part)
     {
         Vector2Int partPos = part.GetPosition();
 
