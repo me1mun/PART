@@ -23,6 +23,7 @@ public class LevelEditorPart : MonoBehaviour
         if (activeEl.isEmpty || partController.element.isEmpty)
         {
             partController.Init(activeEl, 0, partController.GetPosition());
+            partController.ConnectionsShift(partController.flip);
         }
         else
         {

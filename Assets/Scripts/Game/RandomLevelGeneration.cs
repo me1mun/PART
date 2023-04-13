@@ -7,15 +7,16 @@ public class RandomLevelGeneration : MonoBehaviour
     private RandomPart[,] field;
 
     private Vector2Int levelSize;
-    private int connectionChance = 72;
+    private int connectionChance = 69;
 
     [SerializeField] private Element elUniversal ,elEmpty, elSingle, elLine, elTurn, elTriple, elCross;
 
     public Level GenerateLevel(Level randomLevel)
     {
-        levelSize.x = Random.Range(4, 6);
-        levelSize.y = Random.Range(levelSize.x, 9);
+        levelSize.x = Random.Range(3, 6);
+        levelSize.y = Random.Range(levelSize.x, 8);
 
+        randomLevel.isRandom = true;
         randomLevel.width = levelSize.x;
         randomLevel.height = levelSize.y;
         LevelDatabase.Colors[] colors = (LevelDatabase.Colors[])System.Enum.GetValues(typeof(LevelDatabase.Colors));

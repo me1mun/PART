@@ -888,12 +888,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 008411f625d5a8841aeed13eaffef18d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameMode: 0
   level: 0
-  levelsUnlocked: 1
-  levelCount: 0
-  saveLevelPath: 
-  levelsJson:
-  - {fileID: 4900000, guid: a36642ac4e9df804ea1b0207373f6105, type: 3}
+  challangesUnlocked: 1
+  userLevelPath: 
+  levelChallangeList:
+  - {fileID: 4900000, guid: f3e0d30d5c05f5c4ca372cdf1ab07d92, type: 3}
+  - {fileID: 4900000, guid: a25437b861054c849a3fc850084593d8, type: 3}
+  - {fileID: 4900000, guid: 3ef5e19f15712c145871ec7c0487e2ac, type: 3}
+  - {fileID: 4900000, guid: 2eaf1a7c498e31543bdc0507fdebb299, type: 3}
+  - {fileID: 4900000, guid: 77080168f668b924bbe34164c494efe7, type: 3}
+  - {fileID: 4900000, guid: b824a884db0b44445b1ace076e01737f, type: 3}
+  - {fileID: 4900000, guid: 690b16316cf1a004fbe9f290a35235da, type: 3}
+  - {fileID: 4900000, guid: d433d581aa126684da8ed8185bd8511b, type: 3}
+  - {fileID: 4900000, guid: 24b88c2923a897c46952e60eb59909a6, type: 3}
+  - {fileID: 4900000, guid: aafd089028f119342aa2138366e5e4c8, type: 3}
+  - {fileID: 4900000, guid: dcf50bc29f94b0340b4e76430e909bbf, type: 3}
+  - {fileID: 4900000, guid: fe7276f6ee9e43746b6b54ea6f96938c, type: 3}
+  - {fileID: 4900000, guid: 2e395ae1397926f488203bfc438f0817, type: 3}
 --- !u!114 &1648203045
 MonoBehaviour:
   m_ObjectHideFlags: 0

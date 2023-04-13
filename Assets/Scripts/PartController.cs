@@ -14,6 +14,7 @@ public class PartController : MonoBehaviour
     public Element.ConnectionTypes connectionRight = Element.ConnectionTypes.none;
     public Element.ConnectionTypes connectionDown = Element.ConnectionTypes.none;
 
+    public bool isLooped = true;
     private Vector2Int position;
     public bool isFixed = false;
     public Element element;
@@ -54,18 +55,6 @@ public class PartController : MonoBehaviour
         FlipElement(flipCount, true);
     }
 
-    public void Interact()
-    {
-        if(!isFixed)
-        {
-            //FlipElement();
-        }
-        else
-        {
-            //AnimationStart("CoroutineShake");
-        }
-    }
-
     public void PaintSelf(Color32 col32)
     {
         icon.color = col32;
@@ -73,23 +62,19 @@ public class PartController : MonoBehaviour
 
     public void FlipElement(int turnCount = 1, bool flashTurn = false)
     {
-        //Debug.Log("Flip method");
-        for (int i = 0; i < turnCount; i++)
+        flip = (flip + turnCount) % 4;
+        targetAngle = flip * -90;
+
+        ConnectionsShift(turnCount);
+
+        if (flashTurn)
         {
-            flip = (flip + 1) % 4;
-            targetAngle = flip * -90;
-
-            ConnectionsShift();
-
-            if (flashTurn)
-            {
-                content.transform.localRotation = Quaternion.Euler(0, 0, targetAngle);
-                targetAngle = content.transform.localRotation.eulerAngles.z;
-            }
-            else
-            {
-                AnimationStart("CoroutineFlip");
-            }
+            content.transform.localRotation = Quaternion.Euler(0, 0, targetAngle);
+            targetAngle = content.transform.localRotation.eulerAngles.z;
+        }
+        else
+        {
+            AnimationStart("CoroutineFlip");
         }
     }
 
@@ -98,14 +83,17 @@ public class PartController : MonoBehaviour
         AnimationStart("CoroutineShake");
     }
 
-    private void ConnectionsShift()
+    public void ConnectionsShift(int shiftCount)
     {
-        Element.ConnectionTypes tempConnection = connectionLeft;
+        for (int i = 0; i < shiftCount; i++)
+        {
+            Element.ConnectionTypes tempConnection = connectionLeft;
 
-        connectionLeft = connectionDown;
-        connectionDown = connectionRight;
-        connectionRight = connectionUp;
-        connectionUp = tempConnection;
+            connectionLeft = connectionDown;
+            connectionDown = connectionRight;
+            connectionRight = connectionUp;
+            connectionUp = tempConnection;
+        }
     }
 
     public Vector2Int GetPosition()

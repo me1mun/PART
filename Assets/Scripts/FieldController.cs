@@ -27,12 +27,6 @@ public class FieldController : MonoBehaviour
         //FieldCreate(currentLevel);
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-            CheckLoopComplete();
-    }
-
     public void CreateField(Level level)
     {
         ClearField();
@@ -84,6 +78,7 @@ public class FieldController : MonoBehaviour
         {
             if (!CheckElementLoop(pc))
             {
+                pc.isLooped = false;
                 isLooped = false;
                 return isLooped;
             }

@@ -14,7 +14,8 @@ public class GameController : MonoBehaviour
     private RandomLevelGeneration randomLevelGenerator;
 
     [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private TextMeshProUGUI levelCounter;
+    [SerializeField] private AnimationScale titleAnimation;
+    [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private GameObject infiniteIcon;
     [SerializeField] private TextTransition subtitle;
     [SerializeField] private LocalizedString subtitle_complete, subtitle_newLevels;
@@ -45,7 +46,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             CompleteLevel();
         }
@@ -59,6 +60,7 @@ public class GameController : MonoBehaviour
         menu.SetInteractable(true);
         buttonNext.gameObject.SetActive(false);
         field.SetInteractable(true);
+        titleAnimation.StartAnimationResize(1, 0.2f);
     }
 
     public void SetGameStateMenu()
@@ -69,6 +71,7 @@ public class GameController : MonoBehaviour
         menu.SetInteractable(true);
         buttonNext.gameObject.SetActive(false);
         field.SetInteractable(false);
+        titleAnimation.StartAnimationResize(0.8f, 0.2f);
     }
 
     public void SetGameStateVictory()
@@ -80,23 +83,24 @@ public class GameController : MonoBehaviour
         buttonNext.gameObject.SetActive(true);
         buttonNext.ShowButton();
         field.SetInteractable(false);
+        titleAnimation.StartAnimationResize(1, 0.2f);
 
         subtitle.StartTextTransition(subtitle_complete, -1f);
     }
 
     public void CompleteLevel()
     {
-        LevelManager.Instance.UnlockLevel();
-        LevelManager.Instance.SetLevel(LevelManager.Instance.level + 1);
+        LevelManager.Instance.UnlockChallange();
+        //LevelManager.Instance.SetLevel(LevelManager.Instance.level + 1);
 
         SetGameStateVictory();
     }
 
     public void StartLevel(bool fadeOut = true)
     {
-        level = LevelManager.Instance.GetLevel(LevelManager.Instance.level);
+        level = LevelManager.Instance.GetLevel(LevelManager.Instance.gameMode, LevelManager.Instance.level);
 
-        if (level.levelType == LevelDatabase.LevelTypes.random)
+        if (level.isRandom)
             level = randomLevelGenerator.GenerateLevel(level);
 
         if (fadeOut == false)
@@ -109,6 +113,13 @@ public class GameController : MonoBehaviour
         coroutineLevelTransition = StartCoroutine(CoroutineLevelTransition());
     }
 
+    public void StartNextLevel()
+    {
+        LevelManager.Instance.SetLevel(LevelManager.Instance.gameMode, LevelManager.Instance.level + 1);
+
+        StartLevel();
+    }
+
     private IEnumerator CoroutineLevelTransition()
     {
         float animTime = 0.2f;
@@ -119,24 +130,26 @@ public class GameController : MonoBehaviour
         while (canvasGroup.alpha > 0)
             yield return null;
 
-        if (level.levelType == LevelDatabase.LevelTypes.challange)
+        //Debug.Log(level.isRandom);
+        if (level.isRandom == false)
         {
-            levelCounter.gameObject.SetActive(true);
+            title.gameObject.SetActive(true);
             infiniteIcon.SetActive(false);
-            levelCounter.text = "#" + (LevelManager.Instance.level + 1);
+            title.text = "#" + (LevelManager.Instance.level + 1);
             subtitle.HideText();
         }
-        else if (level.levelType == LevelDatabase.LevelTypes.random)
+        else
         {
-            levelCounter.gameObject.SetActive(false);
+            title.gameObject.SetActive(false);
             infiniteIcon.SetActive(true);
             subtitle.SetText(subtitle_newLevels);
         }
 
         field.CreateField(level);
 
-        if (LevelManager.Instance.level == 0)
-            field.field[0, 0].FlipElement(4 - field.field[0, 0].flip, true);
+        // tutorial (first element in wrong position)
+        //if (LevelManager.Instance.level == 0) 
+        //   field.field[0, 0].FlipElement(4 + 1 - field.field[0, 0].flip, true);
 
         SetGameStateGame();
 

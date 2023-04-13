@@ -38,7 +38,7 @@ public class ColorThemeManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             ChangeColorTheme();
         }

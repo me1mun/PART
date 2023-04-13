@@ -6,10 +6,6 @@ public class LevelDatabase : MonoBehaviour
 {
     public static LevelDatabase Instance { get; private set; }
 
-    public enum LevelTypes { challange, empty, random };
-    public static Level randomLevel = new Level { levelType = LevelTypes.random };
-    public static Level emptyLevel = new Level { levelType = LevelTypes.empty, width = 8, height = 10};
-
     public Element[] elements;
     public Element emptyElemet;
 

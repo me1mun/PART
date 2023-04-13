@@ -23,6 +23,10 @@ MonoBehaviour:
     m_Key: Music
     m_Metadata:
       m_Items: []
+  - m_Id: 4073903368933376
+    m_Key: TabTitle
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

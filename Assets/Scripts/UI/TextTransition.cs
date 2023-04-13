@@ -8,12 +8,12 @@ using UnityEngine.Localization;
 [RequireComponent(typeof(AnimationAlpha), typeof(LocalizeStringEvent))]
 public class TextTransition : MonoBehaviour
 {
-    private LocalizeStringEvent localizedStrinEvent;
-    private CanvasGroup canvasGroup;
+    [SerializeField] private LocalizeStringEvent localizedStrinEvent;
+    [SerializeField] private CanvasGroup canvasGroup;
 
     private Coroutine coroutineTextTransition;
 
-    private AnimationAlpha animationAlpha;
+    [SerializeField] private AnimationAlpha animationAlpha;
     private LocalizedString stringReference;
     private float animTime = 0.2f;
     private const float defaultTextShowTime = 4.5f;
@@ -23,8 +23,6 @@ public class TextTransition : MonoBehaviour
     {
         localizedStrinEvent = GetComponent<LocalizeStringEvent>();
         canvasGroup = gameObject.GetComponent<CanvasGroup>();
-        if (canvasGroup != null)
-            Debug.Log("canvas init");
 
         animationAlpha = GetComponent<AnimationAlpha>();
     }
@@ -39,8 +37,7 @@ public class TextTransition : MonoBehaviour
         stringReference = newText;
 
         this.gameObject.SetActive(true);
-        if (canvasGroup != null)
-            canvasGroup.alpha = 1;
+        canvasGroup.alpha = 1;
         localizedStrinEvent.StringReference = stringReference;
     }
 

@@ -17,20 +17,14 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: e37c2c5b080ab154ca6e5f913355d1ef
   m_SerializeEntries:
-  - m_GUID: 5fe5e3410852b384e88289d6716c4f85
-    m_Address: Tabs_ru
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-ru
-    - Preload
   - m_GUID: b165a108680386043a05a0ed5bdbb4c6
-    m_Address: GameSubtitles_ru
+    m_Address: Game_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru
     - Preload
   - m_GUID: a9e451f667d553a4280341b3a948a7ac
-    m_Address: Premium_ru
+    m_Address: TabPremium_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru
@@ -42,7 +36,13 @@ MonoBehaviour:
     - Locale-ru
     - Preload
   - m_GUID: bf48b4fb9844db641b4aa7c77e9b51ee
-    m_Address: EditorSubtitles_ru
+    m_Address: LevelEditor_ru
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ru
+    - Preload
+  - m_GUID: 634a11d90f642024eaf7b56851f68499
+    m_Address: TabLevels_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru

@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class Level
 {
-    public LevelDatabase.LevelTypes levelType = LevelDatabase.LevelTypes.challange;
+    public string fileName;
+    public bool isRandom = false;
 
     public string levelName;
     public int width, height;

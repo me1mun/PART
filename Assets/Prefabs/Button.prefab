@@ -648,7 +648,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 265}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2120722578390829799
@@ -672,11 +672,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactable: 1
-  isSoundClick: 1
   isFillEffect: 1
+  isSoundClick: 1
+  isSoundDown: 0
   content: {fileID: 2079412113973644630}
   soundClick: {fileID: 2079412113852502028}
-  soundDown: {fileID: 0}
   fillEffect: {fileID: 2079412114149140379}
   onClick:
     m_PersistentCalls:
