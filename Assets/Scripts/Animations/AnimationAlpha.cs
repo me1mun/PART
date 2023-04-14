@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CanvasGroup))]
 public class AnimationAlpha : MonoBehaviour
 {
-    private CanvasGroup canvasGroup;
+    [SerializeField] private CanvasGroup canvasGroup;
     private Coroutine coroutineAlpha;
 
     [SerializeField] private AnimationCurve animCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
@@ -15,6 +15,11 @@ public class AnimationAlpha : MonoBehaviour
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+    }
+
+    public void SetAlpha(float newAlpha)
+    {
+        canvasGroup.alpha = newAlpha;
     }
 
     public float GetAlpha()

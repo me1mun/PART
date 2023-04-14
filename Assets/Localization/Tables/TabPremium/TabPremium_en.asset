@@ -19,15 +19,27 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 25805950976
-    m_Localized: 'There is no advertising in this game.
-
-
-      If you want to support
-      the developer, you can make a donation'
+    m_Localized: There is no advertising in this game
     m_Metadata:
       m_Items: []
   - m_Id: 4074631592382464
     m_Localized: Premium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4256421506420736
+    m_Localized: Subscribe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4256664184655872
+    m_Localized: Subscription to premium contributes to the release of new levels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4256846087426048
+    m_Localized: App rating also helps the development of the game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4634181265494016
+    m_Localized: Subscribed
     m_Metadata:
       m_Items: []
   references:

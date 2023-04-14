@@ -8,10 +8,11 @@ public class GameController : MonoBehaviour
 {
     public enum GameStates { game, menu, victory }
     public GameStates gameState = GameStates.game;
-    private bool isPause = false;
+    //private bool isPause = false;
 
 
     private RandomLevelGeneration randomLevelGenerator;
+    [SerializeField] private AudioSource soundVictory;
 
     [SerializeField] private CanvasGroup canvasGroup;
     [SerializeField] private AnimationScale titleAnimation;
@@ -90,9 +91,9 @@ public class GameController : MonoBehaviour
 
     public void CompleteLevel()
     {
-        LevelManager.Instance.UnlockChallange();
+        LevelManager.Instance.UnlockChallange(LevelManager.Instance.challangesUnlocked + 1);
         //LevelManager.Instance.SetLevel(LevelManager.Instance.level + 1);
-
+        soundVictory.Play();
         SetGameStateVictory();
     }
 

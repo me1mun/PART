@@ -251,7 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa411c223f1813d4db737858f4c20e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorType: 3
+  colorType: 2
 --- !u!1 &5505991568450015937
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +479,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2120722578390829794, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
       propertyPath: m_Name
-      value: LevelCase
+      value: ChallangeCase
       objectReference: {fileID: 0}
     - target: {fileID: 2511164817114918392, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
       propertyPath: colorType
@@ -546,6 +546,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20db71d369043c541a0def206cde5054, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  index: 0
   OnInit:
     m_PersistentCalls:
       m_Calls: []

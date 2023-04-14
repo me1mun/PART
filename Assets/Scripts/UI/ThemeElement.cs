@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class ColorThemeElement : MonoBehaviour
+public class ThemeElement : MonoBehaviour
 {
     
-    public ColorThemeManager.ColorType colorType;
+    public OptionTheme.ColorType colorType;
 
     private Image image;
     private TextMeshProUGUI text;
@@ -24,13 +24,13 @@ public class ColorThemeElement : MonoBehaviour
         if (GetComponent<Camera>() != null)
             cam = GetComponent<Camera>();
 
-        ColorThemeManager.Instance.onColorThemeChange.AddListener(UpdateColor);
-        UpdateColor();
+        GameManager.Instance.theme.OnThemeChange.AddListener(UpdateDisplayColor);
+        UpdateDisplayColor();
     }
 
-    public void UpdateColor()
+    public void UpdateDisplayColor()
     {
-        Color32 myColor = ColorThemeManager.Instance.GetColor(colorType);
+        Color32 myColor = GameManager.Instance.theme.GetTheme().colors[colorType];
 
         if (image != null)
             image.color = myColor;
@@ -40,5 +40,12 @@ public class ColorThemeElement : MonoBehaviour
 
         if (cam != null)
             cam.backgroundColor = myColor;
+    }
+
+    public void SetColorType(OptionTheme.ColorType newColor)
+    {
+        colorType = newColor;
+
+        UpdateDisplayColor();
     }
 }

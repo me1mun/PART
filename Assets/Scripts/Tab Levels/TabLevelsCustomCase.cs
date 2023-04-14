@@ -36,9 +36,9 @@ public class TabLevelsCustomCase : MonoBehaviour
         tabLevels.StartLevelFlash(index);
     }
 
-    public void InteractDelete()
+    public void DeleteLevel()
     {
-        LevelManager.Instance.DeleteUserLevel(level.fileName);
+        LevelManager.Instance.DeleteUserLevel(level.levelName);
         tabLevels.ReloadListCases();
     }
 }

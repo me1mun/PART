@@ -7,7 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-
+    public AudioManager audioManager;
+    public OptionTheme theme;
+    public OptionOrientation orientation;
+    public OptionLanguage language;
+    public PremiumManager premiumManager;
 
     private void Awake()
     {
@@ -21,15 +25,7 @@ public class GameManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(this.gameObject);
-        Application.targetFrameRate = 60;
     }
-
-    private void Start()
-    {
-        ChangeScene("Main"); // at the end
-    }
-
-
 
     public static void ChangeScene(string newScene)
     {

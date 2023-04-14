@@ -30,6 +30,18 @@ MonoBehaviour:
     m_Localized: Options
     m_Metadata:
       m_Items: []
+  - m_Id: 4103396473147392
+    m_Localized: Orientation
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4290468106440704
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4290548741935104
+    m_Localized: Color theme
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -20,7 +20,23 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4074631592382464
-    m_Key: TabTitle
+    m_Key: Premium
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4256421506420736
+    m_Key: Subscribe
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4256664184655872
+    m_Key: SubscribeDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4256846087426048
+    m_Key: RateDesc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4634181265494016
+    m_Key: SubscribeDone
     m_Metadata:
       m_Items: []
   m_Metadata:

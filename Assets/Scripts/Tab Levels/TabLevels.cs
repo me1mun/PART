@@ -22,13 +22,6 @@ public class TabLevels : MonoBehaviour
     private void OnEnable()
     {
         SetListMode(currentListMode);
-        //StartCoroutine(OnEndOfFrame());
-    }
-
-    IEnumerator OnEndOfFrame()
-    {
-        yield return new WaitForEndOfFrame();
-        SetListMode(currentListMode);
     }
 
     public void ReloadListCases()

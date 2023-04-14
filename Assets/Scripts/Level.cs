@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Level
 {
-    public string fileName;
+    public string creationDate;
     public bool isRandom = false;
 
     public string levelName;

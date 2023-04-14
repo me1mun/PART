@@ -9,16 +9,19 @@ public class LevelManager : MonoBehaviour
 
     public enum GameModes { challange, user };
 
+    private string saveKeyChallangesUnlocked = "challangesUnlocked";
     public GameModes gameMode = GameModes.challange;
     public int level = 0;
     public int challangesUnlocked = 1;
 
     public string userLevelPath;
 
-    private Dictionary<GameModes, List<TextAsset>> levels = new Dictionary<GameModes, List<TextAsset>>();
+    private Dictionary<GameModes, List<Level>> levels = new Dictionary<GameModes, List<Level>>();
 
-    [SerializeField] private List<TextAsset> levelChallangeList = new List<TextAsset>();
-    private List<TextAsset> levelCustomList = new List<TextAsset>();
+    [SerializeField] private List<TextAsset> challangeLevelTemp = new List<TextAsset>();
+    private List<Level> challangeLevelList = new List<Level>();
+    private List<Level> userLevelList = new List<Level>();
+    private string[] userLevelName;
 
     public Level levelEmpty = new Level() { width = 8, height = 10 };
     public Level levelRandom = new Level() { isRandom = true };
@@ -38,34 +41,59 @@ public class LevelManager : MonoBehaviour
         if (!Directory.Exists(userLevelPath))
             Directory.CreateDirectory(userLevelPath);
 
-        challangesUnlocked = 1000; //load saved value
+        //challangesUnlocked = 1000; //load saved value
         
-        levels.Add(GameModes.challange, levelChallangeList);
-        levels.Add(GameModes.user, levelCustomList);
+        levels.Add(GameModes.challange, challangeLevelList);
+        levels.Add(GameModes.user, userLevelList);
 
-        levels[GameModes.challange].Add(new TextAsset(JsonUtility.ToJson(levelRandom)));
+        LoadChallangeLevels();
         LoadUserLevels();
+
+        LoadData();
+    }
+
+    public void LoadChallangeLevels()
+    {
+        levels[GameModes.challange].Clear();
+
+        foreach (TextAsset txt in challangeLevelTemp)
+        {
+            Level newLevel = JsonUtility.FromJson<Level>(txt.text);
+            levels[GameModes.challange].Add(newLevel);
+        }
+
+        levels[GameModes.challange].Add(levelRandom);
     }
 
     public void LoadUserLevels()
     {
         levels[GameModes.user].Clear();
-        string[] userLevelNames = Directory.GetFiles(userLevelPath, "*.txt");
+        userLevelName = Directory.GetFiles(userLevelPath, "*.txt");
 
-        foreach (string fileName in userLevelNames)
+        foreach (string fileName in userLevelName)
         {
             byte[] fileData = File.ReadAllBytes(fileName);
             string fileText = System.Text.Encoding.UTF8.GetString(fileData);
 
-            levels[GameModes.user].Add(new TextAsset(fileText));
+            levels[GameModes.user].Add(JsonUtility.FromJson<Level>(fileText));
         }
     }
 
+    private void LoadData()
+    {
+        UnlockChallange(PlayerPrefs.GetInt(saveKeyChallangesUnlocked, 1));
+        level = challangesUnlocked - 1;
+    }
+
+    private void SaveData()
+    {
+        PlayerPrefs.SetInt(saveKeyChallangesUnlocked, challangesUnlocked);
+    }
 
     public Level GetLevel(GameModes mode, int levelIndex)
     {
         //Debug.Log("Init " + levelIndex + ": " + levels[GameModes.user][0].text);
-        return JsonUtility.FromJson<Level>(levels[mode][levelIndex].text);
+        return levels[mode][levelIndex];
     }
 
     public int GetLevelCount(GameModes mode)
@@ -79,13 +107,12 @@ public class LevelManager : MonoBehaviour
         level = Mathf.Clamp(newLevel, 0, GetLevelCount(gameMode) - 1);
     }
 
-    public void UnlockChallange()
+    public void UnlockChallange(int newValue)
     {
+        newValue = newValue % GetLevelCount(GameModes.challange);
 
-        if (level >= challangesUnlocked - 1 && challangesUnlocked < GetLevelCount(GameModes.challange))
-        {
-            challangesUnlocked += 1;
-        }
+        challangesUnlocked = newValue;
+        SaveData();
     }
 
     public void DeleteUserLevel(string fileName)

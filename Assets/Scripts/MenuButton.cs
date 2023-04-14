@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MenuButton : MonoBehaviour
 {
-    private bool isActive = false;
+    //private bool isActive = false;
     private Menu menu;
 
     [SerializeField] TabManager.TabEnum tabType;

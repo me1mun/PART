@@ -20,13 +20,19 @@ public class LevelEditor : MonoBehaviour
 
     private void Awake()
     {
-        field.CreateField(LevelManager.Instance.levelEmpty);
-        field.PaintField(colorPool.GetActiveColor());
+        CreateEmptyField();
     }
 
     private void OnEnable()
     {
         subtitle.SetText(string_intro);
+    }
+
+    private void CreateEmptyField()
+    {
+        field.CreateField(LevelManager.Instance.levelEmpty);
+        field.PaintField(colorPool.GetActiveColor());
+        levelNameField.text = "";
     }
 
     public Level ConstructLevel()
@@ -76,7 +82,6 @@ public class LevelEditor : MonoBehaviour
 
         Level NewLevel = new Level
         {
-            fileName = levelNameField.text, //user level index
             levelName = levelNameField.text,
             width = width,
             height = height,
@@ -92,11 +97,7 @@ public class LevelEditor : MonoBehaviour
     {
         Level FinalLevel = ConstructLevel();
 
-        if (FinalLevel.levelName == "")
-        {
-            subtitle.StartTextTransition(string_noName);
-        }
-        else if (FinalLevel.width <= 0)
+        if (FinalLevel.width <= 0)
         {
             subtitle.StartTextTransition(string_emptyField);
         }
@@ -104,25 +105,26 @@ public class LevelEditor : MonoBehaviour
         {
             subtitle.StartTextTransition(string_noLoop);
         }
+        else if(FinalLevel.levelName == "")
+        {
+            subtitle.StartTextTransition(string_noName);
+        }
         else
         {
             string savePath = LevelManager.Instance.userLevelPath;
-            if (!Directory.Exists(savePath))
-            {
-                Directory.CreateDirectory(savePath);
-            }
+
+            FinalLevel.creationDate = DateTime.Now.ToString();
 
             string jsonLevel = JsonUtility.ToJson(FinalLevel);
 
-            File.WriteAllText(savePath + FinalLevel.fileName + ".txt", jsonLevel);
+            File.WriteAllText(savePath + FinalLevel.levelName + ".txt", jsonLevel);
             Debug.Log("Level has been saved to: " + savePath);
 
             LevelManager.Instance.LoadUserLevels();
 
-            //interface reset
-            levelNameField.text = "";
             subtitle.StartTextTransition(string_saved);
-            field.CreateField(LevelManager.Instance.levelEmpty);
+
+            CreateEmptyField();
         }
     }
 }

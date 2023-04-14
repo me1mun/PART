@@ -113,8 +113,6 @@ public class InfiniteScroll : MonoBehaviour
 
                 firstCase = containerTransform.GetChild(0).gameObject;
                 lastCase = containerTransform.GetChild(casesClamp - 1).gameObject;
-                Debug.Log("case replace to start");
-                Debug.Log(firstCase.transform.position.y + " | " + (replaceCaseGap));
             }
 
             while (casesList[lastCase].GetIndex() < casesCount - 1 && (lastCase.transform.position.y > borderDown.position.y - replaceCaseGap))
@@ -127,8 +125,6 @@ public class InfiniteScroll : MonoBehaviour
 
                 firstCase = containerTransform.GetChild(0).gameObject;
                 lastCase = containerTransform.GetChild(casesClamp - 1).gameObject;
-                Debug.Log("case replace to end");
-                Debug.Log(lastCase.transform.position.y + " | " + (replaceCaseGap));
             }
         }
     }
