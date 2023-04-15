@@ -23,30 +23,35 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-ru
     - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: a9e451f667d553a4280341b3a948a7ac
     m_Address: TabPremium_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru
     - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9ab738ce7357ef64c9e5083e9c06667a
     m_Address: Options_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru
     - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: bf48b4fb9844db641b4aa7c77e9b51ee
     m_Address: LevelEditor_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru
     - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 634a11d90f642024eaf7b56851f68499
     m_Address: TabLevels_ru
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ru
     - Preload
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: ad318cec0e5dafe44847bf1e01300e58, type: 2}
   m_SchemaSet:

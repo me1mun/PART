@@ -7,7 +7,7 @@ using Unity.Services.Core.Environments;
 using System;
 using UnityEngine.Purchasing.Extension;
 
-public class StoreManager : MonoBehaviour, IStoreListener
+public class StoreManager : MonoBehaviour, IDetailedStoreListener
 {
     private static IStoreController storeController;
     private static IExtensionProvider extensionProvider;
@@ -34,7 +34,16 @@ public class StoreManager : MonoBehaviour, IStoreListener
         }
 
         StandardPurchasingModule.Instance().useFakeStoreUIMode = FakeStoreUIMode.StandardUser;
-        ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
+        ConfigurationBuilder builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.NotSpecified));
+        if (Application.platform == RuntimePlatform.Android)
+        {
+            builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.GooglePlay));
+        }
+        else if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance(AppStore.AppleAppStore));
+        }
+
         builder.AddProduct("donation_1", ProductType.Consumable);
         builder.AddProduct("donation_2", ProductType.Consumable);
         builder.AddProduct("donation_3", ProductType.Consumable);

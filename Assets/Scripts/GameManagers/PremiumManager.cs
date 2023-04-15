@@ -5,8 +5,6 @@ using UnityEngine.Purchasing;
 
 public class PremiumManager : MonoBehaviour
 {
-    private string premiumProductId = "premium";
-    private Product premiumProduct;
     private string saveKey = "premium";
     private SubscriptionManager subscriptionManager;
 
@@ -14,18 +12,13 @@ public class PremiumManager : MonoBehaviour
 
     private void Start()
     {
-        IStoreController storeController = UnityEngine.Purchasing.CodelessIAPStoreListener.Instance.StoreController;
-        premiumProduct = storeController.products.WithID(premiumProductId);
 
         LoadData();
     }
 
     private void Awake()
     {
-        if (premiumProduct != null)
-        {
-            subscriptionManager = new SubscriptionManager(premiumProduct, null);
-        }
+
     }
 
     private void LoadData()
