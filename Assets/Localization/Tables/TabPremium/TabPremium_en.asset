@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: Not available
     m_Metadata:
       m_Items: []
+  - m_Id: 4978994728898560
+    m_Localized: Donations help support the game
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

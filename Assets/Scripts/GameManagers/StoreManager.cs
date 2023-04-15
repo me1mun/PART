@@ -7,7 +7,7 @@ using Unity.Services.Core.Environments;
 using System;
 using UnityEngine.Purchasing.Extension;
 
-public class StoreManager : MonoBehaviour, IDetailedStoreListener
+public class StoreManager : MonoBehaviour, IStoreListener
 {
     private static IStoreController storeController;
     private static IExtensionProvider extensionProvider;
