@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public OptionOrientation orientation;
     public OptionLanguage language;
     public PremiumManager premiumManager;
+    public StoreManager storeManager;
 
     private void Awake()
     {

@@ -29,6 +29,7 @@ public class TextTransition : MonoBehaviour
 
     public void HideText()
     {
+        canvasGroup.alpha = 0;
         gameObject.SetActive(false);
     }
 

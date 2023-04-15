@@ -26,13 +26,13 @@ public class MenuBar : MonoBehaviour
 
     private void Start()
     {
-        Activator(isOpen);
+        Open(isOpen);
         SetInteractable(isInteractable);
     }
 
-    public void Activator(bool activate)
+    public void Open(bool on)
     {
-        isOpen = activate;
+        isOpen = on;
 
         animator.SetBool("Activate", isOpen);
         gameField.SetInteractable(!isOpen);

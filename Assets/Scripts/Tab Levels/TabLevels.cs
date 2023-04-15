@@ -8,9 +8,8 @@ public class TabLevels : MonoBehaviour
 {
     private LevelManager.GameModes currentListMode;
     [SerializeField] private GameController game;
-    [SerializeField] private InfiniteScroll challangeScroll, userScroll;
+    [SerializeField] private InfiniteScroll challengeScroll, userScroll;
     [SerializeField] private TextTransition titleTransition;
-    [SerializeField] private LocalizedString challangeTitle, userTitle;
     private ListModeButton[] listModeButtonList;
 
     private void Awake()
@@ -26,7 +25,7 @@ public class TabLevels : MonoBehaviour
 
     public void ReloadListCases()
     {
-        challangeScroll.CreateCases(LevelManager.Instance.GetLevelCount(LevelManager.GameModes.challange));
+        challengeScroll.CreateCases(LevelManager.Instance.GetLevelCount(LevelManager.GameModes.challenge));
         userScroll.CreateCases(LevelManager.Instance.GetLevelCount(LevelManager.GameModes.user));
     }
 
@@ -47,17 +46,15 @@ public class TabLevels : MonoBehaviour
             btn.Activate(btn.GetListMode() == currentListMode);
         }
 
-        if(newListMode == LevelManager.GameModes.challange)
+        if(newListMode == LevelManager.GameModes.challenge)
         {
-            titleTransition.StartTextTransition(challangeTitle, 0);
             userScroll.gameObject.SetActive(false);
-            challangeScroll.gameObject.SetActive(true);
-            challangeScroll.CreateCases(LevelManager.Instance.GetLevelCount(newListMode));
+            challengeScroll.gameObject.SetActive(true);
+            challengeScroll.CreateCases(LevelManager.Instance.GetLevelCount(newListMode));
         }
         else if (newListMode == LevelManager.GameModes.user)
         {
-            titleTransition.StartTextTransition(userTitle, 0);
-            challangeScroll.gameObject.SetActive(false);
+            challengeScroll.gameObject.SetActive(false);
             userScroll.gameObject.SetActive(true);
             userScroll.CreateCases(LevelManager.Instance.GetLevelCount(newListMode));
         }

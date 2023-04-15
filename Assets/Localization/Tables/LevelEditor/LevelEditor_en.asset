@@ -46,6 +46,10 @@ MonoBehaviour:
     m_Localized: Level editor
     m_Metadata:
       m_Items: []
+  - m_Id: 4682330524848128
+    m_Localized: This name is taken
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -23,6 +23,14 @@ MonoBehaviour:
     m_Key: Subtitle_NewLevels
     m_Metadata:
       m_Items: []
+  - m_Id: 4808415300259840
+    m_Key: Subtitle_UserLevels
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4810918578327552
+    m_Key: Challenge
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

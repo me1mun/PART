@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI title;
     [SerializeField] private GameObject infiniteIcon;
     [SerializeField] private TextTransition subtitle;
-    [SerializeField] private LocalizedString subtitle_complete, subtitle_newLevels;
+    [SerializeField] private LocalizedString subtitle_complete, subtitle_newLevels, subtitle_userLevels;
     [SerializeField] private FieldController field;
     [SerializeField] private GameButtonComplete buttonNext;
     [SerializeField] private MenuBar menu;
@@ -47,7 +47,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Application.platform == RuntimePlatform.WindowsEditor && Input.GetKeyDown(KeyCode.KeypadEnter))
         {
             CompleteLevel();
         }
@@ -57,7 +57,7 @@ public class GameController : MonoBehaviour
     {
         gameState = GameStates.game;
 
-        menu.Activator(false);
+        menu.Open(false);
         menu.SetInteractable(true);
         buttonNext.gameObject.SetActive(false);
         field.SetInteractable(true);
@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour
     {
         gameState = GameStates.menu;
 
-        menu.Activator(true);
+        menu.Open(true);
         menu.SetInteractable(true);
         buttonNext.gameObject.SetActive(false);
         field.SetInteractable(false);
@@ -79,7 +79,7 @@ public class GameController : MonoBehaviour
     {
         gameState = GameStates.victory;
 
-        menu.Activator(false);
+        menu.Open(false);
         menu.SetInteractable(false);
         buttonNext.gameObject.SetActive(true);
         buttonNext.ShowButton();
@@ -91,7 +91,7 @@ public class GameController : MonoBehaviour
 
     public void CompleteLevel()
     {
-        LevelManager.Instance.UnlockChallange(LevelManager.Instance.challangesUnlocked + 1);
+        LevelManager.Instance.UnlockChallenge(LevelManager.Instance.challengesUnlocked + 1);
         //LevelManager.Instance.SetLevel(LevelManager.Instance.level + 1);
         soundVictory.Play();
         SetGameStateVictory();
@@ -114,9 +114,22 @@ public class GameController : MonoBehaviour
         coroutineLevelTransition = StartCoroutine(CoroutineLevelTransition());
     }
 
+    public void CompleteNextButton()
+    {
+        //if()
+    }
+
     public void StartNextLevel()
     {
         LevelManager.Instance.SetLevel(LevelManager.Instance.gameMode, LevelManager.Instance.level + 1);
+
+        StartLevel();
+    }
+
+    public void StartRandomLevel()
+    {
+        int randomLevelIndex = Random.Range(0, LevelManager.Instance.GetLevelCount(LevelManager.Instance.gameMode));
+        LevelManager.Instance.SetLevel(LevelManager.Instance.gameMode, randomLevelIndex);
 
         StartLevel();
     }
@@ -146,7 +159,17 @@ public class GameController : MonoBehaviour
             subtitle.SetText(subtitle_newLevels);
         }
 
+        if (LevelManager.Instance.gameMode == LevelManager.GameModes.user)
+        {
+            subtitle.SetText(subtitle_userLevels);
+        }
+
         field.CreateField(level);
+        for(int i = 0; i < 10; i++)
+        {
+            if (field.CheckLoopComplete())
+                field.CreateField(level);
+        }
 
         // tutorial (first element in wrong position)
         //if (LevelManager.Instance.level == 0) 

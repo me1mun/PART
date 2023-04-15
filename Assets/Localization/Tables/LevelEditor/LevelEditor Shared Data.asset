@@ -43,6 +43,10 @@ MonoBehaviour:
     m_Key: LevelEditor
     m_Metadata:
       m_Items: []
+  - m_Id: 4682330524848128
+    m_Key: Warning_ExistingName
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

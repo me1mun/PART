@@ -9,34 +9,24 @@ using UnityEngine.Purchasing;
 
 public class TabPremium : MonoBehaviour
 {
-    private string premiumProductKey = "premium";
+    [SerializeField] private List<string> donationIdList;
 
-    [SerializeField] private ButtonController subscribeButton;
-    [SerializeField] private LocalizeStringEvent subscribeButtonText;
-    [SerializeField] private ThemeElement subscribeButtonTheme;
     [SerializeField] private ThemeElement premiumIconTheme;
 
-    [SerializeField] LocalizedString stringSubscribe, stringSubscribed;
 
     private void Start()
     {
-        SetupDisplay();
+        Setup();
     }
 
-    private void SetupDisplay()
+    private void Setup()
     {
         if (GameManager.Instance.premiumManager.isPremium)
         {
-            subscribeButton.SetInteractable(false);
-            subscribeButtonText.StringReference = stringSubscribed;
-            subscribeButtonTheme.SetColorType(OptionTheme.ColorType.overlay);
             premiumIconTheme.SetColorType(OptionTheme.ColorType.accent);
         }
         else
         {
-            subscribeButton.SetInteractable(true);
-            subscribeButtonText.StringReference = stringSubscribe;
-            subscribeButtonTheme.SetColorType(OptionTheme.ColorType.accent);
             premiumIconTheme.SetColorType(OptionTheme.ColorType.content);
 
         }
@@ -44,14 +34,14 @@ public class TabPremium : MonoBehaviour
 
     public void OnPurchaseComplete(Product product)
     {
-        if (product.definition.id == premiumProductKey)
+        if (donationIdList.Contains(product.definition.id))
         {
             GameManager.Instance.premiumManager.SetPremium(true);
-            SetupDisplay();
+            Setup();
 
-            Debug.Log("Premium sibscription is done");
+            //Debug.Log("Premium sibscription is done");
         }
 
-        Debug.Log(product.definition.id + " | " + premiumProductKey);
+        Debug.Log(product.definition.id + ": try to buy");
     }
 } 

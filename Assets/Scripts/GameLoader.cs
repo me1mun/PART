@@ -6,7 +6,7 @@ public class GameLoader : MonoBehaviour
 {
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
         Application.targetFrameRate = 60;
     }
 

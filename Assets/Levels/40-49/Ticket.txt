@@ -1,0 +1,1 @@
+{"creationDate":"15.04.2023 6:22:07","isRandom":false,"levelName":"Ticket","width":5,"height":3,"colorName":"red","elements":["Turn_sharp","Tripple_sharp","Line_regular","Line_regular","Turn_sharp","Line_arc","Line_regular","_Empty","_Empty","Line_arc","Turn_sharp","Tripple_sharp","Line_regular","Line_regular","Turn_sharp"],"elementFlip":[2,2,0,0,3,1,1,0,3,3,1,0,0,0,0]}

@@ -16,7 +16,7 @@ public class LevelEditor : MonoBehaviour
     public LevelEditorColorPool colorPool;
 
     [SerializeField] private TextTransition subtitle;
-    [SerializeField] private LocalizedString string_intro, string_noName, string_emptyField, string_noLoop, string_saved;
+    [SerializeField] private LocalizedString string_intro, string_existingName, string_noName, string_emptyField, string_noLoop, string_saved;
 
     private void Awake()
     {
@@ -28,7 +28,7 @@ public class LevelEditor : MonoBehaviour
         subtitle.SetText(string_intro);
     }
 
-    private void CreateEmptyField()
+    public void CreateEmptyField()
     {
         field.CreateField(LevelManager.Instance.levelEmpty);
         field.PaintField(colorPool.GetActiveColor());
@@ -108,6 +108,10 @@ public class LevelEditor : MonoBehaviour
         else if(FinalLevel.levelName == "")
         {
             subtitle.StartTextTransition(string_noName);
+        }
+        else if (LevelManager.Instance.CheckUserLevelExisting(FinalLevel.levelName) == true)
+        {
+            subtitle.StartTextTransition(string_existingName);
         }
         else
         {

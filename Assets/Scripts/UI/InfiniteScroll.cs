@@ -33,7 +33,7 @@ public class InfiniteScroll : MonoBehaviour
 
     private void Start()
     {
-        //CreateCases(LevelManager.Instance.GetLevelChallangeCount());
+        //CreateCases(LevelManager.Instance.GetLevelChallengeCount());
     }
 
     private void Update()
@@ -51,6 +51,7 @@ public class InfiniteScroll : MonoBehaviour
         DeleteCases();
 
         this.casesCount = casesCount;
+
         casesClamp = Mathf.Min(casesCount, casesMax);
 
         RectTransform containerRect = container.GetComponent<RectTransform>();

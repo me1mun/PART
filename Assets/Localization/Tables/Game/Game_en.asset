@@ -26,6 +26,14 @@ MonoBehaviour:
     m_Localized: New levels will be available in the update
     m_Metadata:
       m_Items: []
+  - m_Id: 4808415300259840
+    m_Localized: User level
+    m_Metadata:
+      m_Items: []
+  - m_Id: 4810918578327552
+    m_Localized: Challenge
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

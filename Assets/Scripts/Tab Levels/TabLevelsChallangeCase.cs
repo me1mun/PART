@@ -28,18 +28,18 @@ public class TabLevelsChallangeCase : MonoBehaviour
     public void Init()
     {
         levelIndex = scrollCase.GetIndex();
-        Level level = LevelManager.Instance.GetLevel(LevelManager.GameModes.challange, levelIndex);
+        Level level = LevelManager.Instance.GetLevel(LevelManager.GameModes.challenge, levelIndex);
         //field.FieldCreate(level);
 
         levelText.text = (levelIndex + 1).ToString();
 
-        bool isUnlocked = levelIndex < LevelManager.Instance.challangesUnlocked;
+        bool isUnlocked = levelIndex < LevelManager.Instance.challengesUnlocked;
 
         float disableAlpha = 0.33f;
         contentCanvasGroup.alpha = isUnlocked ? 1 : disableAlpha;
         GetComponent<ButtonController>().SetInteractable(isUnlocked);
 
-        if (LevelManager.Instance.gameMode == LevelManager.GameModes.challange) 
+        if (LevelManager.Instance.gameMode == LevelManager.GameModes.challenge) 
             outline.gameObject.SetActive(LevelManager.Instance.level == levelIndex);
 
         bool isRandom = level.isRandom;
