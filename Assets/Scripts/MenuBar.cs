@@ -35,7 +35,6 @@ public class MenuBar : MonoBehaviour
         isOpen = on;
 
         animator.SetBool("Activate", isOpen);
-        gameField.SetInteractable(!isOpen);
         panel.gameObject.SetActive(isOpen);
 
         if (isOpen == false)
@@ -52,9 +51,9 @@ public class MenuBar : MonoBehaviour
         Vector2 newPos = new Vector2(0, newY);
         animationAnchor.StartAnimationMove(newPos, 0.2f);
 
-        foreach (ButtonController btn in buttons)
-        {
-            btn.SetInteractable(interactable);
-        }
+        //foreach (ButtonController btn in buttons)
+        //{
+        //    btn.SetInteractable(interactable);
+        //}
     }
 }

@@ -3,25 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Localization;
+using UnityEditor.Localization.Editor;
 
 public class GameController : MonoBehaviour
 {
-    public enum GameStates { game, menu, victory }
-    public GameStates gameState = GameStates.game;
-    //private bool isPause = false;
+    public static GameController Instance;
 
+    private GameStateController gameStateController;
+
+    public enum GameStates { game, menu, victory }
+    public LevelManager.GameModes gameMode = LevelManager.GameModes.challenge;
+    private Dictionary<LevelManager.GameModes, GameModeInfo> gmInfoDict = new Dictionary<LevelManager.GameModes, GameModeInfo>();
+    [SerializeField] private List<GameModeInfo> gmInfoListTemp;
+
+    public static GameStates gameState = GameStates.game;
+    public int levelIndex = 0;
+
+    private GameUI gameUI;
 
     private RandomLevelGeneration randomLevelGenerator;
     [SerializeField] private AudioSource soundVictory;
+    [SerializeField] TextTransition subtitle;
 
     [SerializeField] private CanvasGroup canvasGroup;
-    [SerializeField] private AnimationScale titleAnimation;
-    [SerializeField] private TextMeshProUGUI title;
-    [SerializeField] private GameObject infiniteIcon;
-    [SerializeField] private TextTransition subtitle;
-    [SerializeField] private LocalizedString subtitle_complete, subtitle_newLevels, subtitle_userLevels;
     [SerializeField] private FieldController field;
-    [SerializeField] private GameButtonComplete buttonNext;
     [SerializeField] private MenuBar menu;
 
     private AnimationAlpha animationAlpha;
@@ -33,10 +38,23 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        Instance = this;
+
+        gameStateController = GetComponent<GameStateController>();
+        gameUI = GetComponent<GameUI>();
+
         randomLevelGenerator = GetComponent<RandomLevelGeneration>();
 
         animationAlpha = GetComponent<AnimationAlpha>();
         canvasGroup.alpha = 0;
+
+        foreach (GameModeInfo gmInfo in gmInfoListTemp)
+        {
+            gmInfo.levelsComplete = PlayerPrefs.GetInt(gmInfo.GetSaveKey(), 0);
+
+            gmInfoDict.Add(gmInfo.gameMode, gmInfo);
+            //Debug.Log($"{gmInfo.gameMode.ToString()}: {gmInfo.gameMode}");
+        }
     }
 
     void Start()
@@ -53,56 +71,73 @@ public class GameController : MonoBehaviour
         }
     }
 
-    public void SetGameStateGame()
+    public void SetLevel(LevelManager.GameModes newGameMode, int newLevelIndex)
     {
-        gameState = GameStates.game;
+        gameMode = newGameMode;
 
-        menu.Open(false);
-        menu.SetInteractable(true);
-        buttonNext.gameObject.SetActive(false);
-        field.SetInteractable(true);
-        titleAnimation.StartAnimationResize(1, 0.2f);
+        if (newLevelIndex > LevelManager.Instance.GetLevelCount(gameMode) - 1)
+        {
+            newLevelIndex = 0;
+            if (gmInfoDict[gameMode].loopedSequence == false)
+            {
+                gameMode = LevelManager.GameModes.random;
+            }
+        }
+
+
+        levelIndex = newLevelIndex;
+    }
+
+    public GameModeInfo GetGameModeInfo(LevelManager.GameModes gm)
+    {
+        return gmInfoDict[gm];
+    }
+
+    public int GetLevelsComplete(LevelManager.GameModes gm)
+    {
+        return gmInfoDict[gm].levelsComplete;
+    }
+
+    public void SetGameState(GameStates newState)
+    {
+        gameState = newState;
+
+        gameStateController.SetGameStateDisplay(gameState);
     }
 
     public void SetGameStateMenu()
     {
-        gameState = GameStates.menu;
-
-        menu.Open(true);
-        menu.SetInteractable(true);
-        buttonNext.gameObject.SetActive(false);
-        field.SetInteractable(false);
-        titleAnimation.StartAnimationResize(0.8f, 0.2f);
+        SetGameState(GameStates.menu);
     }
 
-    public void SetGameStateVictory()
+    public void SetGameStateGame()
     {
-        gameState = GameStates.victory;
-
-        menu.Open(false);
-        menu.SetInteractable(false);
-        buttonNext.gameObject.SetActive(true);
-        buttonNext.ShowButton();
-        field.SetInteractable(false);
-        titleAnimation.StartAnimationResize(1, 0.2f);
-
-        subtitle.StartTextTransition(subtitle_complete, -1f);
+        SetGameState(GameStates.game);
     }
 
     public void CompleteLevel()
     {
-        LevelManager.Instance.UnlockChallenge(LevelManager.Instance.challengesUnlocked + 1);
-        //LevelManager.Instance.SetLevel(LevelManager.Instance.level + 1);
+        UnlockLevel(levelIndex + 1);
         soundVictory.Play();
-        SetGameStateVictory();
+        gameUI.SetSubtitleVictory();
+
+        SetGameState(GameStates.victory);
+    }
+
+    private void UnlockLevel(int newValue)
+    {
+        GameModeInfo gmInfo = gmInfoDict[gameMode];
+
+        if (newValue > gmInfo.levelsComplete - 1)
+        {
+            gmInfo.levelsComplete = newValue;
+
+            PlayerPrefs.SetInt(gmInfo.GetSaveKey(), gmInfo.levelsComplete);
+        }
     }
 
     public void StartLevel(bool fadeOut = true)
     {
-        level = LevelManager.Instance.GetLevel(LevelManager.Instance.gameMode, LevelManager.Instance.level);
-
-        if (level.isRandom)
-            level = randomLevelGenerator.GenerateLevel(level);
 
         if (fadeOut == false)
             canvasGroup.alpha = 0;
@@ -114,28 +149,29 @@ public class GameController : MonoBehaviour
         coroutineLevelTransition = StartCoroutine(CoroutineLevelTransition());
     }
 
-    public void CompleteNextButton()
-    {
-        //if()
-    }
-
     public void StartNextLevel()
     {
-        LevelManager.Instance.SetLevel(LevelManager.Instance.gameMode, LevelManager.Instance.level + 1);
+        SetLevel(gameMode, levelIndex + 1);
 
         StartLevel();
     }
 
     public void StartRandomLevel()
     {
-        int randomLevelIndex = Random.Range(0, LevelManager.Instance.GetLevelCount(LevelManager.Instance.gameMode));
-        LevelManager.Instance.SetLevel(LevelManager.Instance.gameMode, randomLevelIndex);
+        int randomLevelIndex = Random.Range(0, LevelManager.Instance.GetLevelCount(gameMode));
+        SetLevel(gameMode, randomLevelIndex);
 
         StartLevel();
     }
 
     private IEnumerator CoroutineLevelTransition()
     {
+        GameModeInfo gmInfo = gmInfoDict[gameMode];
+        level = LevelManager.Instance.GetLevel(gameMode, levelIndex);
+
+        if (gameMode == LevelManager.GameModes.random)
+            level = randomLevelGenerator.GenerateLevel(level);
+
         float animTime = 0.2f;
 
         if (canvasGroup.alpha > 0)
@@ -145,24 +181,8 @@ public class GameController : MonoBehaviour
             yield return null;
 
         //Debug.Log(level.isRandom);
-        if (level.isRandom == false)
-        {
-            title.gameObject.SetActive(true);
-            infiniteIcon.SetActive(false);
-            title.text = "#" + (LevelManager.Instance.level + 1);
-            subtitle.HideText();
-        }
-        else
-        {
-            title.gameObject.SetActive(false);
-            infiniteIcon.SetActive(true);
-            subtitle.SetText(subtitle_newLevels);
-        }
 
-        if (LevelManager.Instance.gameMode == LevelManager.GameModes.user)
-        {
-            subtitle.SetText(subtitle_userLevels);
-        }
+        gameUI.SetupDisplay(gmInfo, levelIndex, level);
 
         field.CreateField(level);
         for(int i = 0; i < 10; i++)
@@ -173,10 +193,11 @@ public class GameController : MonoBehaviour
 
         // tutorial (first element in wrong position)
         //if (LevelManager.Instance.level == 0) 
-        //   field.field[0, 0].FlipElement(4 + 1 - field.field[0, 0].flip, true);
+        //   subtitle.SetText(subtitleTutorial);
 
-        SetGameStateGame();
+        SetGameState(GameStates.game);
 
         animationAlpha.StartAnimationAlpha(1, animTime);
     }
 }
+

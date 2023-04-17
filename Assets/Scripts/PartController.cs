@@ -147,5 +147,6 @@ public class PartController : MonoBehaviour
     public void SetInteractable(bool interactable)
     {
         buttonController.SetInteractable(interactable);
+       
     }
 }

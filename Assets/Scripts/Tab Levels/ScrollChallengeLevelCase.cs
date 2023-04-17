@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class TabLevelsChallangeCase : MonoBehaviour
+public class ScrollChallengeLevelCase : MonoBehaviour
 {
     
     //public GameController.LevelType listType = GameController.LevelType.challange;
@@ -13,9 +13,7 @@ public class TabLevelsChallangeCase : MonoBehaviour
     private TabLevels tabLevels;
     private InfiniteScrollCase scrollCase;
 
-    [SerializeField] private GameObject containerInfo, containerInfinite;
-
-    [SerializeField] private GameObject outline;
+    [SerializeField] private GameObject fill, outlineActive, outlineLock;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private CanvasGroup contentCanvasGroup;
 
@@ -33,24 +31,22 @@ public class TabLevelsChallangeCase : MonoBehaviour
 
         levelText.text = (levelIndex + 1).ToString();
 
-        bool isUnlocked = levelIndex < LevelManager.Instance.challengesUnlocked;
+        bool isUnlocked = levelIndex <= GameController.Instance.GetLevelsComplete(LevelManager.GameModes.challenge);
+
+        GetComponent<ButtonController>().SetInteractable(isUnlocked);
 
         float disableAlpha = 0.33f;
         contentCanvasGroup.alpha = isUnlocked ? 1 : disableAlpha;
-        GetComponent<ButtonController>().SetInteractable(isUnlocked);
+        fill.SetActive(isUnlocked);
+        outlineLock.SetActive(!isUnlocked);
 
-        if (LevelManager.Instance.gameMode == LevelManager.GameModes.challenge) 
-            outline.gameObject.SetActive(LevelManager.Instance.level == levelIndex);
-
-        bool isRandom = level.isRandom;
-        containerInfo.gameObject.SetActive(!isRandom);
-        containerInfinite.gameObject.SetActive(isRandom);
-
+        if(GameController.Instance.gameMode == LevelManager.GameModes.challenge)
+            outlineActive.gameObject.SetActive(GameController.Instance.levelIndex == levelIndex);
     }
 
     public void Interact()
     {
         tabLevels = GetComponentInParent<TabLevels>();
-        tabLevels.StartLevelFlash(levelIndex);
+        tabLevels.StartLevelFlash(LevelManager.GameModes.challenge, levelIndex);
     }
 }

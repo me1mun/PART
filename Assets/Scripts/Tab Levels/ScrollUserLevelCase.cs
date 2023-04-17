@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TabLevelsCustomCase : MonoBehaviour
+public class ScrollUserLevelCase : MonoBehaviour
 {
-    public int index;
+    public int levelIndex;
 
     private TabLevels tabLevels;
     private InfiniteScrollCase scrollCase;
@@ -23,9 +23,9 @@ public class TabLevelsCustomCase : MonoBehaviour
 
     public void Init()
     {
-        index = scrollCase.GetIndex();
+        levelIndex = scrollCase.GetIndex();
         //Debug.Log(LevelManager.Instance.GetLevelCount(LevelManager.GameModes.user) + " | " + index);
-        level = LevelManager.Instance.GetLevel(LevelManager.GameModes.user, index);
+        level = LevelManager.Instance.GetLevel(LevelManager.GameModes.user, levelIndex);
 
         levelName.text = level.levelName;
     }
@@ -33,7 +33,7 @@ public class TabLevelsCustomCase : MonoBehaviour
     public void InteractStart()
     {
         
-        tabLevels.StartLevelFlash(index);
+        tabLevels.StartLevelFlash(LevelManager.GameModes.user, levelIndex);
     }
 
     public void DeleteLevel()

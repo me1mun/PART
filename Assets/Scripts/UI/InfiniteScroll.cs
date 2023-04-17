@@ -7,8 +7,8 @@ public class InfiniteScroll : MonoBehaviour
 {
     [SerializeField] private ScrollRect scrollRect;
 
-    [SerializeField] private GameObject casePrefab;
     [SerializeField] private GameObject container;
+    [SerializeField] private GameObject casePrefab;
 
     private RectTransform canvasRect;
     [SerializeField] private Transform borderUp, borderDown;
@@ -60,16 +60,17 @@ public class InfiniteScroll : MonoBehaviour
         for (int i = 0; i < casesClamp; i++)
         {
             //Debug.Log(casesCount);
+
             GameObject newCaseObject = Instantiate(casePrefab, container.transform);
 
             RectTransform caseRect = newCaseObject.GetComponent<RectTransform>();
             caseRect.localPosition = GetCasePosition(i);
 
-            InfiniteScrollCase newCase = newCaseObject.GetComponent<InfiniteScrollCase>();
+            InfiniteScrollCase newScrollCase = newCaseObject.GetComponent<InfiniteScrollCase>();
             //newCase.SetTabLevels(tabLevels);
-            newCase.Init(i);
+            newScrollCase.Init(i);
 
-            casesList.Add(newCaseObject, newCase);
+            casesList.Add(newCaseObject, newScrollCase);
         }
     }
 

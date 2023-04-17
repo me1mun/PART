@@ -3,17 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
 
-    public enum GameModes { challenge, user };
+    public enum GameModes { challenge, random, user, premium};
 
     private string saveKeyChallengesUnlocked = "challengesUnlocked";
-    public GameModes gameMode = GameModes.challenge;
-    public int level = 0;
     public int challengesUnlocked = 1;
 
     public string userLevelPath;
@@ -21,8 +20,7 @@ public class LevelManager : MonoBehaviour
     private Dictionary<GameModes, List<Level>> levels = new Dictionary<GameModes, List<Level>>();
 
     [SerializeField] private List<TextAsset> challengeLevelTemp = new List<TextAsset>();
-    private List<Level> challengeLevelList = new List<Level>();
-    private List<Level> userLevelList = new List<Level>();
+    [SerializeField] private List<TextAsset> premiumLevelTemp = new List<TextAsset>();
 
     public Level levelEmpty = new Level() { width = 8, height = 10 };
     public Level levelRandom = new Level() { isRandom = true };
@@ -43,15 +41,17 @@ public class LevelManager : MonoBehaviour
             Directory.CreateDirectory(userLevelPath);
 
         //challengesUnlocked = 1000; //load saved value
-        
-        levels.Add(GameModes.challenge, challengeLevelList);
-        levels.Add(GameModes.user, userLevelList);
 
+        foreach (GameModes gm in Enum.GetValues(typeof(GameModes)))
+        {
+            levels.Add(gm, new List<Level>());
+        }
         
         //Debug.Log("Levels: " + GetLevelCount(GameModes.challenge));
         LoadChallengeLevels();
+        LoadRandomLevels();
         LoadUserLevels();
-        LoadData();
+        LoadPremiumLevels();
     }
 
     public void LoadChallengeLevels()
@@ -64,7 +64,9 @@ public class LevelManager : MonoBehaviour
             levels[GameModes.challenge].Add(newLevel);
         }
 
-        levels[GameModes.challenge].Add(levelRandom);
+        //levels[GameModes.challenge].Add(levelRandom);
+
+        challengeLevelTemp.Clear();
     }
 
     public void LoadUserLevels()
@@ -84,34 +86,26 @@ public class LevelManager : MonoBehaviour
         levels[GameModes.user] = levels[GameModes.user].OrderByDescending(l => DateTime.Parse(l.creationDate)).ToList();
     }
 
-    public bool CheckUserLevelExisting(string userLevelName)
+    public void LoadPremiumLevels()
     {
-        foreach(Level lvl in levels[GameModes.user])
+        levels[GameModes.premium].Clear();
+
+        foreach (TextAsset txt in premiumLevelTemp)
         {
-            if (lvl.levelName.ToLower() == userLevelName.ToLower())
-                return true;
+            Level newLevel = JsonUtility.FromJson<Level>(txt.text);
+            levels[GameModes.premium].Add(newLevel);
         }
 
-        return false;
+        premiumLevelTemp.Clear();
     }
 
-    private void LoadData()
+    public void LoadRandomLevels()
     {
+        levels[GameModes.random].Clear();
 
-        UnlockChallenge(PlayerPrefs.GetInt(saveKeyChallengesUnlocked, 1));
+        levels[GameModes.random].Add(levelRandom);
 
-        level = challengesUnlocked - 1;
-    }
-
-    private void SaveData()
-    {
-        PlayerPrefs.SetInt(saveKeyChallengesUnlocked, challengesUnlocked);
-    }
-
-    public void SetLevel(GameModes newGameMode, int newLevel)
-    {
-        gameMode = newGameMode;
-        level = Mathf.Clamp(newLevel, 0, GetLevelCount(gameMode) - 1);
+        premiumLevelTemp.Clear();
     }
 
     public Level GetLevel(GameModes mode, int levelIndex)
@@ -124,12 +118,15 @@ public class LevelManager : MonoBehaviour
         return levels[mode].Count;
     }
 
-    public void UnlockChallenge(int newValue)
+    public bool CheckUserLevelExisting(string userLevelName)
     {
-        newValue = Mathf.Clamp(newValue, 1, GetLevelCount(GameModes.challenge));
-        challengesUnlocked = newValue;
+        foreach (Level lvl in levels[GameModes.user])
+        {
+            if (lvl.levelName.ToLower() == userLevelName.ToLower())
+                return true;
+        }
 
-        SaveData();
+        return false;
     }
 
     public void DeleteUserLevel(string fileName)
@@ -146,5 +143,25 @@ public class LevelManager : MonoBehaviour
         }
 
         LoadUserLevels();
+    }
+}
+
+[System.Serializable]
+public class GameModeInfo
+{
+    public LevelManager.GameModes gameMode;
+
+    public bool isUnlockable;
+    public int levelsComplete;
+    public bool loopedSequence;
+
+    public bool isPremium;
+    public bool isInfinite;
+    public bool displayTitle;
+    public bool displayLevelName;
+
+    public string GetSaveKey()
+    {
+        return "levelsComplete_" + gameMode.ToString();
     }
 }

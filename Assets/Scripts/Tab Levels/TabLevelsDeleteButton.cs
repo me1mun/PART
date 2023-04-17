@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TabLevelsDeleteButton : MonoBehaviour
 {
-    [SerializeField] private TabLevelsCustomCase levelCase;
+    [SerializeField] private ScrollUserLevelCase levelCase;
 
     private bool isReadyToDelete = false;
     private Coroutine coroutineDeleteConfirm;

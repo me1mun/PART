@@ -29,9 +29,9 @@ public class TabLevels : MonoBehaviour
         userScroll.CreateCases(LevelManager.Instance.GetLevelCount(LevelManager.GameModes.user));
     }
 
-    public void StartLevelFlash(int levelIndex)
+    public void StartLevelFlash(LevelManager.GameModes gm, int levelIndex)
     {
-        LevelManager.Instance.SetLevel(currentListMode, levelIndex);
+        game.SetLevel(gm, levelIndex);
         game.StartLevel(false);
 
         //scroll.InitCases();

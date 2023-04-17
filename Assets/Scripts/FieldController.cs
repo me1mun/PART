@@ -13,7 +13,7 @@ public class FieldController : MonoBehaviour
     [SerializeField] Transform fieldContainer;
     [SerializeField] GameObject casePrefab;
 
-    private bool isInteractable = true;
+    public bool isInteractable = true;
     public PartController[,] field = new PartController[0, 0];
     private Vector2Int fieldMaxSize = new Vector2Int(8, 10);
     private Vector2Int fieldSize;

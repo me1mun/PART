@@ -15,14 +15,17 @@ public class GamePart : MonoBehaviour
 
     public void Interact()
     {
-        if (part.element.isFixed)
+        if (field.isInteractable)
         {
-            part.ShakeElement();
-        }
-        else
-        {
-            part.FlipElement();
-            field.CheckLevelComplete();
+            if (part.element.isFixed)
+            {
+                part.ShakeElement();
+            }
+            else
+            {
+                part.FlipElement();
+                field.CheckLevelComplete();
+            }
         }
     }
 
