@@ -6,9 +6,8 @@ using UnityEngine.Purchasing;
 public class PremiumManager : MonoBehaviour
 {
     private string saveKey = "premium";
-    private SubscriptionManager subscriptionManager;
 
-    public bool isPremium;
+    public static bool isPremium;
 
     private void Start()
     {
@@ -23,12 +22,14 @@ public class PremiumManager : MonoBehaviour
 
     private void LoadData()
     {
+        StoreManager store = GameManager.Instance.storeManager;
+
         int premiumInt = PlayerPrefs.GetInt(saveKey, 0);
         isPremium = premiumInt > 0;
 
-        if (subscriptionManager != null && GameManager.CheckInternet())
+        if (GameManager.CheckInternet() && GameManager.IsMobilePlatform())
         {
-            isPremium = subscriptionManager.getSubscriptionInfo().isSubscribed() == Result.True;
+            SetPremium(store.GetSubscriptionStatus());
         }
     }
 

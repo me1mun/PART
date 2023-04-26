@@ -12,7 +12,6 @@ public class LevelManager : MonoBehaviour
 
     public enum GameModes { challenge, random, user, premium};
 
-    private string saveKeyChallengesUnlocked = "challengesUnlocked";
     public int challengesUnlocked = 1;
 
     public string userLevelPath;
@@ -64,9 +63,9 @@ public class LevelManager : MonoBehaviour
             levels[GameModes.challenge].Add(newLevel);
         }
 
-        //levels[GameModes.challenge].Add(levelRandom);
+        levels[GameModes.challenge].Add(levelRandom);
 
-        challengeLevelTemp.Clear();
+        //challengeLevelTemp.Clear();
     }
 
     public void LoadUserLevels()
@@ -94,9 +93,10 @@ public class LevelManager : MonoBehaviour
         {
             Level newLevel = JsonUtility.FromJson<Level>(txt.text);
             levels[GameModes.premium].Add(newLevel);
+            
         }
 
-        premiumLevelTemp.Clear();
+        //premiumLevelTemp.Clear();
     }
 
     public void LoadRandomLevels()
@@ -105,12 +105,15 @@ public class LevelManager : MonoBehaviour
 
         levels[GameModes.random].Add(levelRandom);
 
-        premiumLevelTemp.Clear();
+        //premiumLevelTemp.Clear();
     }
 
-    public Level GetLevel(GameModes mode, int levelIndex)
+    public Level GetLevel(GameModes gm, int levelIndex)
     {
-        return levels[mode][levelIndex];
+        if (levelIndex < GetLevelCount(gm))
+            return levels[gm][levelIndex];
+
+        return null;
     }
 
     public int GetLevelCount(GameModes mode)

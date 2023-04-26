@@ -10,6 +10,8 @@ public class ScrollUserLevelCase : MonoBehaviour
     private TabLevels tabLevels;
     private InfiniteScrollCase scrollCase;
 
+    [SerializeField] private GameObject deleteButton;
+    [SerializeField] private GameObject activeOutline;
     [SerializeField] private TextMeshProUGUI levelName;
 
     private Level level;
@@ -28,6 +30,8 @@ public class ScrollUserLevelCase : MonoBehaviour
         level = LevelManager.Instance.GetLevel(LevelManager.GameModes.user, levelIndex);
 
         levelName.text = level.levelName;
+
+        //if(GameController.gameState == LevelManager.GameModes.user )
     }
 
     public void InteractStart()

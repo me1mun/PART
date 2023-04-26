@@ -12,7 +12,9 @@ public class ScrollChallengeLevelCase : MonoBehaviour
 
     private TabLevels tabLevels;
     private InfiniteScrollCase scrollCase;
+    private Level level;
 
+    [SerializeField] private GameObject challengeContent, randomContent;
     [SerializeField] private GameObject fill, outlineActive, outlineLock;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private CanvasGroup contentCanvasGroup;
@@ -26,27 +28,40 @@ public class ScrollChallengeLevelCase : MonoBehaviour
     public void Init()
     {
         levelIndex = scrollCase.GetIndex();
-        Level level = LevelManager.Instance.GetLevel(LevelManager.GameModes.challenge, levelIndex);
+        level = LevelManager.Instance.GetLevel(LevelManager.GameModes.challenge, levelIndex);
         //field.FieldCreate(level);
 
         levelText.text = (levelIndex + 1).ToString();
 
-        bool isUnlocked = levelIndex <= GameController.Instance.GetLevelsComplete(LevelManager.GameModes.challenge);
+        bool isUnlocked = levelIndex <= GameController.Instance.GetLevelsComplete(LevelManager.GameModes.challenge) || level.isRandom;
 
         GetComponent<ButtonController>().SetInteractable(isUnlocked);
-
-        float disableAlpha = 0.33f;
-        contentCanvasGroup.alpha = isUnlocked ? 1 : disableAlpha;
         fill.SetActive(isUnlocked);
         outlineLock.SetActive(!isUnlocked);
 
-        if(GameController.Instance.gameMode == LevelManager.GameModes.challenge)
-            outlineActive.gameObject.SetActive(GameController.Instance.levelIndex == levelIndex);
+        bool isRandom = level.isRandom;
+        contentCanvasGroup.alpha = isUnlocked ? 1 : 0.33f;
+        challengeContent.SetActive(!isRandom);
+        randomContent.SetActive(isRandom);
+
+        bool isActive = false;
+
+        if (GameController.Instance.gameMode == LevelManager.GameModes.challenge)
+            isActive = GameController.Instance.levelIndex == levelIndex;
+
+        if (GameController.Instance.gameMode == LevelManager.GameModes.random && isRandom)
+            isActive = true;
+
+        outlineActive.gameObject.SetActive(isActive);
     }
 
     public void Interact()
     {
         tabLevels = GetComponentInParent<TabLevels>();
-        tabLevels.StartLevelFlash(LevelManager.GameModes.challenge, levelIndex);
+
+        if(level.isRandom)
+            tabLevels.StartLevelFlash(LevelManager.GameModes.random, 0);
+        else
+            tabLevels.StartLevelFlash(LevelManager.GameModes.challenge, levelIndex);
     }
 }

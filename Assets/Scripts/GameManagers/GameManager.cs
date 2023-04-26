@@ -37,4 +37,9 @@ public class GameManager : MonoBehaviour
     {
         return Application.internetReachability != NetworkReachability.NotReachable;
     }
+
+    public static bool IsMobilePlatform()
+    {
+        return Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer;
+    }
 }

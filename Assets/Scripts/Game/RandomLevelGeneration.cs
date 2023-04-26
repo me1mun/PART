@@ -7,14 +7,16 @@ public class RandomLevelGeneration : MonoBehaviour
     private RandomPart[,] field;
 
     private Vector2Int levelSize;
-    private int connectionChance = 69;
+    private int connectionChance = 66;
 
     [SerializeField] private Element elUniversal ,elEmpty, elSingle, elLine, elTurn, elTriple, elCross;
 
     public Level GenerateLevel(Level randomLevel)
     {
-        levelSize.x = Random.Range(3, 6);
-        levelSize.y = Random.Range(levelSize.x, 8);
+        int[] widthPool = new int[4] { 3, 4, 4, 5 };
+
+        levelSize.x = widthPool[Random.Range(0, widthPool.Length)];
+        levelSize.y = Random.Range(levelSize.x, 7);
 
         randomLevel.isRandom = true;
         randomLevel.width = levelSize.x;

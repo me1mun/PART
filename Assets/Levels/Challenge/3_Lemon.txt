@@ -1,0 +1,1 @@
+{"creationDate":"18.04.2023 3:57:26","isRandom":false,"levelName":"Lemon","width":3,"height":3,"colorName":"yellow","elements":["Turn_smooth","Line_arc","Turn_smooth","Line_regular","_Empty","Line_regular","Turn_smooth","Line_arc","Turn_smooth"],"elementFlip":[2,0,3,1,0,1,1,2,0]}

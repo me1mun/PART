@@ -9,39 +9,33 @@ using UnityEngine.Purchasing;
 
 public class TabPremium : MonoBehaviour
 {
-    [SerializeField] private List<string> donationIdList;
 
     [SerializeField] private ThemeElement premiumIconTheme;
+    [SerializeField] private GameObject buttonSubscribe, buttonSubscribed;
 
 
-    private void Start()
+    private void OnEnable()
     {
-        Setup();
+        SetupDisplay();
     }
 
-    private void Setup()
+    private void SetupDisplay()
     {
-        if (GameManager.Instance.premiumManager.isPremium)
-        {
-            premiumIconTheme.SetColorType(OptionTheme.ColorType.accent);
-        }
-        else
-        {
-            premiumIconTheme.SetColorType(OptionTheme.ColorType.content);
+        bool isPremium = PremiumManager.isPremium;
 
-        }
+        premiumIconTheme.SetColorType(isPremium ? OptionTheme.ColorType.accent : OptionTheme.ColorType.content);
+        buttonSubscribe.SetActive(!isPremium);
+        buttonSubscribed.SetActive(isPremium);
     }
 
     public void OnPurchaseComplete(Product product)
     {
-        if (donationIdList.Contains(product.definition.id))
+        if (product.definition.id == "premium")
         {
             GameManager.Instance.premiumManager.SetPremium(true);
-            Setup();
+            SetupDisplay();
 
             //Debug.Log("Premium sibscription is done");
         }
-
-        Debug.Log(product.definition.id + ": try to buy");
     }
 } 

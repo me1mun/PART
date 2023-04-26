@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.Localization;
-using UnityEditor.Localization.Editor;
+using System;
+using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
@@ -55,6 +55,8 @@ public class GameController : MonoBehaviour
             gmInfoDict.Add(gmInfo.gameMode, gmInfo);
             //Debug.Log($"{gmInfo.gameMode.ToString()}: {gmInfo.gameMode}");
         }
+
+        LoadLastLevel();
     }
 
     void Start()
@@ -71,21 +73,56 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void LoadLastLevel()
+    {
+        string gameModeString = PlayerPrefs.GetString("gameMode", "");
+        int levelIndexTemp = PlayerPrefs.GetInt("levelIndex", 0);
+        bool lastLevelIsExist = true;
+        bool lastModeIsExist = false;
+
+        if (Enum.IsDefined(typeof(LevelManager.GameModes), gameModeString))
+        {
+            lastModeIsExist = true;
+
+            gameMode = (LevelManager.GameModes) Enum.Parse(typeof(LevelManager.GameModes), gameModeString);
+
+            lastLevelIsExist = LevelManager.Instance.GetLevel(gameMode, levelIndexTemp) != null;
+        }
+        
+        if(lastModeIsExist == false || lastLevelIsExist == false)
+        {
+            gameMode = LevelManager.GameModes.challenge;
+            levelIndexTemp = gmInfoDict[LevelManager.GameModes.challenge].levelsComplete;
+        }
+
+        SetLevel(gameMode, levelIndexTemp);
+    }
+
+    private void SaveLastLevel()
+    {
+        PlayerPrefs.SetString("gameMode", gameMode.ToString());
+        PlayerPrefs.SetInt("levelIndex", levelIndex);
+    }
+
     public void SetLevel(LevelManager.GameModes newGameMode, int newLevelIndex)
     {
         gameMode = newGameMode;
 
         if (newLevelIndex > LevelManager.Instance.GetLevelCount(gameMode) - 1)
-        {
             newLevelIndex = 0;
-            if (gmInfoDict[gameMode].loopedSequence == false)
-            {
-                gameMode = LevelManager.GameModes.random;
-            }
-        }
 
+        bool newLevelIsExist = LevelManager.Instance.GetLevel(gameMode, newLevelIndex) != null;
+
+        if (LevelManager.Instance.GetLevel(gameMode, newLevelIndex).isRandom)
+        {
+            gameMode = LevelManager.GameModes.random;
+            newLevelIndex = 0;
+        }
+            
 
         levelIndex = newLevelIndex;
+
+        SaveLastLevel();
     }
 
     public GameModeInfo GetGameModeInfo(LevelManager.GameModes gm)

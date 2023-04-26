@@ -9,6 +9,7 @@ public class Menu : MonoBehaviour
 
     public void OpenTab(TabManager.TabEnum newTab)
     {
+        menuBar.Open(true);
         tabManager.SwitchTab(newTab);
     }
 }

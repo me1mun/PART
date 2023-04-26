@@ -7,14 +7,14 @@ using TMPro;
 public class TabLevels : MonoBehaviour
 {
     private LevelManager.GameModes currentListMode;
+    [SerializeField] private List<LevelsTab> levelsTablList;
     [SerializeField] private GameController game;
+    [SerializeField] private Menu menu;
     [SerializeField] private InfiniteScroll challengeScroll, userScroll;
     [SerializeField] private TextTransition titleTransition;
-    private ListModeButton[] listModeButtonList;
 
     private void Awake()
     {
-        listModeButtonList = GetComponentsInChildren<ListModeButton>(true);
 
     }
 
@@ -37,26 +37,32 @@ public class TabLevels : MonoBehaviour
         //scroll.InitCases();
     }
 
+    public void OpenPremiumTab()
+    {
+        menu.OpenTab(TabManager.TabEnum.premium);
+    }
+
     public void SetListMode(LevelManager.GameModes newListMode)
     {
         currentListMode = newListMode;
 
-        foreach(ListModeButton btn in listModeButtonList)
+        foreach(LevelsTab lvltab in levelsTablList)
         {
-            btn.Activate(btn.GetListMode() == currentListMode);
-        }
+            bool modeIsMatch = lvltab.gameMode == currentListMode;
 
-        if(newListMode == LevelManager.GameModes.challenge)
-        {
-            userScroll.gameObject.SetActive(false);
-            challengeScroll.gameObject.SetActive(true);
-            challengeScroll.CreateCases(LevelManager.Instance.GetLevelCount(newListMode));
-        }
-        else if (newListMode == LevelManager.GameModes.user)
-        {
-            challengeScroll.gameObject.SetActive(false);
-            userScroll.gameObject.SetActive(true);
-            userScroll.CreateCases(LevelManager.Instance.GetLevelCount(newListMode));
+            lvltab.button.Activate(modeIsMatch);
+
+            lvltab.scroll.gameObject.SetActive(modeIsMatch);
+            lvltab.scroll.CreateCases(LevelManager.Instance.GetLevelCount(newListMode));
         }
     }
+}
+
+[System.Serializable]
+public class LevelsTab
+{
+    public LevelManager.GameModes gameMode;
+
+    public LevelsTabButton button;
+    public InfiniteScroll scroll;
 }

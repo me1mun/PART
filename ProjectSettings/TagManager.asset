@@ -50,3 +50,6 @@ TagManager:
   - name: Tab
     uniqueID: 2985415671
     locked: 0
+  - name: SceneTransition
+    uniqueID: 3132238231
+    locked: 0

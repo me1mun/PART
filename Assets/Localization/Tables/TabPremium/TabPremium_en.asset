@@ -19,7 +19,9 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 25805950976
-    m_Localized: There is no advertising in this game
+    m_Localized: 'This game has no ads.
+
+      Subscription helps release updates'
     m_Metadata:
       m_Items: []
   - m_Id: 4074631592382464
@@ -31,7 +33,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4256664184655872
-    m_Localized: Subscription to premium contributes to the release of new levels
+    m_Localized: Unlock twice as many levels
     m_Metadata:
       m_Items: []
   - m_Id: 4256846087426048
@@ -39,7 +41,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4634181265494016
-    m_Localized: Subscribed
+    m_Localized: Thank you
     m_Metadata:
       m_Items: []
   - m_Id: 4971194653052928

@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2847933683672095869}
   m_Layer: 5
-  m_Name: ContainerInfo
+  m_Name: Challange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -402,7 +402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6152875126387558938}
   m_Layer: 5
-  m_Name: ContainerInfinite
+  m_Name: RandomInfinite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -659,8 +659,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelIndex: 0
-  containerInfo: {fileID: 5505991568450015937}
-  containerInfinite: {fileID: 8663820504369697292}
+  challengeContent: {fileID: 5505991568450015937}
+  randomContent: {fileID: 8663820504369697292}
   fill: {fileID: 421917198154791538}
   outlineActive: {fileID: 7780936926038368689}
   outlineLock: {fileID: 7618011607447164184}

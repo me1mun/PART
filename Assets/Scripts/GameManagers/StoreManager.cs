@@ -12,6 +12,8 @@ public class StoreManager : MonoBehaviour, IDetailedStoreListener
     private static IStoreController storeController;
     private static IExtensionProvider extensionProvider;
 
+    private SubscriptionManager subscriptionManager;
+
     public string environment = "production";
 
     private void Awake()
@@ -47,7 +49,10 @@ public class StoreManager : MonoBehaviour, IDetailedStoreListener
         builder.AddProduct("donation_1", ProductType.Consumable);
         builder.AddProduct("donation_2", ProductType.Consumable);
         builder.AddProduct("donation_3", ProductType.Consumable);
+        builder.AddProduct("premium", ProductType.Subscription);
         UnityPurchasing.Initialize(this, builder);
+
+        subscriptionManager = new SubscriptionManager(storeController.products.WithID("premium"), null);
     }
 
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
@@ -85,6 +90,11 @@ public class StoreManager : MonoBehaviour, IDetailedStoreListener
         return priceString;
     }
 
+    public bool GetSubscriptionStatus()
+    {
+        return subscriptionManager.getSubscriptionInfo().isSubscribed() == Result.True;
+    }
+
     public void OnInitializeFailed(InitializationFailureReason error, string message)
     {
         throw new System.NotImplementedException();
@@ -104,4 +114,5 @@ public class StoreManager : MonoBehaviour, IDetailedStoreListener
     {
         throw new NotImplementedException();
     }
+
 }

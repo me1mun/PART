@@ -1,0 +1,1 @@
+{"creationDate":"18.04.2023 3:34:45","isRandom":false,"levelName":"PartLogo","width":3,"height":3,"colorName":"blue","elements":["_Empty","Turn_smooth","Turn_smooth","Turn_smooth","Cross_sharp","Turn_smooth","Turn_smooth","Turn_sharp","_Empty"],"elementFlip":[0,2,3,2,0,0,1,0,0]}
