@@ -7,7 +7,7 @@ public class LevelDatabase : MonoBehaviour
     public static LevelDatabase Instance { get; private set; }
 
     public Element[] elements;
-    public Element emptyElemet;
+    public Element emptyElemet, universalElement;
 
     public enum Colors { red, yellow, green, blue, purple };
     public Dictionary<Colors, Color32> colorsList = new Dictionary<Colors, Color32>();
@@ -30,15 +30,24 @@ public class LevelDatabase : MonoBehaviour
 
     public Element GetElement(string elementName)
     {
-        foreach(Element el in elements)
+        Element resultElement = universalElement;
+
+        if (elementName == "")
         {
-            if (el.name == elementName)
+            resultElement = emptyElemet;
+        }
+        else
+        {
+            foreach (Element el in elements)
             {
-                return el;
+                if (el.name == elementName)
+                {
+                    resultElement = el;
+                }
             }
         }
 
-        return emptyElemet;
+        return resultElement;
     }
 
     private void SetupColors()

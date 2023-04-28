@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2847933683672095869}
   m_Layer: 5
-  m_Name: Challange
+  m_Name: LevelIndex
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -583,7 +583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2120722578390829794, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
       propertyPath: m_Name
-      value: ChallangeCase
+      value: LevelCase
       objectReference: {fileID: 0}
     - target: {fileID: 2511164817114918392, guid: f374c1b455f5db84bbf319a75f3b5ee9, type: 3}
       propertyPath: colorType
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelIndex: 0
-  challengeContent: {fileID: 5505991568450015937}
+  levelContent: {fileID: 5505991568450015937}
   randomContent: {fileID: 8663820504369697292}
   fill: {fileID: 421917198154791538}
   outlineActive: {fileID: 7780936926038368689}

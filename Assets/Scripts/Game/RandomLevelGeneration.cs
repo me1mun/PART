@@ -11,8 +11,9 @@ public class RandomLevelGeneration : MonoBehaviour
 
     [SerializeField] private Element elUniversal ,elEmpty, elSingle, elLine, elTurn, elTriple, elCross;
 
-    public Level GenerateLevel(Level randomLevel)
+    public Level GenerateLevel()
     {
+        Level randomLevel = new Level();
         int[] widthPool = new int[4] { 3, 4, 4, 5 };
 
         levelSize.x = widthPool[Random.Range(0, widthPool.Length)];

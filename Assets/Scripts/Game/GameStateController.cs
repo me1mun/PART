@@ -11,7 +11,8 @@ public class GameStateController : MonoBehaviour
     private Dictionary<GameController.GameStates, GameStateInfo> gameStatesDict = new Dictionary<GameController.GameStates, GameStateInfo>();
 
     //display
-    [SerializeField] private AnimationScale upperBarScale;
+    [SerializeField] private AnimationScale levelCounterScale;
+    [SerializeField] private IngameLevelSelector levelSelector;
     [SerializeField] private FieldController field;
     [SerializeField] private GameObject victoryButtons;
     [SerializeField] private MenuBar menuBar;
@@ -29,7 +30,7 @@ public class GameStateController : MonoBehaviour
         GameStateInfo stateInfo = gameStatesDict[newState];
 
         //display setup
-        upperBarScale.StartAnimationResize(stateInfo.upperBarIsSmall ? 0.75f : 1f, 0.2f);
+        levelSelector.SetInteractable(stateInfo.levelSelectorIsActive);
         field.SetInteractable(stateInfo.fieldIsInteractable);
         menuBar.SetInteractable(stateInfo.menuIsInteractable);
         menuBar.Open(stateInfo.menuIsOpen);
@@ -42,9 +43,9 @@ public class GameStateInfo
 {
     public GameController.GameStates gameState;
 
-    public bool upperBarIsSmall;
     public bool menuIsOpen;
     public bool menuIsInteractable;
     public bool victoryButtonIsActive;
     public bool fieldIsInteractable;
+    public bool levelSelectorIsActive;
 }

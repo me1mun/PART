@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Localization;
 
@@ -11,17 +12,13 @@ public class GameUI : MonoBehaviour
     [SerializeField] private TextTransition subtitle;
     [SerializeField] private LocalizedString subtitle_complete;
 
-    public void SetupDisplay(GameModeInfo gmInfo, int levelIndex, Level level)
+    public void SetupDisplay(int levelIndex, Level level)
     {
         subtitle.HideText();
-        title.gameObject.SetActive(gmInfo.displayTitle);
-        infiniteIcon.SetActive(gmInfo.isInfinite);
-        premiumIcon.SetActive(gmInfo.isPremium);
+        infiniteIcon.SetActive(level.isRandom);
 
-        if (gmInfo.displayLevelName)
-            title.text = level.levelName;
-        else
-            title.text = "#" + (levelIndex + 1);
+        title.gameObject.SetActive(!level.isRandom);
+        title.text = "#" + (levelIndex + 1);
     }
 
     public void SetSubtitleVictory()

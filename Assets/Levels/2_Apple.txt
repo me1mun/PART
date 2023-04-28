@@ -1,0 +1,1 @@
+{"creationDate":"28.04.2023 2:37:40","isRandom":false,"levelName":"Apple","width":3,"height":4,"colorName":"green","elements":["Turn_sharp","Turn_smooth","_Empty","Tripple_smooth","Tripple_sharp","Turn_smooth","Line_regular","_Empty","Line_arc","Turn_smooth","Line_regular","Turn_smooth"],"elementFlip":[2,3,0,1,0,3,1,0,3,1,0,0]}

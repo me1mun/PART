@@ -109,13 +109,13 @@ public class LevelEditor : MonoBehaviour
         {
             subtitle.StartTextTransition(string_noName);
         }
-        else if (LevelManager.Instance.CheckUserLevelExisting(FinalLevel.levelName) == true)
+        else if (LevelManager.Instance.CheckLevelNameExisting(FinalLevel.levelName) == true)
         {
             subtitle.StartTextTransition(string_existingName);
         }
         else
         {
-            string savePath = LevelManager.Instance.userLevelPath;
+            string savePath = LevelManager.Instance.levelSavePath;
 
             FinalLevel.creationDate = DateTime.Now.ToString();
 
@@ -124,7 +124,7 @@ public class LevelEditor : MonoBehaviour
             File.WriteAllText(savePath + FinalLevel.levelName + ".txt", jsonLevel);
             Debug.Log("Level has been saved to: " + savePath);
 
-            LevelManager.Instance.LoadUserLevels();
+            //LevelManager.Instance.LoadUserLevels();
 
             subtitle.StartTextTransition(string_saved);
 

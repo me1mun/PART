@@ -12,6 +12,6 @@ public class GameLoader : MonoBehaviour
 
     private void Start()
     {
-        GameManager.ChangeScene("Menu"); // at the end
+        GameManager.ChangeScene("Game"); // at the end
     }
 }

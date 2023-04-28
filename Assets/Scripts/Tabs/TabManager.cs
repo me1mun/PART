@@ -16,6 +16,12 @@ public class TabManager : MonoBehaviour
         //Debug.Log("tabs: " + tabsArray[0]);
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.RightControl) && Application.platform == RuntimePlatform.WindowsEditor)
+            SwitchTab(TabEnum.editor);
+    }
+
     public void SwitchTab(TabEnum newTab)
     {
         currentTab = newTab;

@@ -6,11 +6,9 @@ using TMPro;
 
 public class TabLevels : MonoBehaviour
 {
-    private LevelManager.GameModes currentListMode;
-    [SerializeField] private List<LevelsTab> levelsTablList;
     [SerializeField] private GameController game;
     [SerializeField] private Menu menu;
-    [SerializeField] private InfiniteScroll challengeScroll, userScroll;
+    [SerializeField] private InfiniteScroll levelScroll;
     [SerializeField] private TextTransition titleTransition;
 
     private void Awake()
@@ -20,18 +18,17 @@ public class TabLevels : MonoBehaviour
 
     private void OnEnable()
     {
-        SetListMode(currentListMode);
+        ReloadListCases();
     }
 
     public void ReloadListCases()
     {
-        challengeScroll.CreateCases(LevelManager.Instance.GetLevelCount(LevelManager.GameModes.challenge));
-        userScroll.CreateCases(LevelManager.Instance.GetLevelCount(LevelManager.GameModes.user));
+        levelScroll.CreateCases(LevelManager.Instance.GetLevelCount());
     }
 
-    public void StartLevelFlash(LevelManager.GameModes gm, int levelIndex)
+    public void StartLevelFlash(int levelIndex)
     {
-        game.SetLevel(gm, levelIndex);
+        game.SetLevel(levelIndex);
         game.StartLevel(false);
 
         //scroll.InitCases();
@@ -41,28 +38,4 @@ public class TabLevels : MonoBehaviour
     {
         menu.OpenTab(TabManager.TabEnum.premium);
     }
-
-    public void SetListMode(LevelManager.GameModes newListMode)
-    {
-        currentListMode = newListMode;
-
-        foreach(LevelsTab lvltab in levelsTablList)
-        {
-            bool modeIsMatch = lvltab.gameMode == currentListMode;
-
-            lvltab.button.Activate(modeIsMatch);
-
-            lvltab.scroll.gameObject.SetActive(modeIsMatch);
-            lvltab.scroll.CreateCases(LevelManager.Instance.GetLevelCount(newListMode));
-        }
-    }
-}
-
-[System.Serializable]
-public class LevelsTab
-{
-    public LevelManager.GameModes gameMode;
-
-    public LevelsTabButton button;
-    public InfiniteScroll scroll;
 }

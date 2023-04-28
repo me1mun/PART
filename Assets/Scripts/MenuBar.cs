@@ -28,6 +28,8 @@ public class MenuBar : MonoBehaviour
     {
         Open(isOpen);
         SetInteractable(isInteractable);
+
+        animator.Play(animator.GetCurrentAnimatorStateInfo(0).fullPathHash, -1, 1f);
     }
 
     public void Open(bool on)

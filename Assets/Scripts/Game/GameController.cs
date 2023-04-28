@@ -12,12 +12,10 @@ public class GameController : MonoBehaviour
     private GameStateController gameStateController;
 
     public enum GameStates { game, menu, victory }
-    public LevelManager.GameModes gameMode = LevelManager.GameModes.challenge;
-    private Dictionary<LevelManager.GameModes, GameModeInfo> gmInfoDict = new Dictionary<LevelManager.GameModes, GameModeInfo>();
-    [SerializeField] private List<GameModeInfo> gmInfoListTemp;
+    private GameStates gameState;
 
-    public static GameStates gameState = GameStates.game;
     public int levelIndex = 0;
+    private Level level;
 
     private GameUI gameUI;
 
@@ -30,8 +28,6 @@ public class GameController : MonoBehaviour
     [SerializeField] private MenuBar menu;
 
     private AnimationAlpha animationAlpha;
-
-    private Level level;
 
     //private float initProgress;
     private Coroutine coroutineLevelTransition;
@@ -48,15 +44,7 @@ public class GameController : MonoBehaviour
         animationAlpha = GetComponent<AnimationAlpha>();
         canvasGroup.alpha = 0;
 
-        foreach (GameModeInfo gmInfo in gmInfoListTemp)
-        {
-            gmInfo.levelsComplete = PlayerPrefs.GetInt(gmInfo.GetSaveKey(), 0);
-
-            gmInfoDict.Add(gmInfo.gameMode, gmInfo);
-            //Debug.Log($"{gmInfo.gameMode.ToString()}: {gmInfo.gameMode}");
-        }
-
-        LoadLastLevel();
+        levelIndex = PlayerPrefs.GetInt("lastPlayedLevel", 0);
     }
 
     void Start()
@@ -73,66 +61,12 @@ public class GameController : MonoBehaviour
         }
     }
 
-    private void LoadLastLevel()
+    public void SetLevel(int newLevelIndex)
     {
-        string gameModeString = PlayerPrefs.GetString("gameMode", "");
-        int levelIndexTemp = PlayerPrefs.GetInt("levelIndex", 0);
-        bool lastLevelIsExist = true;
-        bool lastModeIsExist = false;
+        if (newLevelIndex < LevelManager.Instance.GetLevelCount())
+            levelIndex = newLevelIndex;
 
-        if (Enum.IsDefined(typeof(LevelManager.GameModes), gameModeString))
-        {
-            lastModeIsExist = true;
-
-            gameMode = (LevelManager.GameModes) Enum.Parse(typeof(LevelManager.GameModes), gameModeString);
-
-            lastLevelIsExist = LevelManager.Instance.GetLevel(gameMode, levelIndexTemp) != null;
-        }
-        
-        if(lastModeIsExist == false || lastLevelIsExist == false)
-        {
-            gameMode = LevelManager.GameModes.challenge;
-            levelIndexTemp = gmInfoDict[LevelManager.GameModes.challenge].levelsComplete;
-        }
-
-        SetLevel(gameMode, levelIndexTemp);
-    }
-
-    private void SaveLastLevel()
-    {
-        PlayerPrefs.SetString("gameMode", gameMode.ToString());
-        PlayerPrefs.SetInt("levelIndex", levelIndex);
-    }
-
-    public void SetLevel(LevelManager.GameModes newGameMode, int newLevelIndex)
-    {
-        gameMode = newGameMode;
-
-        if (newLevelIndex > LevelManager.Instance.GetLevelCount(gameMode) - 1)
-            newLevelIndex = 0;
-
-        bool newLevelIsExist = LevelManager.Instance.GetLevel(gameMode, newLevelIndex) != null;
-
-        if (LevelManager.Instance.GetLevel(gameMode, newLevelIndex).isRandom)
-        {
-            gameMode = LevelManager.GameModes.random;
-            newLevelIndex = 0;
-        }
-            
-
-        levelIndex = newLevelIndex;
-
-        SaveLastLevel();
-    }
-
-    public GameModeInfo GetGameModeInfo(LevelManager.GameModes gm)
-    {
-        return gmInfoDict[gm];
-    }
-
-    public int GetLevelsComplete(LevelManager.GameModes gm)
-    {
-        return gmInfoDict[gm].levelsComplete;
+        PlayerPrefs.SetInt("lastPlayedLevel", levelIndex);
     }
 
     public void SetGameState(GameStates newState)
@@ -154,23 +88,11 @@ public class GameController : MonoBehaviour
 
     public void CompleteLevel()
     {
-        UnlockLevel(levelIndex + 1);
+        LevelManager.Instance.UnlockLevel(levelIndex + 2);
         soundVictory.Play();
         gameUI.SetSubtitleVictory();
 
         SetGameState(GameStates.victory);
-    }
-
-    private void UnlockLevel(int newValue)
-    {
-        GameModeInfo gmInfo = gmInfoDict[gameMode];
-
-        if (newValue > gmInfo.levelsComplete - 1)
-        {
-            gmInfo.levelsComplete = newValue;
-
-            PlayerPrefs.SetInt(gmInfo.GetSaveKey(), gmInfo.levelsComplete);
-        }
     }
 
     public void StartLevel(bool fadeOut = true)
@@ -188,26 +110,17 @@ public class GameController : MonoBehaviour
 
     public void StartNextLevel()
     {
-        SetLevel(gameMode, levelIndex + 1);
-
-        StartLevel();
-    }
-
-    public void StartRandomLevel()
-    {
-        int randomLevelIndex = Random.Range(0, LevelManager.Instance.GetLevelCount(gameMode));
-        SetLevel(gameMode, randomLevelIndex);
+        SetLevel(levelIndex + 1);
 
         StartLevel();
     }
 
     private IEnumerator CoroutineLevelTransition()
     {
-        GameModeInfo gmInfo = gmInfoDict[gameMode];
-        level = LevelManager.Instance.GetLevel(gameMode, levelIndex);
+        level = LevelManager.Instance.GetLevel(levelIndex);
 
-        if (gameMode == LevelManager.GameModes.random)
-            level = randomLevelGenerator.GenerateLevel(level);
+        if (level.isRandom)
+            level = randomLevelGenerator.GenerateLevel();
 
         float animTime = 0.2f;
 
@@ -219,7 +132,7 @@ public class GameController : MonoBehaviour
 
         //Debug.Log(level.isRandom);
 
-        gameUI.SetupDisplay(gmInfo, levelIndex, level);
+        gameUI.SetupDisplay(levelIndex, level);
 
         field.CreateField(level);
         for(int i = 0; i < 10; i++)
@@ -228,7 +141,6 @@ public class GameController : MonoBehaviour
                 field.CreateField(level);
         }
 
-        // tutorial (first element in wrong position)
         //if (LevelManager.Instance.level == 0) 
         //   subtitle.SetText(subtitleTutorial);
 
