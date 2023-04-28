@@ -60,10 +60,8 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void LoadRandomLevels()
     public int GetLevelCount()
     {
-        levels[GameModes.random].Clear();
         return levels.Count;
     }
 
