@@ -1,0 +1,1 @@
+{"creationDate":"29.04.2023 13:28:21","isRandom":false,"levelName":"Cloud","width":3,"height":2,"colorName":"blue","elements":["Turn_smooth","Line_arc","Turn_smooth","Turn_smooth","Line_regular","Turn_smooth"],"elementFlip":[2,0,3,1,0,0]}

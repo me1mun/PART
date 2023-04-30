@@ -2,9 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UnityEditor;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -36,11 +34,15 @@ public class LevelManager : MonoBehaviour
         if (!Directory.Exists(levelSavePath))
             Directory.CreateDirectory(levelSavePath);
 
+        //levels.RemoveRange(2, levels.Count - 2);
         levels.Add(new TextAsset(JsonUtility.ToJson(levelRandom)));
 
         //challengesUnlocked = 1000; //load saved value
 
-        levelsUnlocked = PlayerPrefs.GetInt("levelsUnlocked", 1);
+        UnlockLevel(PlayerPrefs.GetInt("levelsUnlocked", 1));
+
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+            UnlockLevel(9999);
     }
 
     public Level GetLevel(int levelIndex)
@@ -55,7 +57,7 @@ public class LevelManager : MonoBehaviour
     {
         if (newValue > levelsUnlocked)
         {
-            levelsUnlocked = newValue;
+            levelsUnlocked = Math.Clamp(newValue, 1, GetLevelCount());
             PlayerPrefs.SetInt("levelsUnlocked", levelsUnlocked);
         }
     }

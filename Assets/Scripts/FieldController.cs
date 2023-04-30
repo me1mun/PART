@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
+using TMPro;
 
 public class FieldController : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class FieldController : MonoBehaviour
     [SerializeField] GameObject casePrefab;
 
     public bool isInteractable = true;
+    public bool emptyIsDisable = false;
     public PartController[,] field = new PartController[0, 0];
     private Vector2Int fieldMaxSize = new Vector2Int(8, 10);
     private Vector2Int fieldSize;
@@ -27,8 +29,10 @@ public class FieldController : MonoBehaviour
         //FieldCreate(currentLevel);
     }
 
-    public void CreateField(Level level)
+    public void CreateField(Level level, bool ignoreEmpty)
     {
+        emptyIsDisable = ignoreEmpty;
+
         ClearField();
 
         currentLevel = level;
@@ -50,22 +54,25 @@ public class FieldController : MonoBehaviour
                 //Debug.Log("Index: " + elementIndex);
                 field[x, y] = Instantiate(casePrefab, fieldContainer).GetComponent<PartController>();
 
-                Element newPart = LevelDatabase.Instance.emptyElemet;
+                Element newElement = LevelDatabase.Instance.emptyElemet;
                 int newPartFlip = 0;
                 //levelColor = LevelDatabase.Instance.defaultColor;
 
                 if (level.elements != null)
                 {
-                    newPart = LevelDatabase.Instance.GetElement(level.elements[elementIndex]);
+                    newElement = LevelDatabase.Instance.GetElement(level.elements[elementIndex]);
 
-                    if (newPart.isFixed)
+                    if (newElement.isFixed)
                         newPartFlip = level.elementFlip[elementIndex];
                     else
                         newPartFlip = UnityEngine.Random.Range(0, 4);
                 }
                 
-                field[x, y].Init(newPart, newPartFlip, new Vector2Int(x, y));
+                field[x, y].Init(newElement, newPartFlip, new Vector2Int(x, y));
                 field[x, y].PaintSelf(levelColor32);
+
+                if (emptyIsDisable && field[x, y].element.isEmpty)
+                    field[x, y].SetInteractable(false);
             }
         }
 
@@ -143,9 +150,9 @@ public class FieldController : MonoBehaviour
     {
         Color32 newColor = LevelDatabase.Instance.GetColor(colorName);
 
-        foreach (PartController ec in field)
+        foreach (PartController p in field)
         {
-            ec.PaintSelf(newColor);
+            p.PaintSelf(newColor);
         }
     }
 
@@ -154,9 +161,33 @@ public class FieldController : MonoBehaviour
         isInteractable = interactable;
 
         foreach (PartController p in field)
+        {
             p.SetInteractable(interactable);
+
+            if (emptyIsDisable && p.element.isEmpty)
+                p.SetInteractable(false);
+        }
 
         float newScale = interactable ? 1f : 0.75f;
         GetComponent<AnimationScale>().StartAnimationResize(newScale, 0.2f);
+    }
+
+    public void ActivateCellBorders(bool on, bool ignoreEmpty)
+    {
+        foreach (PartController p in field)
+        {
+            bool cellIsVisible = on;
+
+            if (on)
+            {
+                if (ignoreEmpty && p.element.isEmpty == true)
+                    cellIsVisible = false;
+                else
+                    cellIsVisible = true;
+            }
+
+            p.ActivateCellBorder(cellIsVisible);
+        }
+            
     }
 }

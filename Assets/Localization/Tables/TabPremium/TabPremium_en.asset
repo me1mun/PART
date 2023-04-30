@@ -52,6 +52,10 @@ MonoBehaviour:
     m_Localized: Donations help support the game
     m_Metadata:
       m_Items: []
+  - m_Id: 10215317723123712
+    m_Localized: Rate the game
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -30,7 +30,8 @@ public class LevelEditor : MonoBehaviour
 
     public void CreateEmptyField()
     {
-        field.CreateField(LevelManager.Instance.levelEmpty);
+        field.CreateField(LevelManager.Instance.levelEmpty, false);
+        field.ActivateCellBorders(true, false);
         field.PaintField(colorPool.GetActiveColor());
         levelNameField.text = "";
     }

@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
         animationAlpha = GetComponent<AnimationAlpha>();
         canvasGroup.alpha = 0;
 
-        levelIndex = PlayerPrefs.GetInt("lastPlayedLevel", 0);
+        SetLevel(PlayerPrefs.GetInt("lastPlayedLevel", 0));
     }
 
     void Start()
@@ -63,8 +63,7 @@ public class GameController : MonoBehaviour
 
     public void SetLevel(int newLevelIndex)
     {
-        if (newLevelIndex < LevelManager.Instance.GetLevelCount())
-            levelIndex = newLevelIndex;
+        levelIndex = Math.Clamp(newLevelIndex, 0, LevelManager.Instance.GetLevelCount() - 1);
 
         PlayerPrefs.SetInt("lastPlayedLevel", levelIndex);
     }
@@ -134,15 +133,14 @@ public class GameController : MonoBehaviour
 
         gameUI.SetupDisplay(levelIndex, level);
 
-        field.CreateField(level);
+        field.CreateField(level, true);
         for(int i = 0; i < 10; i++)
         {
             if (field.CheckLoopComplete())
-                field.CreateField(level);
+                field.CreateField(level, true);
         }
 
-        //if (LevelManager.Instance.level == 0) 
-        //   subtitle.SetText(subtitleTutorial);
+        field.ActivateCellBorders(levelIndex <= 2, true); // tutorial
 
         SetGameState(GameStates.game);
 

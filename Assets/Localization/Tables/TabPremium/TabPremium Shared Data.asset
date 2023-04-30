@@ -47,6 +47,10 @@ MonoBehaviour:
     m_Key: DonationDesc
     m_Metadata:
       m_Items: []
+  - m_Id: 10215317723123712
+    m_Key: Rate
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

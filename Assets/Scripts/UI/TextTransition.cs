@@ -15,7 +15,7 @@ public class TextTransition : MonoBehaviour
 
     [SerializeField] private AnimationAlpha animationAlpha;
     private LocalizedString stringReference;
-    private float animTime = 0.2f;
+    private float animTime = 0.15f;
     private const float defaultTextShowTime = 4.5f;
     private float textShowTime = 0;
 

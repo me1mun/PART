@@ -8,6 +8,7 @@ public class PartController : MonoBehaviour
     private ButtonController buttonController;
     [SerializeField] private Image icon;
     [SerializeField] private GameObject content;
+    [SerializeField] private GameObject cellBorder;
 
     public Element.ConnectionTypes connectionLeft = Element.ConnectionTypes.none;
     public Element.ConnectionTypes connectionUp = Element.ConnectionTypes.none;
@@ -147,6 +148,11 @@ public class PartController : MonoBehaviour
     public void SetInteractable(bool interactable)
     {
         buttonController.SetInteractable(interactable);
-       
+        
+    }
+
+    public void ActivateCellBorder(bool on)
+    {
+        cellBorder.SetActive(on);
     }
 }
