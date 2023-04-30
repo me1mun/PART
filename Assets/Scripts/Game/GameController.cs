@@ -10,6 +10,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance;
 
     private GameStateController gameStateController;
+    [SerializeField] private InappReview inappReview;
 
     public enum GameStates { game, menu, victory }
     private GameStates gameState;
@@ -92,6 +93,9 @@ public class GameController : MonoBehaviour
         gameUI.SetSubtitleVictory();
 
         SetGameState(GameStates.victory);
+
+        if (levelIndex == 19)
+            inappReview.ShowReview();
     }
 
     public void StartLevel(bool fadeOut = true)
