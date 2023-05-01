@@ -6,13 +6,14 @@ using UnityEngine.UI;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization;
 using UnityEngine.Purchasing;
+using TMPro;
 
 public class TabPremium : MonoBehaviour
 {
 
     [SerializeField] private ThemeElement premiumIconTheme;
     [SerializeField] private GameObject buttonSubscribe, buttonSubscribed;
-
+    [SerializeField] private TextMeshProUGUI priceText;
 
     private void OnEnable()
     {
@@ -26,6 +27,11 @@ public class TabPremium : MonoBehaviour
         premiumIconTheme.SetColorType(isPremium ? OptionTheme.ColorType.accent : OptionTheme.ColorType.content);
         buttonSubscribe.SetActive(!isPremium);
         buttonSubscribed.SetActive(isPremium);
+
+        string price = GameManager.Instance.storeManager.GetProductPrice("premium");
+
+        if (price != "") 
+            priceText.text = GameManager.Instance.storeManager.GetProductPrice("premium");
     }
 
     public void OnPurchaseComplete(Product product)

@@ -31,9 +31,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 4256664184655872
-    m_Localized: 'This game has no ads.
+    m_Localized: 'All features of the game are available for free and without ads.
 
-      Subscription helps release updates'
+
+      Subscription
+      is an option to support the developer'
     m_Metadata:
       m_Items: []
   - m_Id: 4256846087426048

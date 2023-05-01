@@ -18,6 +18,7 @@ public class OptionTheme : MonoBehaviour
     private void Awake()
     {
         LoadThemes();
+        defaultTheme = themeList[0].themeName;
 
         LoadData();
     }

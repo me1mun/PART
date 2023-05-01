@@ -16,6 +16,7 @@ public class StoreManager : MonoBehaviour, IDetailedStoreListener
 
     public string environment = "production";
 
+
     private void Awake()
     {
         
@@ -30,7 +31,7 @@ public class StoreManager : MonoBehaviour, IDetailedStoreListener
 
             await UnityServices.InitializeAsync(options);
         }
-        catch (Exception exception)
+        catch //(Exception exception)
         {
             // An error occurred during initialization.
         }

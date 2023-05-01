@@ -462,7 +462,20 @@ MonoBehaviour:
       rgba: 4294967295
     colorContent:
       serializedVersion: 2
-      rgba: 4282723886
+      rgba: 4283907389
+    colorAccent:
+      serializedVersion: 2
+      rgba: 4293491779
+  - themeName: Black
+    colorBg:
+      serializedVersion: 2
+      rgba: 4280690214
+    colorOverlay:
+      serializedVersion: 2
+      rgba: 4281348144
+    colorContent:
+      serializedVersion: 2
+      rgba: 4293388263
     colorAccent:
       serializedVersion: 2
       rgba: 4294937680

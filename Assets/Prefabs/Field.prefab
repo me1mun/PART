@@ -35,12 +35,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.261}
   m_AnchorMax: {x: 0.5, y: 0.261}
   m_AnchoredPosition: {x: 0, y: 450}
-  m_SizeDelta: {x: 800, y: 1000}
+  m_SizeDelta: {x: 960, y: 1200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!210 &4238582656202803986
 SortingGroup:
@@ -53,6 +53,7 @@ SortingGroup:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!114 &4238582656202803987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,7 +74,7 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 100, y: 100}
+  m_CellSize: {x: 120, y: 120}
   m_Spacing: {x: 0, y: 0}
   m_Constraint: 1
   m_ConstraintCount: 8
@@ -89,8 +90,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6596813add5387c439a9cd76613e90ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  OnLevelComplete:
+    m_PersistentCalls:
+      m_Calls: []
   fieldContainer: {fileID: 4238582656202803989}
   casePrefab: {fileID: 0}
+  isInteractable: 1
+  emptyIsDisable: 0
   isLooped: 0
 --- !u!223 &4238582656202803984
 Canvas:
@@ -109,7 +115,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

@@ -20,19 +20,36 @@ public class InappReview : MonoBehaviour
 
     private IEnumerator ReviewCoroutine()
     {
-        Debug.Log("InApp review show");
+        Debug.Log("InApp review start");
+
+        _reviewManager = new ReviewManager();
+
+        yield return new WaitForSeconds(1f);
 
         var requestFlowOperation = _reviewManager.RequestReviewFlow();
         yield return requestFlowOperation;
         if (requestFlowOperation.Error != ReviewErrorCode.NoError)
         {
-            Debug.LogWarning(requestFlowOperation.Error.ToString());
+            Debug.LogWarning("Request #1: " + requestFlowOperation.Error.ToString());
             yield break;
         }
         _playReviewInfo = requestFlowOperation.GetResult();
 
+
+        while (_playReviewInfo == null)
+            yield return null;
+
+
         var launchFlowOperation = _reviewManager.LaunchReviewFlow(_playReviewInfo);
         yield return launchFlowOperation;
         _playReviewInfo = null; // Reset the object
+
+        if (launchFlowOperation.Error != ReviewErrorCode.NoError)
+        {
+            Debug.LogWarning("Request #2: " + requestFlowOperation.Error.ToString());
+            yield break;
+        }
+
+        Debug.Log("InApp review finish");
     }
 }
