@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using UnityEngine.Localization.Components;
 using UnityEngine.Localization;
 using UnityEngine.Purchasing;
-using TMPro;
 
 public class TabPremium : MonoBehaviour
 {

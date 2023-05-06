@@ -12,6 +12,8 @@ public class InappReview : MonoBehaviour
 
     public void ShowReview()
     {
+        _reviewManager = new ReviewManager();
+
         if (reviewCoroutine != null)
             StopCoroutine(reviewCoroutine);
 
@@ -21,8 +23,6 @@ public class InappReview : MonoBehaviour
     private IEnumerator ReviewCoroutine()
     {
         Debug.Log("InApp review start");
-
-        _reviewManager = new ReviewManager();
 
         yield return new WaitForSeconds(1f);
 
